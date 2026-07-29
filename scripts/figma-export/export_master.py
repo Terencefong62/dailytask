@@ -28,7 +28,10 @@ def main() -> int:
         print(
             "Missing FIGMA_ACCESS_TOKEN.\n"
             "Create at https://www.figma.com/settings → Security → Personal access tokens\n"
-            "Then run: FIGMA_ACCESS_TOKEN=figd_... python3 export_master.py",
+            "Store as a Runtime Secret named FIGMA_ACCESS_TOKEN in your cloud environment.\n"
+            "Then run: FIGMA_ACCESS_TOKEN=figd_... python3 export_master.py\n\n"
+            "Note: Collab/Viewer seats are limited to ~6 Tier-1 API calls/month.\n"
+            "Use a Full or Dev seat token for automated exports, or export manually in Figma.",
             file=sys.stderr,
         )
         return 2
