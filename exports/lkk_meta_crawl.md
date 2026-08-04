@@ -1,184 +1,184 @@
-Found 180 URLs in sitemaps.
+Found 180 URLs across en, zh-hk, and zh-cn sitemaps.
 
-| URL | Meta Title | Meta Description |
-| --- | --- | --- |
-| https://preview-web.lkk.com/en | Authentic Asian Sauces \| Lee Kum Kee Corporate | With a glorious history of 130 years, Lee Kum Kee has become a household name, an international brand and a symbol of quality and trust. |
-| https://preview-web.lkk.com/en/404 | 404 |  |
-| https://preview-web.lkk.com/en/about-lkk/100-worldwide-connect | 100+Worldwide connect |  |
-| https://preview-web.lkk.com/en/about-lkk/1888-over-a-century-of-heritage | 1888 Over a century of heritage |  |
-| https://preview-web.lkk.com/en/about-lkk/300-flavours | 300+ Flavours |  |
-| https://preview-web.lkk.com/en/about-lkk/chairman-message | Message from the Chairman |  |
-| https://preview-web.lkk.com/en/about-lkk/company-overview | Company Overview \| Lee Kum Kee Corporate | Global Leader of Authentic Asian sauces and ingredients since 1888. |
-| https://preview-web.lkk.com/en/about-lkk/company-vision-mission-and-corporate-culture | Company Vision, Mission and Corporate Culture |  |
-| https://preview-web.lkk.com/en/about-lkk/milestones | Milestones |  |
-| https://preview-web.lkk.com/en/about-lkk/sustainability | Sustainability |  |
-| https://preview-web.lkk.com/en/careers/employees | Employee Stories |  |
-| https://preview-web.lkk.com/en/contact-us | Contact Us |  |
-| https://preview-web.lkk.com/en/corporate-news | Corporate news |  |
-| https://preview-web.lkk.com/en/corporate-news/cma-esg-pledge-2026-5-year-badge | CMA ESG Pledge 2026 5+ Year Badge |  |
-| https://preview-web.lkk.com/en/corporate-news/green-council/department-of-commerce-of-guangdong-province | Guangdong Time-Honoured Brand |  |
-| https://preview-web.lkk.com/en/corporate-news/green-council/gs1-hong-kong | 5 Year + Consumer Caring |  |
-| https://preview-web.lkk.com/en/corporate-news/green-council/hr-asia | HR Asia Best Companies to Work for in Asia - Hong Kong Region |  |
-| https://preview-web.lkk.com/en/corporate-news/green-council/hr-asia/design-council-of-hong-kong-of-federation-of-hong-kong-industries | D-Mark Certificate |  |
-| https://preview-web.lkk.com/en/corporate-news/green-council/hr-asia/hong-kong-brand-development-council | The BDC 20th Anniversary Special Merit Award |  |
-| https://preview-web.lkk.com/en/corporate-news/green-council/hr-asia/labour-department-hksar-government | Good Employee Recognition Campaign 2025 - Good Employee Commendation Certificate |  |
-| https://preview-web.lkk.com/en/corporate-news/green-council/jobmarket | Employer of Choice Award, Asia Pacific Outstanding Employer Award |  |
-| https://preview-web.lkk.com/en/corporate-news/hkim-powerbrand-award-cum-marketers-of-the-year-2024-2025 | Hong Kong Institute of Marketing (HKIM) - Centennial Hong Kong PowerBrand 2024/2025 |  |
-| https://preview-web.lkk.com/en/corporate-news/press-release/20240527 | Lee Kum Kee: The Taste of Victory at the 9th World Championship of Chinese Cuisine |  |
-| https://preview-web.lkk.com/en/corporate-news/press-release/20241211 | Lee Kum Kee Garners Industry Cares Recognition Scheme 2024 ‘Grand Award’ from the Federation of Hong Kong Industries |  |
-| https://preview-web.lkk.com/en/corporate-news/press-release/c-20240704 | Lee Kum Kee is The World’s 50 Best Restaurants’ first-ever Official Sauce & Condiment Partner |  |
-| https://preview-web.lkk.com/en/corporate-news/press-releases/creating-a-global-archive-of-flavour-memories | Lee Kum Kee Partners with UNESCO to Launch the “Forever Flavors Project” Co-creating a Global Archive of Flavour Memories |  |
-| https://preview-web.lkk.com/en/corporate-news/press-releases/lee-kum-kee-global-culinary-immersion-programme-debuts-in-bhutan | Lee Kum Kee Global Culinary Immersion Programme Debuts in Bhutan |  |
-| https://preview-web.lkk.com/en/corporate-news/press-releases/lee-kum-kee-joins-the-celebration-at-wellington-s-lunar-new-year-festival | Lee Kum Kee Joins the Celebration at Wellington’s Lunar New Year Festival |  |
-| https://preview-web.lkk.com/en/corporate-news/press-releases/the-8th-international-master-chef-s-charity-gala-dinner | The 8th International Master Chef’s Charity Gala Dinner |  |
-| https://preview-web.lkk.com/en/corporate-news/the-chinese-manufacturers-association-of-hong-kong-2025-hong-kong-esg-awards-esg-grand-award | 2025 Hong Kong ESG Awards - ESG Grand Award |  |
-| https://preview-web.lkk.com/en/employee/adam-ho | adam-ho |  |
-| https://preview-web.lkk.com/en/employee/cheng-chiu-ming | cheng-chiu-ming |  |
-| https://preview-web.lkk.com/en/employee/cheng-wei-yan | cheng-wei-yan |  |
-| https://preview-web.lkk.com/en/employee/gong-min | gong-min |  |
-| https://preview-web.lkk.com/en/employee/jiang-zhi | jiang-zhi |  |
-| https://preview-web.lkk.com/en/employee/lau-fung-ying-christine | lau-fung-ying-christine |  |
-| https://preview-web.lkk.com/en/employee/mark-butzke | mark-butzke |  |
-| https://preview-web.lkk.com/en/employee/mauricio-olmedo | mauricio-olmedo |  |
-| https://preview-web.lkk.com/en/employee/ng-seow-voon-miko | ng-seow-voon-miko |  |
-| https://preview-web.lkk.com/en/employee/ou-yang-tong | ou-yang-tong |  |
-| https://preview-web.lkk.com/en/employee/tony-mok | tony-mok |  |
-| https://preview-web.lkk.com/en/employee/wei-gang | wei-gang |  |
-| https://preview-web.lkk.com/en/employee/wen-wen | wen-wen |  |
-| https://preview-web.lkk.com/en/employee/wu-zhi-gang-jacky | wu-zhi-gang-jacky |  |
-| https://preview-web.lkk.com/en/employee/yip-wai-chuen | yip-wai-chuen |  |
-| https://preview-web.lkk.com/en/employee/zhao-xiao-min | zhao-xiao-min |  |
-| https://preview-web.lkk.com/en/faq-details | Frequently Asked Questions (FAQ) | Frequently asked questions about products, recipes, and more! |
-| https://preview-web.lkk.com/en/privacy-statement | Privacy Policy Statement and Personal Information Collection Statement |  |
-| https://preview-web.lkk.com/en/search | Search |  |
-| https://preview-web.lkk.com/en/sitemap | Sitemap |  |
-| https://preview-web.lkk.com/en/terms-of-use | Terms of Use |  |
-| https://preview-web.lkk.com/en/testing-page-1 | testing page 1 |  |
-| https://preview-web.lkk.com/en/testing-page-1/testing-page-in-1 | testing page in 1 |  |
-| https://preview-web.lkk.com/en/testing-page-1/testing-page-in-2 | testing page in 2 |  |
-| https://preview-web.lkk.com/en/testing-page-1/testing-page-in-2/opportunities | Opportunities |  |
-| https://preview-web.lkk.com/home/careers.html | Careers |  |
-| https://preview-web.lkk.com/home/careers/frequently-asked-questions.html | Frequently Asked Questions |  |
-| https://preview-web.lkk.com/home/careers/recruitment-journey.html | Recruitment journey |  |
-| https://preview-web.lkk.com/home/careers/students-graduates.html | Students & Graduates |  |
-| https://preview-web.lkk.com/home/careers/working-at-lee-kum-kee.html | Working at Lee Kum Kee |  |
-| https://preview-web.lkk.com/home/corporate-news/listContainer/articles/2026/01/hong-kong-awards-for-environmental-excellence.html | Manufacturing and Industrial Services - Bronze Award |  |
-| https://preview-web.lkk.com/home/corporate-news/listContainer/articles/2026/03/aon.html | 2025 Aon China Best ESG Employer |  |
-| https://preview-web.lkk.com/home/corporate-news/listContainer/articles/2026/03/green-council.html | UNSDG Achievement Awards 2025 Hong Kong |  |
-| https://preview-web.lkk.com/home/corporate-news/listContainer/articles/2026/03/hong-kong-management-association.html | 2025 HKMA/Viu TV & Now TV Awards for Marketing Excellence - Excellence Award, Standard Chartered Hong Kong Excellence in Customer Insights Award |  |
-| https://preview-web.lkk.com/zh-cn | 百年酱料专家 \| 李锦记企业 | 历经130年的持续发展，李锦记已成为一个家喻户晓的酱料王国，成功打造出一个百年民族企业，成为中华民族企业「质量与信心标志」的国际品牌。 |
-| https://preview-web.lkk.com/zh-cn/404 | 404 |  |
-| https://preview-web.lkk.com/zh-cn/about-lkk/chairman-message | 主席的话 |  |
-| https://preview-web.lkk.com/zh-cn/about-lkk/company-overview | 关于李锦记 \| 李锦记企业 | 李锦记跨越三个世纪，历经几代人的艰苦奋斗，让我们与您一起细味这个家传户晓的品牌传奇。 |
-| https://preview-web.lkk.com/zh-cn/about-lkk/company-vision-mission-and-corporate-culture | 企业愿景、使命及企业文化 |  |
-| https://preview-web.lkk.com/zh-cn/about-lkk/milestones | 里程碑 |  |
-| https://preview-web.lkk.com/zh-cn/about-lkk/sustainability | 可持续发展 |  |
-| https://preview-web.lkk.com/zh-cn/careers/employees | 员工故事 |  |
-| https://preview-web.lkk.com/zh-cn/contact-us | 联系我们 |  |
-| https://preview-web.lkk.com/zh-cn/corporate-news | 企业新闻 |  |
-| https://preview-web.lkk.com/zh-cn/corporate-news/cma-esg-pledge-2026-5-year-badge | 厂商会“ESG约章“2026 (5+) |  |
-| https://preview-web.lkk.com/zh-cn/corporate-news/green-council/department-of-commerce-of-guangdong-province | 广东老字号 |  |
-| https://preview-web.lkk.com/zh-cn/corporate-news/green-council/gs1-hong-kong | 贴心企业五年+赏 |  |
-| https://preview-web.lkk.com/zh-cn/corporate-news/green-council/hr-asia | 2025 亚洲最佳企业雇主奖 ── 香港地区 |  |
-| https://preview-web.lkk.com/zh-cn/corporate-news/green-council/hr-asia/design-council-of-hong-kong-of-federation-of-hong-kong-industries | D-Mark |  |
-| https://preview-web.lkk.com/zh-cn/corporate-news/green-council/hr-asia/hong-kong-brand-development-council | 香港品牌发展局20周年特别荣誉奖 |  |
-| https://preview-web.lkk.com/zh-cn/corporate-news/green-council/hr-asia/labour-department-hksar-government | 好雇员嘉许计划2025 ── 好雇员嘉许奖状 |  |
-| https://preview-web.lkk.com/zh-cn/corporate-news/green-council/jobmarket | 卓越雇主大奖、亚太杰出雇主大奖 |  |
-| https://preview-web.lkk.com/zh-cn/corporate-news/hkim-powerbrand-award-cum-marketers-of-the-year-2024-2025 | 香港事务学会 (HKIM) - Centennial Hong Kong PowerBrand 2024/2025 |  |
-| https://preview-web.lkk.com/zh-cn/corporate-news/press-release/20240527 | 李锦记支持第9届中国烹饪世界大赛圆满举行 |  |
-| https://preview-web.lkk.com/zh-cn/corporate-news/press-release/20241211 | 李锦记荣获香港工业总会颁发 2024年「工业献爱心」最高荣誉「至尊关怀大奖」 |  |
-| https://preview-web.lkk.com/zh-cn/corporate-news/press-release/c-20240704 | Lee Kum Kee is The World’s 50 Best Restaurants’ first-ever Official Sauce & Condiment Partner |  |
-| https://preview-web.lkk.com/zh-cn/corporate-news/press-releases/creating-a-global-archive-of-flavour-memories | 李锦记携手联合国教科文组织启动“忘不了的味道·档案计划” 共建“全球味道记忆档案库” |  |
-| https://preview-web.lkk.com/zh-cn/corporate-news/press-releases/lee-kum-kee-global-culinary-immersion-programme-debuts-in-bhutan | 李锦记“全球烹饪体验项目” 首度扩展至不丹 |  |
-| https://preview-web.lkk.com/zh-cn/corporate-news/press-releases/lee-kum-kee-joins-the-celebration-at-wellington-s-lunar-new-year-festival | Lee Kum Kee Joins the Celebration at Wellington’s Lunar New Year Festival |  |
-| https://preview-web.lkk.com/zh-cn/corporate-news/press-releases/the-8th-international-master-chef-s-charity-gala-dinner | 第八届国际名厨慈善宴 |  |
-| https://preview-web.lkk.com/zh-cn/corporate-news/the-chinese-manufacturers-association-of-hong-kong-2025-hong-kong-esg-awards-esg-grand-award | 2025香港ESG奖 ── ESG大奖 |  |
-| https://preview-web.lkk.com/zh-cn/employee/adam-ho | adam-ho |  |
-| https://preview-web.lkk.com/zh-cn/employee/cheng-chiu-ming | cheng-chiu-ming |  |
-| https://preview-web.lkk.com/zh-cn/employee/cheng-wei-yan | cheng-wei-yan |  |
-| https://preview-web.lkk.com/zh-cn/employee/gong-min | gong-min |  |
-| https://preview-web.lkk.com/zh-cn/employee/jiang-zhi | jiang-zhi |  |
-| https://preview-web.lkk.com/zh-cn/employee/lau-fung-ying-christine | lau-fung-ying-christine |  |
-| https://preview-web.lkk.com/zh-cn/employee/mark-butzke | mark-butzke |  |
-| https://preview-web.lkk.com/zh-cn/employee/mauricio-olmedo | mauricio-olmedo |  |
-| https://preview-web.lkk.com/zh-cn/employee/ng-seow-voon-miko | ng-seow-voon-miko |  |
-| https://preview-web.lkk.com/zh-cn/employee/ou-yang-tong | ou-yang-tong |  |
-| https://preview-web.lkk.com/zh-cn/employee/tony-mok | tony-mok |  |
-| https://preview-web.lkk.com/zh-cn/employee/wei-gang | wei-gang |  |
-| https://preview-web.lkk.com/zh-cn/employee/wen-wen | wen-wen |  |
-| https://preview-web.lkk.com/zh-cn/employee/wu-zhi-gang-jacky | wu-zhi-gang-jacky |  |
-| https://preview-web.lkk.com/zh-cn/employee/yip-wai-chuen | yip-wai-chuen |  |
-| https://preview-web.lkk.com/zh-cn/employee/zhao-xiao-min | zhao-xiao-min |  |
-| https://preview-web.lkk.com/zh-cn/faq-details | 常见问题 |  |
-| https://preview-web.lkk.com/zh-cn/privacy-statement | 私隐政策及个人资料收集声明 |  |
-| https://preview-web.lkk.com/zh-cn/search | 搜索 |  |
-| https://preview-web.lkk.com/zh-cn/sitemap | 网站地图 |  |
-| https://preview-web.lkk.com/zh-cn/terms-of-use | 网站条款及细则 |  |
-| https://preview-web.lkk.com/zh-cn/testing-page-1/testing-page-in-2/opportunities | 职业发展 |  |
-| https://preview-web.lkk.com/zh-hk | 百年醬料專家 \| 李錦記企業 | 歷經130年的持續發展，李錦記已成為一個家喻戶曉的醬料王國，成功打造出一個百年民族企業，成為中華民族企業「品質與信心標誌」的國際品牌。 |
-| https://preview-web.lkk.com/zh-hk/404 | 404 |  |
-| https://preview-web.lkk.com/zh-hk/about-lkk/chairman-message | 主席的話 |  |
-| https://preview-web.lkk.com/zh-hk/about-lkk/company-overview | 關於李錦記 \| 李錦記企業 | 李錦記跨越三個世紀，歷經幾代人的艱苦奮鬥，讓我們與您一起細味這個家傳戶曉的品牌傳奇。 |
-| https://preview-web.lkk.com/zh-hk/about-lkk/company-vision-mission-and-corporate-culture | 企業願景、使命及企業文化 |  |
-| https://preview-web.lkk.com/zh-hk/about-lkk/milestones | 里程碑 |  |
-| https://preview-web.lkk.com/zh-hk/about-lkk/sustainability | 可持續發展 |  |
-| https://preview-web.lkk.com/zh-hk/careers/employees | 員工故事 |  |
-| https://preview-web.lkk.com/zh-hk/contact-us | 聯絡我們 |  |
-| https://preview-web.lkk.com/zh-hk/corporate-news | 企業新聞 |  |
-| https://preview-web.lkk.com/zh-hk/corporate-news/cma-esg-pledge-2026-5-year-badge | 廠商會「ESG 約章」2026 (5+) |  |
-| https://preview-web.lkk.com/zh-hk/corporate-news/green-council/department-of-commerce-of-guangdong-province | 廣東老字號 |  |
-| https://preview-web.lkk.com/zh-hk/corporate-news/green-council/gs1-hong-kong | 貼心企業五年+賞 |  |
-| https://preview-web.lkk.com/zh-hk/corporate-news/green-council/hr-asia | 2025 亞洲最佳企業僱主獎 ── 香港地區 |  |
-| https://preview-web.lkk.com/zh-hk/corporate-news/green-council/hr-asia/design-council-of-hong-kong-of-federation-of-hong-kong-industries | D-Mark |  |
-| https://preview-web.lkk.com/zh-hk/corporate-news/green-council/hr-asia/hong-kong-brand-development-council | 香港品牌發展局20週年特別榮譽獎 |  |
-| https://preview-web.lkk.com/zh-hk/corporate-news/green-council/hr-asia/labour-department-hksar-government | 好僱員嘉許計劃2025 ── 好僱員嘉許獎狀 |  |
-| https://preview-web.lkk.com/zh-hk/corporate-news/green-council/jobmarket | 卓越僱主大獎、亞太傑出僱主大獎 |  |
-| https://preview-web.lkk.com/zh-hk/corporate-news/hkim-powerbrand-award-cum-marketers-of-the-year-2024-2025 | 香港事務學會 (HKIM) - Centennial Hong Kong PowerBrand 2024/2025 |  |
-| https://preview-web.lkk.com/zh-hk/corporate-news/press-release/20240527 | 李錦記支持第9屆中國烹飪世界大賽圓滿舉行 | 5月21日至23日，全球頂尖廚師聚首加拿大溫哥華，參加由李錦記獨家贊助醬料的第9屆中國烹飪世界大賽 |
-| https://preview-web.lkk.com/zh-hk/corporate-news/press-release/20241211 | 李錦記榮獲香港工業總會頒發 2024年「工業獻愛心」最高榮譽「至尊關懷大獎」 |  |
-| https://preview-web.lkk.com/zh-hk/corporate-news/press-release/c-20240704 | Lee Kum Kee is The World’s 50 Best Restaurants’ first-ever Official Sauce & Condiment Partner |  |
-| https://preview-web.lkk.com/zh-hk/corporate-news/press-releases/creating-a-global-archive-of-flavour-memories | 李錦記攜手聯合國教科文組織啟動「忘不了的味道·檔案計劃」 共建「全球味道記憶檔案庫」 |  |
-| https://preview-web.lkk.com/zh-hk/corporate-news/press-releases/lee-kum-kee-global-culinary-immersion-programme-debuts-in-bhutan | 李錦記「全球烹飪體驗項目」首度擴展至不丹 |  |
-| https://preview-web.lkk.com/zh-hk/corporate-news/press-releases/lee-kum-kee-joins-the-celebration-at-wellington-s-lunar-new-year-festival | Lee Kum Kee Joins the Celebration at Wellington’s Lunar New Year Festival |  |
-| https://preview-web.lkk.com/zh-hk/corporate-news/press-releases/the-8th-international-master-chef-s-charity-gala-dinner | 第八屆國際名廚慈善宴 |  |
-| https://preview-web.lkk.com/zh-hk/corporate-news/the-chinese-manufacturers-association-of-hong-kong-2025-hong-kong-esg-awards-esg-grand-award | 2025香港ESG獎 ── ESG大獎 |  |
-| https://preview-web.lkk.com/zh-hk/employee/adam-ho | adam-ho |  |
-| https://preview-web.lkk.com/zh-hk/employee/cheng-chiu-ming | cheng-chiu-ming |  |
-| https://preview-web.lkk.com/zh-hk/employee/cheng-wei-yan | cheng-wei-yan |  |
-| https://preview-web.lkk.com/zh-hk/employee/gong-min | gong-min |  |
-| https://preview-web.lkk.com/zh-hk/employee/jiang-zhi | jiang-zhi |  |
-| https://preview-web.lkk.com/zh-hk/employee/lau-fung-ying-christine | lau-fung-ying-christine |  |
-| https://preview-web.lkk.com/zh-hk/employee/mark-butzke | mark-butzke |  |
-| https://preview-web.lkk.com/zh-hk/employee/mauricio-olmedo | mauricio-olmedo |  |
-| https://preview-web.lkk.com/zh-hk/employee/ng-seow-voon-miko | ng-seow-voon-miko |  |
-| https://preview-web.lkk.com/zh-hk/employee/ou-yang-tong | ou-yang-tong |  |
-| https://preview-web.lkk.com/zh-hk/employee/tony-mok | tony-mok |  |
-| https://preview-web.lkk.com/zh-hk/employee/wei-gang | wei-gang |  |
-| https://preview-web.lkk.com/zh-hk/employee/wen-wen | wen-wen |  |
-| https://preview-web.lkk.com/zh-hk/employee/wu-zhi-gang-jacky | wu-zhi-gang-jacky |  |
-| https://preview-web.lkk.com/zh-hk/employee/yip-wai-chuen | yip-wai-chuen |  |
-| https://preview-web.lkk.com/zh-hk/employee/zhao-xiao-min | zhao-xiao-min |  |
-| https://preview-web.lkk.com/zh-hk/faq-details | 常見問題 | Frequently asked questions about products, recipes, and more! |
-| https://preview-web.lkk.com/zh-hk/privacy-statement | 私隱政策及個人資料收集聲明 |  |
-| https://preview-web.lkk.com/zh-hk/search | 搜索 |  |
-| https://preview-web.lkk.com/zh-hk/sitemap | 網頁地圖 |  |
-| https://preview-web.lkk.com/zh-hk/terms-of-use | 網站條款及細則 |  |
-| https://preview-web.lkk.com/zh-hk/testing-page-1/testing-page-in-2/opportunities | 事業發展 |  |
-| https://preview-web.lkk.com/zh_CN/home/careers.html | 职业发展 |  |
-| https://preview-web.lkk.com/zh_CN/home/careers/frequently-asked-questions.html | 常见问题 |  |
-| https://preview-web.lkk.com/zh_CN/home/careers/recruitment-journey.html | 李的招聘之旅 |  |
-| https://preview-web.lkk.com/zh_CN/home/careers/students-graduates.html | 学生与毕业生 |  |
-| https://preview-web.lkk.com/zh_CN/home/careers/working-at-lee-kum-kee.html | 职在李锦记 |  |
-| https://preview-web.lkk.com/zh_CN/home/corporate-news/listContainer/articles/2026/01/hong-kong-awards-for-environmental-excellence.html | 制造业及工业服务界别── 铜奖 |  |
-| https://preview-web.lkk.com/zh_CN/home/corporate-news/listContainer/articles/2026/03/aon.html | 2025中国最佳ESG雇主 |  |
-| https://preview-web.lkk.com/zh_CN/home/corporate-news/listContainer/articles/2026/03/green-council.html | 联合国可持续发展目标香港成就奖2025 |  |
-| https://preview-web.lkk.com/zh_CN/home/corporate-news/listContainer/articles/2026/03/hong-kong-management-association.html | 2025年度 HKMA/ViuTV及Now TV杰出市场策划奖 ── 卓越奖、杰出顾客洞察力奖 |  |
-| https://preview-web.lkk.com/zh_HK/home/careers.html | 職業生涯 |  |
-| https://preview-web.lkk.com/zh_HK/home/careers/frequently-asked-questions.html | 常見問題 |  |
-| https://preview-web.lkk.com/zh_HK/home/careers/recruitment-journey.html | 李的招聘之旅 |  |
-| https://preview-web.lkk.com/zh_HK/home/careers/students-graduates.html | 學生與畢業生 |  |
-| https://preview-web.lkk.com/zh_HK/home/careers/working-at-lee-kum-kee.html | 在李錦記工作 |  |
-| https://preview-web.lkk.com/zh_HK/home/corporate-news/listContainer/articles/2026/01/hong-kong-awards-for-environmental-excellence.html | 製造業及工業服務界別── 銅獎 |  |
-| https://preview-web.lkk.com/zh_HK/home/corporate-news/listContainer/articles/2026/03/aon.html | 2025中國最佳ESG僱主 |  |
-| https://preview-web.lkk.com/zh_HK/home/corporate-news/listContainer/articles/2026/03/green-council.html | 聯合國可持續發展目標香港成就獎2025 |  |
-| https://preview-web.lkk.com/zh_HK/home/corporate-news/listContainer/articles/2026/03/hong-kong-management-association.html | 2025年度 HKMA/ViuTV及Now TV傑出市場策劃獎 ── 卓越獎、傑出顧客洞察力獎 |  |
+| Language | URL | Meta Title | Meta Description |
+| --- | --- | --- | --- |
+| en | https://preview-web.lkk.com/en | Authentic Asian Sauces \| Lee Kum Kee Corporate | With a glorious history of 130 years, Lee Kum Kee has become a household name, an international brand and a symbol of quality and trust. |
+| en | https://preview-web.lkk.com/en/404 | 404 |  |
+| en | https://preview-web.lkk.com/en/about-lkk/100-worldwide-connect | 100+Worldwide connect |  |
+| en | https://preview-web.lkk.com/en/about-lkk/1888-over-a-century-of-heritage | 1888 Over a century of heritage |  |
+| en | https://preview-web.lkk.com/en/about-lkk/300-flavours | 300+ Flavours |  |
+| en | https://preview-web.lkk.com/en/about-lkk/chairman-message | Message from the Chairman |  |
+| en | https://preview-web.lkk.com/en/about-lkk/company-overview | Company Overview \| Lee Kum Kee Corporate | Global Leader of Authentic Asian sauces and ingredients since 1888. |
+| en | https://preview-web.lkk.com/en/about-lkk/company-vision-mission-and-corporate-culture | Company Vision, Mission and Corporate Culture |  |
+| en | https://preview-web.lkk.com/en/about-lkk/milestones | Milestones |  |
+| en | https://preview-web.lkk.com/en/about-lkk/sustainability | Sustainability |  |
+| en | https://preview-web.lkk.com/en/careers/employees | Employee Stories |  |
+| en | https://preview-web.lkk.com/en/contact-us | Contact Us |  |
+| en | https://preview-web.lkk.com/en/corporate-news | Corporate news |  |
+| en | https://preview-web.lkk.com/en/corporate-news/cma-esg-pledge-2026-5-year-badge | CMA ESG Pledge 2026 5+ Year Badge |  |
+| en | https://preview-web.lkk.com/en/corporate-news/green-council/department-of-commerce-of-guangdong-province | Guangdong Time-Honoured Brand |  |
+| en | https://preview-web.lkk.com/en/corporate-news/green-council/gs1-hong-kong | 5 Year + Consumer Caring |  |
+| en | https://preview-web.lkk.com/en/corporate-news/green-council/hr-asia | HR Asia Best Companies to Work for in Asia - Hong Kong Region |  |
+| en | https://preview-web.lkk.com/en/corporate-news/green-council/hr-asia/design-council-of-hong-kong-of-federation-of-hong-kong-industries | D-Mark Certificate |  |
+| en | https://preview-web.lkk.com/en/corporate-news/green-council/hr-asia/hong-kong-brand-development-council | The BDC 20th Anniversary Special Merit Award |  |
+| en | https://preview-web.lkk.com/en/corporate-news/green-council/hr-asia/labour-department-hksar-government | Good Employee Recognition Campaign 2025 - Good Employee Commendation Certificate |  |
+| en | https://preview-web.lkk.com/en/corporate-news/green-council/jobmarket | Employer of Choice Award, Asia Pacific Outstanding Employer Award |  |
+| en | https://preview-web.lkk.com/en/corporate-news/hkim-powerbrand-award-cum-marketers-of-the-year-2024-2025 | Hong Kong Institute of Marketing (HKIM) - Centennial Hong Kong PowerBrand 2024/2025 |  |
+| en | https://preview-web.lkk.com/en/corporate-news/press-release/20240527 | Lee Kum Kee: The Taste of Victory at the 9th World Championship of Chinese Cuisine |  |
+| en | https://preview-web.lkk.com/en/corporate-news/press-release/20241211 | Lee Kum Kee Garners Industry Cares Recognition Scheme 2024 ‘Grand Award’ from the Federation of Hong Kong Industries |  |
+| en | https://preview-web.lkk.com/en/corporate-news/press-release/c-20240704 | Lee Kum Kee is The World’s 50 Best Restaurants’ first-ever Official Sauce & Condiment Partner |  |
+| en | https://preview-web.lkk.com/en/corporate-news/press-releases/creating-a-global-archive-of-flavour-memories | Lee Kum Kee Partners with UNESCO to Launch the “Forever Flavors Project” Co-creating a Global Archive of Flavour Memories |  |
+| en | https://preview-web.lkk.com/en/corporate-news/press-releases/lee-kum-kee-global-culinary-immersion-programme-debuts-in-bhutan | Lee Kum Kee Global Culinary Immersion Programme Debuts in Bhutan |  |
+| en | https://preview-web.lkk.com/en/corporate-news/press-releases/lee-kum-kee-joins-the-celebration-at-wellington-s-lunar-new-year-festival | Lee Kum Kee Joins the Celebration at Wellington’s Lunar New Year Festival |  |
+| en | https://preview-web.lkk.com/en/corporate-news/press-releases/the-8th-international-master-chef-s-charity-gala-dinner | The 8th International Master Chef’s Charity Gala Dinner |  |
+| en | https://preview-web.lkk.com/en/corporate-news/the-chinese-manufacturers-association-of-hong-kong-2025-hong-kong-esg-awards-esg-grand-award | 2025 Hong Kong ESG Awards - ESG Grand Award |  |
+| en | https://preview-web.lkk.com/en/employee/adam-ho | adam-ho |  |
+| en | https://preview-web.lkk.com/en/employee/cheng-chiu-ming | cheng-chiu-ming |  |
+| en | https://preview-web.lkk.com/en/employee/cheng-wei-yan | cheng-wei-yan |  |
+| en | https://preview-web.lkk.com/en/employee/gong-min | gong-min |  |
+| en | https://preview-web.lkk.com/en/employee/jiang-zhi | jiang-zhi |  |
+| en | https://preview-web.lkk.com/en/employee/lau-fung-ying-christine | lau-fung-ying-christine |  |
+| en | https://preview-web.lkk.com/en/employee/mark-butzke | mark-butzke |  |
+| en | https://preview-web.lkk.com/en/employee/mauricio-olmedo | mauricio-olmedo |  |
+| en | https://preview-web.lkk.com/en/employee/ng-seow-voon-miko | ng-seow-voon-miko |  |
+| en | https://preview-web.lkk.com/en/employee/ou-yang-tong | ou-yang-tong |  |
+| en | https://preview-web.lkk.com/en/employee/tony-mok | tony-mok |  |
+| en | https://preview-web.lkk.com/en/employee/wei-gang | wei-gang |  |
+| en | https://preview-web.lkk.com/en/employee/wen-wen | wen-wen |  |
+| en | https://preview-web.lkk.com/en/employee/wu-zhi-gang-jacky | wu-zhi-gang-jacky |  |
+| en | https://preview-web.lkk.com/en/employee/yip-wai-chuen | yip-wai-chuen |  |
+| en | https://preview-web.lkk.com/en/employee/zhao-xiao-min | zhao-xiao-min |  |
+| en | https://preview-web.lkk.com/en/faq-details | Frequently Asked Questions (FAQ) | Frequently asked questions about products, recipes, and more! |
+| en | https://preview-web.lkk.com/en/privacy-statement | Privacy Policy Statement and Personal Information Collection Statement |  |
+| en | https://preview-web.lkk.com/en/search | Search |  |
+| en | https://preview-web.lkk.com/en/sitemap | Sitemap |  |
+| en | https://preview-web.lkk.com/en/terms-of-use | Terms of Use |  |
+| en | https://preview-web.lkk.com/en/testing-page-1 | testing page 1 |  |
+| en | https://preview-web.lkk.com/en/testing-page-1/testing-page-in-1 | testing page in 1 |  |
+| en | https://preview-web.lkk.com/en/testing-page-1/testing-page-in-2 | testing page in 2 |  |
+| en | https://preview-web.lkk.com/en/testing-page-1/testing-page-in-2/opportunities | Opportunities |  |
+| en | https://preview-web.lkk.com/home/careers.html | Careers |  |
+| en | https://preview-web.lkk.com/home/careers/frequently-asked-questions.html | Frequently Asked Questions |  |
+| en | https://preview-web.lkk.com/home/careers/recruitment-journey.html | Recruitment journey |  |
+| en | https://preview-web.lkk.com/home/careers/students-graduates.html | Students & Graduates |  |
+| en | https://preview-web.lkk.com/home/careers/working-at-lee-kum-kee.html | Working at Lee Kum Kee |  |
+| en | https://preview-web.lkk.com/home/corporate-news/listContainer/articles/2026/01/hong-kong-awards-for-environmental-excellence.html | Manufacturing and Industrial Services - Bronze Award |  |
+| en | https://preview-web.lkk.com/home/corporate-news/listContainer/articles/2026/03/aon.html | 2025 Aon China Best ESG Employer |  |
+| en | https://preview-web.lkk.com/home/corporate-news/listContainer/articles/2026/03/green-council.html | UNSDG Achievement Awards 2025 Hong Kong |  |
+| en | https://preview-web.lkk.com/home/corporate-news/listContainer/articles/2026/03/hong-kong-management-association.html | 2025 HKMA/Viu TV & Now TV Awards for Marketing Excellence - Excellence Award, Standard Chartered Hong Kong Excellence in Customer Insights Award |  |
+| zh-cn | https://preview-web.lkk.com/zh-cn | 百年酱料专家 \| 李锦记企业 | 历经130年的持续发展，李锦记已成为一个家喻户晓的酱料王国，成功打造出一个百年民族企业，成为中华民族企业「质量与信心标志」的国际品牌。 |
+| zh-cn | https://preview-web.lkk.com/zh-cn/404 | 404 |  |
+| zh-cn | https://preview-web.lkk.com/zh-cn/about-lkk/chairman-message | 主席的话 |  |
+| zh-cn | https://preview-web.lkk.com/zh-cn/about-lkk/company-overview | 关于李锦记 \| 李锦记企业 | 李锦记跨越三个世纪，历经几代人的艰苦奋斗，让我们与您一起细味这个家传户晓的品牌传奇。 |
+| zh-cn | https://preview-web.lkk.com/zh-cn/about-lkk/company-vision-mission-and-corporate-culture | 企业愿景、使命及企业文化 |  |
+| zh-cn | https://preview-web.lkk.com/zh-cn/about-lkk/milestones | 里程碑 |  |
+| zh-cn | https://preview-web.lkk.com/zh-cn/about-lkk/sustainability | 可持续发展 |  |
+| zh-cn | https://preview-web.lkk.com/zh-cn/careers/employees | 员工故事 |  |
+| zh-cn | https://preview-web.lkk.com/zh-cn/contact-us | 联系我们 |  |
+| zh-cn | https://preview-web.lkk.com/zh-cn/corporate-news | 企业新闻 |  |
+| zh-cn | https://preview-web.lkk.com/zh-cn/corporate-news/cma-esg-pledge-2026-5-year-badge | 厂商会“ESG约章“2026 (5+) |  |
+| zh-cn | https://preview-web.lkk.com/zh-cn/corporate-news/green-council/department-of-commerce-of-guangdong-province | 广东老字号 |  |
+| zh-cn | https://preview-web.lkk.com/zh-cn/corporate-news/green-council/gs1-hong-kong | 贴心企业五年+赏 |  |
+| zh-cn | https://preview-web.lkk.com/zh-cn/corporate-news/green-council/hr-asia | 2025 亚洲最佳企业雇主奖 ── 香港地区 |  |
+| zh-cn | https://preview-web.lkk.com/zh-cn/corporate-news/green-council/hr-asia/design-council-of-hong-kong-of-federation-of-hong-kong-industries | D-Mark |  |
+| zh-cn | https://preview-web.lkk.com/zh-cn/corporate-news/green-council/hr-asia/hong-kong-brand-development-council | 香港品牌发展局20周年特别荣誉奖 |  |
+| zh-cn | https://preview-web.lkk.com/zh-cn/corporate-news/green-council/hr-asia/labour-department-hksar-government | 好雇员嘉许计划2025 ── 好雇员嘉许奖状 |  |
+| zh-cn | https://preview-web.lkk.com/zh-cn/corporate-news/green-council/jobmarket | 卓越雇主大奖、亚太杰出雇主大奖 |  |
+| zh-cn | https://preview-web.lkk.com/zh-cn/corporate-news/hkim-powerbrand-award-cum-marketers-of-the-year-2024-2025 | 香港事务学会 (HKIM) - Centennial Hong Kong PowerBrand 2024/2025 |  |
+| zh-cn | https://preview-web.lkk.com/zh-cn/corporate-news/press-release/20240527 | 李锦记支持第9届中国烹饪世界大赛圆满举行 |  |
+| zh-cn | https://preview-web.lkk.com/zh-cn/corporate-news/press-release/20241211 | 李锦记荣获香港工业总会颁发 2024年「工业献爱心」最高荣誉「至尊关怀大奖」 |  |
+| zh-cn | https://preview-web.lkk.com/zh-cn/corporate-news/press-release/c-20240704 | Lee Kum Kee is The World’s 50 Best Restaurants’ first-ever Official Sauce & Condiment Partner |  |
+| zh-cn | https://preview-web.lkk.com/zh-cn/corporate-news/press-releases/creating-a-global-archive-of-flavour-memories | 李锦记携手联合国教科文组织启动“忘不了的味道·档案计划” 共建“全球味道记忆档案库” |  |
+| zh-cn | https://preview-web.lkk.com/zh-cn/corporate-news/press-releases/lee-kum-kee-global-culinary-immersion-programme-debuts-in-bhutan | 李锦记“全球烹饪体验项目” 首度扩展至不丹 |  |
+| zh-cn | https://preview-web.lkk.com/zh-cn/corporate-news/press-releases/lee-kum-kee-joins-the-celebration-at-wellington-s-lunar-new-year-festival | Lee Kum Kee Joins the Celebration at Wellington’s Lunar New Year Festival |  |
+| zh-cn | https://preview-web.lkk.com/zh-cn/corporate-news/press-releases/the-8th-international-master-chef-s-charity-gala-dinner | 第八届国际名厨慈善宴 |  |
+| zh-cn | https://preview-web.lkk.com/zh-cn/corporate-news/the-chinese-manufacturers-association-of-hong-kong-2025-hong-kong-esg-awards-esg-grand-award | 2025香港ESG奖 ── ESG大奖 |  |
+| zh-cn | https://preview-web.lkk.com/zh-cn/employee/adam-ho | adam-ho |  |
+| zh-cn | https://preview-web.lkk.com/zh-cn/employee/cheng-chiu-ming | cheng-chiu-ming |  |
+| zh-cn | https://preview-web.lkk.com/zh-cn/employee/cheng-wei-yan | cheng-wei-yan |  |
+| zh-cn | https://preview-web.lkk.com/zh-cn/employee/gong-min | gong-min |  |
+| zh-cn | https://preview-web.lkk.com/zh-cn/employee/jiang-zhi | jiang-zhi |  |
+| zh-cn | https://preview-web.lkk.com/zh-cn/employee/lau-fung-ying-christine | lau-fung-ying-christine |  |
+| zh-cn | https://preview-web.lkk.com/zh-cn/employee/mark-butzke | mark-butzke |  |
+| zh-cn | https://preview-web.lkk.com/zh-cn/employee/mauricio-olmedo | mauricio-olmedo |  |
+| zh-cn | https://preview-web.lkk.com/zh-cn/employee/ng-seow-voon-miko | ng-seow-voon-miko |  |
+| zh-cn | https://preview-web.lkk.com/zh-cn/employee/ou-yang-tong | ou-yang-tong |  |
+| zh-cn | https://preview-web.lkk.com/zh-cn/employee/tony-mok | tony-mok |  |
+| zh-cn | https://preview-web.lkk.com/zh-cn/employee/wei-gang | wei-gang |  |
+| zh-cn | https://preview-web.lkk.com/zh-cn/employee/wen-wen | wen-wen |  |
+| zh-cn | https://preview-web.lkk.com/zh-cn/employee/wu-zhi-gang-jacky | wu-zhi-gang-jacky |  |
+| zh-cn | https://preview-web.lkk.com/zh-cn/employee/yip-wai-chuen | yip-wai-chuen |  |
+| zh-cn | https://preview-web.lkk.com/zh-cn/employee/zhao-xiao-min | zhao-xiao-min |  |
+| zh-cn | https://preview-web.lkk.com/zh-cn/faq-details | 常见问题 |  |
+| zh-cn | https://preview-web.lkk.com/zh-cn/privacy-statement | 私隐政策及个人资料收集声明 |  |
+| zh-cn | https://preview-web.lkk.com/zh-cn/search | 搜索 |  |
+| zh-cn | https://preview-web.lkk.com/zh-cn/sitemap | 网站地图 |  |
+| zh-cn | https://preview-web.lkk.com/zh-cn/terms-of-use | 网站条款及细则 |  |
+| zh-cn | https://preview-web.lkk.com/zh-cn/testing-page-1/testing-page-in-2/opportunities | 职业发展 |  |
+| zh-cn | https://preview-web.lkk.com/zh_CN/home/careers.html | 职业发展 |  |
+| zh-cn | https://preview-web.lkk.com/zh_CN/home/careers/frequently-asked-questions.html | 常见问题 |  |
+| zh-cn | https://preview-web.lkk.com/zh_CN/home/careers/recruitment-journey.html | 李的招聘之旅 |  |
+| zh-cn | https://preview-web.lkk.com/zh_CN/home/careers/students-graduates.html | 学生与毕业生 |  |
+| zh-cn | https://preview-web.lkk.com/zh_CN/home/careers/working-at-lee-kum-kee.html | 职在李锦记 |  |
+| zh-cn | https://preview-web.lkk.com/zh_CN/home/corporate-news/listContainer/articles/2026/01/hong-kong-awards-for-environmental-excellence.html | 制造业及工业服务界别── 铜奖 |  |
+| zh-cn | https://preview-web.lkk.com/zh_CN/home/corporate-news/listContainer/articles/2026/03/aon.html | 2025中国最佳ESG雇主 |  |
+| zh-cn | https://preview-web.lkk.com/zh_CN/home/corporate-news/listContainer/articles/2026/03/green-council.html | 联合国可持续发展目标香港成就奖2025 |  |
+| zh-cn | https://preview-web.lkk.com/zh_CN/home/corporate-news/listContainer/articles/2026/03/hong-kong-management-association.html | 2025年度 HKMA/ViuTV及Now TV杰出市场策划奖 ── 卓越奖、杰出顾客洞察力奖 |  |
+| zh-hk | https://preview-web.lkk.com/zh-hk | 百年醬料專家 \| 李錦記企業 | 歷經130年的持續發展，李錦記已成為一個家喻戶曉的醬料王國，成功打造出一個百年民族企業，成為中華民族企業「品質與信心標誌」的國際品牌。 |
+| zh-hk | https://preview-web.lkk.com/zh-hk/404 | 404 |  |
+| zh-hk | https://preview-web.lkk.com/zh-hk/about-lkk/chairman-message | 主席的話 |  |
+| zh-hk | https://preview-web.lkk.com/zh-hk/about-lkk/company-overview | 關於李錦記 \| 李錦記企業 | 李錦記跨越三個世紀，歷經幾代人的艱苦奮鬥，讓我們與您一起細味這個家傳戶曉的品牌傳奇。 |
+| zh-hk | https://preview-web.lkk.com/zh-hk/about-lkk/company-vision-mission-and-corporate-culture | 企業願景、使命及企業文化 |  |
+| zh-hk | https://preview-web.lkk.com/zh-hk/about-lkk/milestones | 里程碑 |  |
+| zh-hk | https://preview-web.lkk.com/zh-hk/about-lkk/sustainability | 可持續發展 |  |
+| zh-hk | https://preview-web.lkk.com/zh-hk/careers/employees | 員工故事 |  |
+| zh-hk | https://preview-web.lkk.com/zh-hk/contact-us | 聯絡我們 |  |
+| zh-hk | https://preview-web.lkk.com/zh-hk/corporate-news | 企業新聞 |  |
+| zh-hk | https://preview-web.lkk.com/zh-hk/corporate-news/cma-esg-pledge-2026-5-year-badge | 廠商會「ESG 約章」2026 (5+) |  |
+| zh-hk | https://preview-web.lkk.com/zh-hk/corporate-news/green-council/department-of-commerce-of-guangdong-province | 廣東老字號 |  |
+| zh-hk | https://preview-web.lkk.com/zh-hk/corporate-news/green-council/gs1-hong-kong | 貼心企業五年+賞 |  |
+| zh-hk | https://preview-web.lkk.com/zh-hk/corporate-news/green-council/hr-asia | 2025 亞洲最佳企業僱主獎 ── 香港地區 |  |
+| zh-hk | https://preview-web.lkk.com/zh-hk/corporate-news/green-council/hr-asia/design-council-of-hong-kong-of-federation-of-hong-kong-industries | D-Mark |  |
+| zh-hk | https://preview-web.lkk.com/zh-hk/corporate-news/green-council/hr-asia/hong-kong-brand-development-council | 香港品牌發展局20週年特別榮譽獎 |  |
+| zh-hk | https://preview-web.lkk.com/zh-hk/corporate-news/green-council/hr-asia/labour-department-hksar-government | 好僱員嘉許計劃2025 ── 好僱員嘉許獎狀 |  |
+| zh-hk | https://preview-web.lkk.com/zh-hk/corporate-news/green-council/jobmarket | 卓越僱主大獎、亞太傑出僱主大獎 |  |
+| zh-hk | https://preview-web.lkk.com/zh-hk/corporate-news/hkim-powerbrand-award-cum-marketers-of-the-year-2024-2025 | 香港事務學會 (HKIM) - Centennial Hong Kong PowerBrand 2024/2025 |  |
+| zh-hk | https://preview-web.lkk.com/zh-hk/corporate-news/press-release/20240527 | 李錦記支持第9屆中國烹飪世界大賽圓滿舉行 | 5月21日至23日，全球頂尖廚師聚首加拿大溫哥華，參加由李錦記獨家贊助醬料的第9屆中國烹飪世界大賽 |
+| zh-hk | https://preview-web.lkk.com/zh-hk/corporate-news/press-release/20241211 | 李錦記榮獲香港工業總會頒發 2024年「工業獻愛心」最高榮譽「至尊關懷大獎」 |  |
+| zh-hk | https://preview-web.lkk.com/zh-hk/corporate-news/press-release/c-20240704 | Lee Kum Kee is The World’s 50 Best Restaurants’ first-ever Official Sauce & Condiment Partner |  |
+| zh-hk | https://preview-web.lkk.com/zh-hk/corporate-news/press-releases/creating-a-global-archive-of-flavour-memories | 李錦記攜手聯合國教科文組織啟動「忘不了的味道·檔案計劃」 共建「全球味道記憶檔案庫」 |  |
+| zh-hk | https://preview-web.lkk.com/zh-hk/corporate-news/press-releases/lee-kum-kee-global-culinary-immersion-programme-debuts-in-bhutan | 李錦記「全球烹飪體驗項目」首度擴展至不丹 |  |
+| zh-hk | https://preview-web.lkk.com/zh-hk/corporate-news/press-releases/lee-kum-kee-joins-the-celebration-at-wellington-s-lunar-new-year-festival | Lee Kum Kee Joins the Celebration at Wellington’s Lunar New Year Festival |  |
+| zh-hk | https://preview-web.lkk.com/zh-hk/corporate-news/press-releases/the-8th-international-master-chef-s-charity-gala-dinner | 第八屆國際名廚慈善宴 |  |
+| zh-hk | https://preview-web.lkk.com/zh-hk/corporate-news/the-chinese-manufacturers-association-of-hong-kong-2025-hong-kong-esg-awards-esg-grand-award | 2025香港ESG獎 ── ESG大獎 |  |
+| zh-hk | https://preview-web.lkk.com/zh-hk/employee/adam-ho | adam-ho |  |
+| zh-hk | https://preview-web.lkk.com/zh-hk/employee/cheng-chiu-ming | cheng-chiu-ming |  |
+| zh-hk | https://preview-web.lkk.com/zh-hk/employee/cheng-wei-yan | cheng-wei-yan |  |
+| zh-hk | https://preview-web.lkk.com/zh-hk/employee/gong-min | gong-min |  |
+| zh-hk | https://preview-web.lkk.com/zh-hk/employee/jiang-zhi | jiang-zhi |  |
+| zh-hk | https://preview-web.lkk.com/zh-hk/employee/lau-fung-ying-christine | lau-fung-ying-christine |  |
+| zh-hk | https://preview-web.lkk.com/zh-hk/employee/mark-butzke | mark-butzke |  |
+| zh-hk | https://preview-web.lkk.com/zh-hk/employee/mauricio-olmedo | mauricio-olmedo |  |
+| zh-hk | https://preview-web.lkk.com/zh-hk/employee/ng-seow-voon-miko | ng-seow-voon-miko |  |
+| zh-hk | https://preview-web.lkk.com/zh-hk/employee/ou-yang-tong | ou-yang-tong |  |
+| zh-hk | https://preview-web.lkk.com/zh-hk/employee/tony-mok | tony-mok |  |
+| zh-hk | https://preview-web.lkk.com/zh-hk/employee/wei-gang | wei-gang |  |
+| zh-hk | https://preview-web.lkk.com/zh-hk/employee/wen-wen | wen-wen |  |
+| zh-hk | https://preview-web.lkk.com/zh-hk/employee/wu-zhi-gang-jacky | wu-zhi-gang-jacky |  |
+| zh-hk | https://preview-web.lkk.com/zh-hk/employee/yip-wai-chuen | yip-wai-chuen |  |
+| zh-hk | https://preview-web.lkk.com/zh-hk/employee/zhao-xiao-min | zhao-xiao-min |  |
+| zh-hk | https://preview-web.lkk.com/zh-hk/faq-details | 常見問題 | Frequently asked questions about products, recipes, and more! |
+| zh-hk | https://preview-web.lkk.com/zh-hk/privacy-statement | 私隱政策及個人資料收集聲明 |  |
+| zh-hk | https://preview-web.lkk.com/zh-hk/search | 搜索 |  |
+| zh-hk | https://preview-web.lkk.com/zh-hk/sitemap | 網頁地圖 |  |
+| zh-hk | https://preview-web.lkk.com/zh-hk/terms-of-use | 網站條款及細則 |  |
+| zh-hk | https://preview-web.lkk.com/zh-hk/testing-page-1/testing-page-in-2/opportunities | 事業發展 |  |
+| zh-hk | https://preview-web.lkk.com/zh_HK/home/careers.html | 職業生涯 |  |
+| zh-hk | https://preview-web.lkk.com/zh_HK/home/careers/frequently-asked-questions.html | 常見問題 |  |
+| zh-hk | https://preview-web.lkk.com/zh_HK/home/careers/recruitment-journey.html | 李的招聘之旅 |  |
+| zh-hk | https://preview-web.lkk.com/zh_HK/home/careers/students-graduates.html | 學生與畢業生 |  |
+| zh-hk | https://preview-web.lkk.com/zh_HK/home/careers/working-at-lee-kum-kee.html | 在李錦記工作 |  |
+| zh-hk | https://preview-web.lkk.com/zh_HK/home/corporate-news/listContainer/articles/2026/01/hong-kong-awards-for-environmental-excellence.html | 製造業及工業服務界別── 銅獎 |  |
+| zh-hk | https://preview-web.lkk.com/zh_HK/home/corporate-news/listContainer/articles/2026/03/aon.html | 2025中國最佳ESG僱主 |  |
+| zh-hk | https://preview-web.lkk.com/zh_HK/home/corporate-news/listContainer/articles/2026/03/green-council.html | 聯合國可持續發展目標香港成就獎2025 |  |
+| zh-hk | https://preview-web.lkk.com/zh_HK/home/corporate-news/listContainer/articles/2026/03/hong-kong-management-association.html | 2025年度 HKMA/ViuTV及Now TV傑出市場策劃獎 ── 卓越獎、傑出顧客洞察力獎 |  |
