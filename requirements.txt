@@ -1,0 +1,11 @@
+# Image processing (scripts/process_lee_kum_kee_images.py)
+numpy==2.5.1
+opencv-python-headless==5.0.0.93
+pillow==12.3.0
+
+# Excel workflows (HKTVMALL_Ingredient_Ranking.xlsx)
+et-xmlfile==2.0.0
+openpyxl==3.1.5
+pandas==3.0.5
+python-dateutil==2.9.0.post0
+six==1.17.0
