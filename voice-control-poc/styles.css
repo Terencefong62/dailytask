@@ -142,10 +142,11 @@ body {
   color: var(--lkk-red);
 }
 
-.btn:focus-visible,
-.source-link a:focus-visible {
-  outline: 3px solid rgba(200, 16, 46, 0.35);
+.btn:focus,
+.source-link a:focus {
+  outline: 3px solid #111;
   outline-offset: 2px;
+  box-shadow: 0 0 0 5px rgba(200, 16, 46, 0.25);
 }
 
 .btn-primary {
