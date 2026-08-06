@@ -1,3 +1,5 @@
+const _img = (key) => stepImageMeta(key, "zh");
+
 window.RECIPE_VOICE_CONFIG = {
   lang: "zh-HK",
   recognitionLang: "zh-HK",
@@ -10,18 +12,22 @@ window.RECIPE_VOICE_CONFIG = {
         {
           number: 1,
           text: "雞翼用刀在中間𠝹幾刀，用醃料醃10分鐘，薯仔去皮切角備用。用中大火燒熱油鑊，下雞翼煎至兩面金黃色，盛起蓋著保溫，備用。",
+          ..._img("prepMarinate"),
         },
         {
           number: 2,
           text: "原鑊再下少許油，爆香蒜蓉，下薯仔炒勻。",
+          ..._img("sautePotato"),
         },
         {
           number: 3,
           text: "倒進水，加蓋用小火煮至馬鈴薯開始軟身。雞翼回鑊，兜勻。",
+          ..._img("simmer"),
         },
         {
           number: 4,
           text: "倒進調味料，加蓋多煮5分鐘或至喜歡的濃稠度，灑蔥花裝飾，即可。",
+          ..._img("finish"),
         },
       ],
       ingredients: {
@@ -71,18 +77,22 @@ window.RECIPE_VOICE_CONFIG = {
         {
           number: 1,
           text: "百頁豆腐切件，在中間𠝹幾刀，用素食蠔油及蒜蓉醃10分鐘，薯仔去皮切角備用。用中大火燒熱油鑊，下豆腐煎至兩面金黃色，盛起保溫備用。",
+          ..._img("prepTofu"),
         },
         {
           number: 2,
           text: "原鑊再下少許油，爆香蒜蓉，下薯仔炒勻。",
+          ..._img("sautePotato"),
         },
         {
           number: 3,
           text: "倒進水，加蓋用小火煮至薯仔開始軟身。豆腐回鑊，兜勻。",
+          ..._img("simmer"),
         },
         {
           number: 4,
           text: "倒進調味料（素食蠔油2湯匙、糖1茶匙、清水200毫升），加蓋多煮5分鐘，灑蔥花裝飾，即可。",
+          ..._img("finish"),
         },
       ],
       ingredients: {
@@ -132,18 +142,22 @@ window.RECIPE_VOICE_CONFIG = {
         {
           number: 1,
           text: "雞翼用刀在中間𠝹幾刀，用少量舊庄蠔油（約半湯匙）及蒜蓉醃10分鐘，薯仔去皮切角備用。用中火少油燒熱油鑊，下雞翼煎至兩面金黃色，盛起保溫備用。",
+          ..._img("lightFry"),
         },
         {
           number: 2,
           text: "原鑊下少許油，爆香蒜蓉，下薯仔炒勻。",
+          ..._img("sautePotato"),
         },
         {
           number: 3,
           text: "倒進水，加蓋用小火煮至薯仔開始軟身。雞翼回鑊，兜勻。",
+          ..._img("simmer"),
         },
         {
           number: 4,
           text: "倒進調味料（舊庄蠔油1.5湯匙、糖半茶匙或免糖、清水200毫升），加蓋多煮5分鐘，灑蔥花裝飾，即可。",
+          ..._img("finish"),
         },
       ],
       ingredients: {
@@ -210,6 +224,9 @@ window.RECIPE_VOICE_CONFIG = {
     prepTitle: "預備食材",
     lkkProductsTitle: "使用了以下李錦記產品",
     stepsTitle: "烹調步驟",
+    stepGuideTitle: "步驟圖示指引",
+    stepGuideLabel: (n) => `第 ${n} 步`,
+    stepGuidePrompt: "說「開始」或點選步驟，查看該步圖示指引",
     changedBadge: "已調整",
     cursorAiTitle: "AI 即時生成",
     cursorAiHint: "使用 ChatGPT（OpenAI API）或 Cursor AI 即時生成素食版／健康版。",

@@ -36,28 +36,16 @@ Both languages support three versions (click buttons or use voice):
 
 Use the **English** / **中文** link in the header to switch language.
 
-## AI generation (real-time)
-
-Vegan and Healthy can be generated with **ChatGPT (OpenAI API)** — recommended, usually **5–15 seconds** — or **Cursor Cloud Agents** (~30–90 seconds).
-
-### ChatGPT (OpenAI)
-
-1. Create an API key at [OpenAI API keys](https://platform.openai.com/api-keys)
-2. In the POC, select **ChatGPT (OpenAI)** and paste your `sk-…` key
-3. Click **Save & connect**, then choose **素食版 / Vegan** or **健康版 / Healthy**
-
-Server env (optional): `OPENAI_API_KEY` and optional `OPENAI_MODEL` (default `gpt-4o-mini`).
-
-### Cursor AI (alternative)
-
-1. API key from [Cursor Dashboard → API Keys](https://cursor.com/dashboard/api)
-2. Select **Cursor AI** in the dropdown
-
-Server env (optional): `CURSOR_API_KEY`
-
-Without a key, static fallback data is used. Results cache in `sessionStorage` per provider.
-
 ## Run locally
+
+Static recipe versions (Original, Vegan, Healthy) are built into the POC — no API keys required.
+
+```bash
+cd voice-control-poc
+python3 -m http.server 8080
+```
+
+Or with the bundled API server (same static UI; AI endpoints unused):
 
 ```bash
 cd voice-control-poc/api

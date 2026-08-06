@@ -36,6 +36,10 @@ class RecipeVoiceController {
     this.ingredientsContent = document.getElementById("ingredients-content");
     this.prepTitle = document.getElementById("prep-title");
     this.stepsTitle = document.getElementById("steps-title");
+    this.stepGuide = document.getElementById("step-guide");
+    this.stepGuideTitle = document.getElementById("step-guide-title");
+    this.stepGuideLabel = document.getElementById("step-guide-label");
+    this.stepGuideImage = document.getElementById("step-guide-image");
     this.versionNote = document.getElementById("version-note");
     this.versionButtons = document.querySelectorAll(".version-btn");
     this.micToggle = document.getElementById("mic-toggle");
@@ -65,6 +69,8 @@ class RecipeVoiceController {
     const { strings } = this.config;
     if (this.prepTitle) this.prepTitle.textContent = strings.prepTitle || "";
     if (this.stepsTitle) this.stepsTitle.textContent = strings.stepsTitle || "";
+    if (this.stepGuideTitle) this.stepGuideTitle.textContent = strings.stepGuideTitle || "";
+    this.updateStepGuide();
   }
 
   applyVariantState(variantId, announce) {
@@ -144,14 +150,58 @@ class RecipeVoiceController {
 
   renderSteps() {
     this.stepsList.innerHTML = this.steps
-      .map(
-        (step) =>
-          `<li class="step-box" data-step="${step.number}" id="step-${step.number}">
-            <span class="step-number" aria-hidden="true">${step.number}</span>
-            <span class="step-text">${step.text}</span>
-          </li>`
-      )
+      .map((step) => {
+        const thumb = step.image
+          ? `<img src="${step.image}" alt="${step.imageAlt || ""}" class="step-thumb" loading="lazy">`
+          : "";
+
+        return `<li class="step-box" data-step="${step.number}" id="step-${step.number}">
+            <div class="step-content">
+              ${thumb}
+              <div class="step-body">
+                <span class="step-number" aria-hidden="true">${step.number}</span>
+                <span class="step-text">${step.text}</span>
+              </div>
+            </div>
+          </li>`;
+      })
       .join("");
+
+    this.updateStepGuide();
+  }
+
+  getActiveStep() {
+    if (this.currentIndex < 0 || this.currentIndex >= this.steps.length) return null;
+    return this.steps[this.currentIndex];
+  }
+
+  updateStepGuide(stepNumber) {
+    const { strings } = this.config;
+    if (!this.stepGuide || !this.stepGuideImage) return;
+
+    const step =
+      stepNumber !== undefined
+        ? this.steps.find((s) => s.number === stepNumber)
+        : this.getActiveStep();
+
+    if (!step || !step.image) {
+      this.stepGuide.classList.add("is-idle");
+      if (this.stepGuideLabel) {
+        this.stepGuideLabel.textContent = strings.stepGuidePrompt || "";
+      }
+      if (this.stepGuideImage) {
+        this.stepGuideImage.removeAttribute("src");
+        this.stepGuideImage.alt = "";
+      }
+      return;
+    }
+
+    this.stepGuide.classList.remove("is-idle");
+    if (this.stepGuideLabel) {
+      this.stepGuideLabel.textContent = strings.stepGuideLabel(step.number);
+    }
+    this.stepGuideImage.src = step.image;
+    this.stepGuideImage.alt = step.imageAlt || strings.stepGuideLabel(step.number);
   }
 
   updateVersionUi() {
@@ -180,6 +230,14 @@ class RecipeVoiceController {
 
     this.versionButtons.forEach((btn) => {
       btn.addEventListener("click", () => this.switchVariant(btn.dataset.version));
+    });
+
+    this.stepsList.addEventListener("click", (event) => {
+      const box = event.target.closest(".step-box");
+      if (!box) return;
+      const stepNumber = parseInt(box.dataset.step, 10);
+      const index = this.steps.findIndex((s) => s.number === stepNumber);
+      if (index !== -1) this.speakStep(index);
     });
 
     window.addEventListener("beforeunload", () => {
@@ -267,6 +325,7 @@ class RecipeVoiceController {
 
   stopSpeaking() {
     window.speechSynthesis.cancel();
+    this.updateStepGuide();
     this.updateUi();
   }
 
@@ -299,6 +358,8 @@ class RecipeVoiceController {
     document.querySelectorAll(".step-box").forEach((el) => {
       el.classList.toggle("active", el.dataset.step === String(stepNumber));
     });
+
+    this.updateStepGuide(stepNumber);
 
     const active = document.getElementById(`step-${stepNumber}`);
     if (active) active.scrollIntoView({ behavior: "smooth", block: "nearest" });

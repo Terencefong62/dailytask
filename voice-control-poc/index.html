@@ -95,6 +95,11 @@
 
     <section class="steps-section">
       <h2 id="steps-title" class="recipe-main-title"></h2>
+      <div id="step-guide" class="step-guide is-idle" aria-live="polite">
+        <h3 id="step-guide-title" class="step-guide-heading"></h3>
+        <p id="step-guide-label" class="step-guide-label"></p>
+        <img id="step-guide-image" class="step-guide-image" alt="" loading="lazy">
+      </div>
       <ol id="steps-list" class="steps-list"></ol>
     </section>
   </main>
@@ -105,6 +110,7 @@
     </div>
   </footer>
 
+  <script src="step-images.js"></script>
   <script src="config.zh-HK.js"></script>
   <script src="voice-control.js"></script>
 </body>

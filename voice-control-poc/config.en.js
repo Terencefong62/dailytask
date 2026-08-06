@@ -1,3 +1,5 @@
+const _img = (key) => stepImageMeta(key, "en");
+
 window.RECIPE_VOICE_CONFIG = {
   lang: "en-US",
   recognitionLang: "en-US",
@@ -10,22 +12,27 @@ window.RECIPE_VOICE_CONFIG = {
         {
           number: 1,
           text: "Slice in the middle of the chicken wings and marinade for 10 minutes. Peel and cut the potatoes into pieces.",
+          ..._img("prepMarinate"),
         },
         {
           number: 2,
           text: "Heat the oil with medium high heat, fry the chicken wings until golden yellow, set aside and keep warm.",
+          ..._img("fryChicken"),
         },
         {
           number: 3,
           text: "Add some oil, sauté garlic and dried shallots until fragrant, then add potatoes and stir-fry well.",
+          ..._img("sautePotato"),
         },
         {
           number: 4,
           text: "Add water, cover and bring to boil until the potatoes soften. Add chicken wings and stir well.",
+          ..._img("simmer"),
         },
         {
           number: 5,
           text: "Add the seasoning, cover and cook for 5 minutes or adjust the thickness of sauce according to personal preference. Garnish with green onions.",
+          ..._img("finish"),
         },
       ],
       ingredients: {
@@ -75,22 +82,27 @@ window.RECIPE_VOICE_CONFIG = {
         {
           number: 1,
           text: "Slice king oyster mushrooms in the middle and marinate with vegan oyster sauce and garlic for 10 minutes. Peel and cut the potatoes into pieces.",
+          ..._img("prepMushroom"),
         },
         {
           number: 2,
           text: "Heat a little oil over medium-high heat, pan-fry the mushroom pieces until golden, set aside and keep warm.",
+          ..._img("fryMushroom"),
         },
         {
           number: 3,
           text: "Add some oil, sauté garlic and dried shallots until fragrant, then add potatoes and stir-fry well.",
+          ..._img("sautePotato"),
         },
         {
           number: 4,
           text: "Add water, cover and simmer until the potatoes soften. Add mushrooms back to the pan and stir well.",
+          ..._img("simmer"),
         },
         {
           number: 5,
           text: "Add seasoning (2 tbsp vegan oyster sauce, 1 tsp sugar, 200 ml water), cover and cook for 5 minutes. Garnish with green onions.",
+          ..._img("finish"),
         },
       ],
       ingredients: {
@@ -140,22 +152,27 @@ window.RECIPE_VOICE_CONFIG = {
         {
           number: 1,
           text: "Slice chicken wings in the middle and marinate for 10 minutes with less premium oyster sauce (about half a tablespoon) and garlic. Peel and cut potatoes.",
+          ..._img("prepMarinate"),
         },
         {
           number: 2,
           text: "Heat a small amount of oil over medium heat, fry the chicken wings until golden yellow, set aside and keep warm.",
+          ..._img("lightFry"),
         },
         {
           number: 3,
           text: "Add a little oil, sauté garlic and dried shallots until fragrant, then add potatoes and stir-fry well.",
+          ..._img("sautePotato"),
         },
         {
           number: 4,
           text: "Add water, cover and simmer until the potatoes soften. Add chicken wings back and stir well.",
+          ..._img("simmer"),
         },
         {
           number: 5,
           text: "Add reduced seasoning (1.5 tbsp oyster sauce, half teaspoon sugar or no sugar, 200 ml water), cover and cook for 5 minutes. Garnish with green onions.",
+          ..._img("finish"),
         },
       ],
       ingredients: {
@@ -222,6 +239,9 @@ window.RECIPE_VOICE_CONFIG = {
     prepTitle: "Ingredients",
     lkkProductsTitle: "Made with Lee Kum Kee products",
     stepsTitle: "How to make it",
+    stepGuideTitle: "Step visual guide",
+    stepGuideLabel: (n) => `Step ${n}`,
+    stepGuidePrompt: "Say \"Start\" or pick a step to see the visual guide",
     changedBadge: "Adjusted",
     cursorAiTitle: "AI generation (real-time)",
     cursorAiHint: "Generate Vegan / Healthy with ChatGPT (OpenAI API) or Cursor AI.",
