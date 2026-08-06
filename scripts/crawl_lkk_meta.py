@@ -6,15 +6,13 @@ from __future__ import annotations
 import argparse
 import csv
 import re
-import sys
 import xml.etree.ElementTree as ET
 from concurrent.futures import ThreadPoolExecutor, as_completed
-from html import unescape
 from pathlib import Path
 from urllib.error import HTTPError, URLError
-from urllib.request import Request, urlopen
 
-BASE = "https://preview-web.lkk.com"
+from lkk_meta_utils import BASE, fetch, normalize_whitespace
+
 SITEMAP_INDEX = f"{BASE}/sitemap.xml"
 NS = {"sm": "http://www.sitemaps.org/schemas/sitemap/0.9"}
 USER_AGENT = "Mozilla/5.0 (compatible; LKKMetaCrawler/1.0)"
@@ -27,10 +25,8 @@ LANGUAGE_SITEMAPS = [
 ]
 
 
-def fetch(url: str) -> str:
-    req = Request(url, headers={"User-Agent": USER_AGENT})
-    with urlopen(req, timeout=TIMEOUT) as resp:
-        return resp.read().decode("utf-8", errors="replace")
+def fetch_url(url: str) -> str:
+    return fetch(url, USER_AGENT, timeout=TIMEOUT)
 
 
 def parse_sitemap_urls(xml_text: str) -> list[str]:
@@ -63,14 +59,14 @@ def collect_page_urls() -> list[str]:
     """Collect URLs from all language sitemaps (en, zh-hk, zh-cn)."""
     page_urls: list[str] = []
     for _lang, sitemap_url in LANGUAGE_SITEMAPS:
-        page_urls.extend(parse_sitemap_urls(fetch(sitemap_url)))
+        page_urls.extend(parse_sitemap_urls(fetch_url(sitemap_url)))
 
     # Also include anything listed in the sitemap index (fallback).
-    index_xml = fetch(SITEMAP_INDEX)
+    index_xml = fetch_url(SITEMAP_INDEX)
     for sm_url in parse_sitemap_urls(index_xml):
         if sm_url.endswith("sitemap-lang.xml"):
             continue
-        page_urls.extend(parse_sitemap_urls(fetch(sm_url)))
+        page_urls.extend(parse_sitemap_urls(fetch_url(sm_url)))
 
     seen: set[str] = set()
     unique: list[str] = []
@@ -83,7 +79,7 @@ def collect_page_urls() -> list[str]:
 
 def extract_meta(html: str) -> tuple[str, str]:
     title_match = re.search(r"<title[^>]*>(.*?)</title>", html, re.IGNORECASE | re.DOTALL)
-    title = unescape(re.sub(r"\s+", " ", title_match.group(1)).strip()) if title_match else ""
+    title = normalize_whitespace(title_match.group(1)) if title_match else ""
 
     desc = ""
     for pattern in [
@@ -94,7 +90,7 @@ def extract_meta(html: str) -> tuple[str, str]:
     ]:
         match = re.search(pattern, html, re.IGNORECASE | re.DOTALL)
         if match:
-            desc = unescape(re.sub(r"\s+", " ", match.group(1)).strip())
+            desc = normalize_whitespace(match.group(1))
             break
 
     return title, desc
@@ -102,7 +98,7 @@ def extract_meta(html: str) -> tuple[str, str]:
 
 def crawl_url(url: str) -> dict[str, str]:
     try:
-        html = fetch(url)
+        html = fetch_url(url)
         title, desc = extract_meta(html)
         return {
             "Language": detect_language(url),

@@ -3,34 +3,23 @@
 
 from __future__ import annotations
 
+import argparse
 import csv
 import re
-from html import unescape
 from pathlib import Path
-from urllib.request import Request, urlopen
 
 import openpyxl
 from openpyxl.styles import Font
 
-BASE = "https://preview-web.lkk.com"
-SLUGS = [
-    "adam-ho",
-    "cheng-chiu-ming",
-    "cheng-wei-yan",
-    "gong-min",
-    "jiang-zhi",
-    "lau-fung-ying-christine",
-    "mark-butzke",
-    "mauricio-olmedo",
-    "ng-seow-voon-miko",
-    "ou-yang-tong",
-    "tony-mok",
-    "wei-gang",
-    "wen-wen",
-    "wu-zhi-gang-jacky",
-    "yip-wai-chuen",
-    "zhao-xiao-min",
-]
+from lkk_meta_utils import (
+    BASE,
+    EMPLOYEE_SLUGS,
+    LOCALES,
+    extract_employee_name,
+    fetch,
+    normalize_whitespace,
+)
+
 USER_AGENT = "LKKEmployeeMeta/1.0"
 MAX_DESC = 155
 
@@ -51,44 +40,8 @@ CORP = {
 }
 
 
-def fetch(url: str) -> str:
-    req = Request(url, headers={"User-Agent": USER_AGENT})
-    with urlopen(req, timeout=20) as resp:
-        return resp.read().decode("utf-8", errors="replace")
-
-
-def extract_breadcrumb_name(html: str) -> str:
-    names = re.findall(
-        r'"@type":\s*"ListItem"[^}]*"name":\s*"([^"]+)"',
-        html,
-        flags=re.IGNORECASE | re.DOTALL,
-    )
-    skip = {
-        "lkkGroup",
-        "Home",
-        "主頁",
-        "Careers",
-        "職業生涯",
-        "职业发展",
-        "Employee Stories",
-        "員工故事",
-        "员工故事",
-    }
-    for name in reversed(names):
-        if name not in skip:
-            return unescape(name.strip())
-    return ""
-
-
 def extract_employee_fields(html: str) -> tuple[str, str, str]:
-    name = extract_breadcrumb_name(html)
-    if not name:
-        h2 = re.search(
-            r'class="G33-basic-content-title[^"]*"[^>]*>([^<]+)<',
-            html,
-            flags=re.IGNORECASE,
-        )
-        name = unescape(h2.group(1).strip()) if h2 else ""
+    name = extract_employee_name(html)
 
     role = ""
     role_m = re.search(
@@ -97,7 +50,7 @@ def extract_employee_fields(html: str) -> tuple[str, str, str]:
         flags=re.IGNORECASE,
     )
     if role_m:
-        role = unescape(role_m.group(1).strip())
+        role = normalize_whitespace(role_m.group(1))
 
     intro = ""
     intro_m = re.search(
@@ -106,7 +59,7 @@ def extract_employee_fields(html: str) -> tuple[str, str, str]:
         flags=re.IGNORECASE,
     )
     if intro_m:
-        intro = unescape(intro_m.group(1).strip())
+        intro = normalize_whitespace(intro_m.group(1))
 
     return name, role, intro
 
@@ -117,16 +70,18 @@ def proposed_title(locale: str, name: str) -> str:
 
 def proposed_description(locale: str, name: str, role: str, intro: str) -> str:
     if locale == "en":
-        lead = f"{name}, {role} at {BRAND[locale]}." if name and role else f"{name} — {BRAND[locale]}."
+        lead = (
+            f"{name}, {role} at {BRAND[locale]}."
+            if name and role
+            else f"{name} — {BRAND[locale]}."
+        )
         text = f"{lead} {intro}".strip() if intro else lead
-    elif locale == "zh-hk":
-        lead = f"{name}，{role}，分享在{BRAND[locale]}的工作故事。"
-        text = f"{lead}{intro}" if intro else lead
     else:
-        lead = f"{name}，{role}，分享在{BRAND[locale]}的工作故事。"
+        role_fragment = f"{role}，" if role else ""
+        lead = f"{name}，{role_fragment}分享在{BRAND[locale]}的工作故事。"
         text = f"{lead}{intro}" if intro else lead
 
-    text = re.sub(r"\s+", " ", text).strip()
+    text = normalize_whitespace(text)
     if len(text) > MAX_DESC:
         text = text[: MAX_DESC - 1].rstrip() + "…"
     return text
@@ -134,10 +89,10 @@ def proposed_description(locale: str, name: str, role: str, intro: str) -> str:
 
 def build_employee_updates() -> dict[str, tuple[str, str]]:
     updates: dict[str, tuple[str, str]] = {}
-    for slug in SLUGS:
-        for locale in ("en", "zh-hk", "zh-cn"):
+    for slug in EMPLOYEE_SLUGS:
+        for locale in LOCALES:
             url = f"{BASE}/{locale}/employee/{slug}"
-            html = fetch(url)
+            html = fetch(url, USER_AGENT)
             name, role, intro = extract_employee_fields(html)
             title = proposed_title(locale, name)
             desc = proposed_description(locale, name, role, intro)
@@ -204,10 +159,22 @@ def write_excel(rows: list[dict[str, str]], path: Path) -> None:
 
 
 def main() -> None:
-    crawl_path = Path("exports/lkk_meta_crawl.csv")
-    excel_path = Path("exports/lkk_meta_crawl.xlsx")
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument(
+        "--crawl",
+        type=Path,
+        default=Path("exports/lkk_meta_crawl.csv"),
+        help="Input/output crawl CSV path",
+    )
+    parser.add_argument(
+        "--excel",
+        type=Path,
+        default=Path("exports/lkk_meta_crawl.xlsx"),
+        help="Output Excel path",
+    )
+    args = parser.parse_args()
 
-    rows = load_crawl_rows(crawl_path)
+    rows = load_crawl_rows(args.crawl)
     updates = build_employee_updates()
 
     changed = 0
@@ -219,11 +186,11 @@ def main() -> None:
             row["Meta Description"] = desc
             changed += 1
 
-    write_crawl_csv(rows, crawl_path)
-    write_excel(rows, excel_path)
+    write_crawl_csv(rows, args.crawl)
+    write_excel(rows, args.excel)
     print(f"Updated {changed} employee rows")
-    print(f"CSV: {crawl_path}")
-    print(f"Excel: {excel_path} (Meta Title=col E, Meta Description=col F)")
+    print(f"CSV: {args.crawl}")
+    print(f"Excel: {args.excel} (Meta Title=col E, Meta Description=col F)")
 
 
 if __name__ == "__main__":

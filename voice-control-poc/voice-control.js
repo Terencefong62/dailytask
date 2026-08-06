@@ -35,6 +35,11 @@ const CHINESE_DIGITS = {
   十: 10,
 };
 
+const LISTENING_LABELS = {
+  idle: "開啟語音聆聽",
+  active: "停止語音聆聽",
+};
+
 const SpeechRecognition =
   window.SpeechRecognition || window.webkitSpeechRecognition;
 
@@ -55,6 +60,9 @@ class RecipeVoiceController {
     this.statusSpeaking = document.getElementById("status-speaking");
     this.statusMessage = document.getElementById("status-message");
     this.lastCommand = document.getElementById("last-command");
+    this.micIcon = this.micToggle.querySelector(".mic-icon");
+    this.micLabel = this.micToggle.querySelector(".mic-label");
+    this.stepElements = new Map();
 
     this.renderSteps();
     this.bindUi();
@@ -63,15 +71,28 @@ class RecipeVoiceController {
   }
 
   renderSteps() {
-    this.stepsList.innerHTML = this.steps
-      .map(
-        (step) =>
-          `<li class="step-box" data-step="${step.number}" id="step-${step.number}">
-            <span class="step-number" aria-hidden="true">${step.number}</span>
-            <span class="step-text">${step.text}</span>
-          </li>`
-      )
-      .join("");
+    this.stepsList.replaceChildren();
+    this.stepElements.clear();
+
+    for (const step of this.steps) {
+      const item = document.createElement("li");
+      item.className = "step-box";
+      item.dataset.step = String(step.number);
+      item.id = `step-${step.number}`;
+
+      const number = document.createElement("span");
+      number.className = "step-number";
+      number.setAttribute("aria-hidden", "true");
+      number.textContent = String(step.number);
+
+      const text = document.createElement("span");
+      text.className = "step-text";
+      text.textContent = step.text;
+
+      item.append(number, text);
+      this.stepsList.append(item);
+      this.stepElements.set(step.number, item);
+    }
   }
 
   bindUi() {
@@ -139,12 +160,10 @@ class RecipeVoiceController {
     try {
       this.recognition.start();
       this.isListening = true;
-      this.micToggle.setAttribute("aria-pressed", "true");
-      this.micToggle.querySelector(".mic-icon").textContent = "🔴";
-      this.micToggle.lastChild.textContent = "停止語音聆聽";
+      this.updateListeningControl();
       this.setMessage("語音聆聽已開啟，請說出指令。");
       this.updateUi();
-    } catch (error) {
+    } catch {
       this.setMessage("無法啟動語音聆聽，請確認麥克風權限。");
     }
   }
@@ -154,9 +173,8 @@ class RecipeVoiceController {
 
     this.isListening = false;
     this.recognition.stop();
-    this.micToggle.setAttribute("aria-pressed", "false");
-    this.micToggle.querySelector(".mic-icon").textContent = "🎤";
-    this.micToggle.lastChild.textContent = "開啟語音聆聽";
+    this.updateListeningControl();
+    this.setMessage("語音聆聽已關閉。");
     this.updateUi();
   }
 
@@ -180,11 +198,7 @@ class RecipeVoiceController {
     utterance.onend = () => this.updateUi();
     utterance.onerror = () => this.updateUi();
 
-    const voices = window.speechSynthesis.getVoices();
-    const zhVoice = voices.find(
-      (v) => v.lang.startsWith("zh") && (v.lang.includes("HK") || v.lang.includes("TW"))
-    ) || voices.find((v) => v.lang.startsWith("zh"));
-
+    const zhVoice = this.findChineseVoice();
     if (zhVoice) utterance.voice = zhVoice;
 
     window.speechSynthesis.speak(utterance);
@@ -193,11 +207,17 @@ class RecipeVoiceController {
   }
 
   highlightStep(stepNumber) {
-    document.querySelectorAll(".step-box").forEach((el) => {
-      el.classList.toggle("active", el.dataset.step === String(stepNumber));
+    this.stepElements.forEach((el, number) => {
+      const active = number === stepNumber;
+      el.classList.toggle("active", active);
+      if (active) {
+        el.setAttribute("aria-current", "step");
+      } else {
+        el.removeAttribute("aria-current");
+      }
     });
 
-    const active = document.getElementById(`step-${stepNumber}`);
+    const active = this.stepElements.get(stepNumber);
     if (active) active.scrollIntoView({ behavior: "smooth", block: "nearest" });
   }
 
@@ -239,8 +259,14 @@ class RecipeVoiceController {
   }
 
   speakFeedback(text) {
+    this.stopSpeaking();
     const utterance = new SpeechSynthesisUtterance(text);
     utterance.lang = "zh-HK";
+    const zhVoice = this.findChineseVoice();
+    if (zhVoice) utterance.voice = zhVoice;
+    utterance.onstart = () => this.updateUi();
+    utterance.onend = () => this.updateUi();
+    utterance.onerror = () => this.updateUi();
     window.speechSynthesis.speak(utterance);
   }
 
@@ -302,11 +328,33 @@ class RecipeVoiceController {
       } else {
         this.goToFirstStep();
       }
+      return;
     }
+
+    this.setMessage("未能識別指令，請說「開始」、「下一步」、「上一步」、「返回第 X 步」、「重複」或「停止」。");
   }
 
   setMessage(message) {
     this.statusMessage.textContent = message;
+  }
+
+  findChineseVoice() {
+    const voices = window.speechSynthesis.getVoices();
+    return (
+      voices.find(
+        (voice) =>
+          voice.lang.startsWith("zh") &&
+          (voice.lang.includes("HK") || voice.lang.includes("TW"))
+      ) || voices.find((voice) => voice.lang.startsWith("zh"))
+    );
+  }
+
+  updateListeningControl() {
+    this.micToggle.setAttribute("aria-pressed", String(this.isListening));
+    this.micIcon.textContent = this.isListening ? "🔴" : "🎤";
+    this.micLabel.textContent = this.isListening
+      ? LISTENING_LABELS.active
+      : LISTENING_LABELS.idle;
   }
 
   updateUi() {

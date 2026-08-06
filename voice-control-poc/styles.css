@@ -142,6 +142,12 @@ body {
   color: var(--lkk-red);
 }
 
+.btn:focus-visible,
+.source-link a:focus-visible {
+  outline: 3px solid rgba(200, 16, 46, 0.35);
+  outline-offset: 2px;
+}
+
 .btn-primary {
   background: var(--lkk-red);
   border-color: var(--lkk-red);

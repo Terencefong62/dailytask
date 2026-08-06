@@ -51,13 +51,15 @@
       <h2>語音控制</h2>
       <p class="voice-hint">
         說出指令控制朗讀烹調步驟：
-        <strong>開始</strong>、<strong>下一步</strong>、<strong>上一步</strong>、<strong>返回第 X 步</strong>（例如：返回第 2 步）
+        <strong>開始</strong>、<strong>下一步</strong>、<strong>上一步</strong>、
+        <strong>返回第 X 步</strong>、<strong>重複</strong>、<strong>停止</strong>
+        （例如：返回第 2 步）
       </p>
 
       <div class="voice-controls">
         <button type="button" id="mic-toggle" class="btn btn-primary" aria-pressed="false">
           <span class="mic-icon" aria-hidden="true">🎤</span>
-          開啟語音聆聽
+          <span class="mic-label">開啟語音聆聽</span>
         </button>
         <button type="button" id="btn-start" class="btn">開始</button>
         <button type="button" id="btn-prev" class="btn">上一步</button>
@@ -76,7 +78,7 @@
 
     <section class="steps-section">
       <h2 class="recipe-main-title">烹調步驟</h2>
-      <ol id="steps-list" class="steps-list"></ol>
+      <ol id="steps-list" class="steps-list" aria-label="烹調步驟列表"></ol>
     </section>
   </main>
 
