@@ -82,6 +82,5 @@ Use Chrome or Edge for full POC (TTS + voice commands).
 - `en.html` — English recipe page (en-US)
 - `config.zh-HK.js` / `config.en.js` — locale-specific steps and commands
 - `styles.css` — LKK-inspired styling
-- `ai-client.js` — ChatGPT + Cursor API client
-- `api/` — FastAPI backend (`main.py`, `openai_service.py`, `cursor_service.py`)
+- `voice-control.js` — shared TTS + voice recognition logic
 - `requirements.txt` — Python dependencies

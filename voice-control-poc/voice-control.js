@@ -47,21 +47,10 @@ class RecipeVoiceController {
     this.statusSpeaking = document.getElementById("status-speaking");
     this.statusMessage = document.getElementById("status-message");
     this.lastCommand = document.getElementById("last-command");
-    this.cursorApiKeyInput = document.getElementById("cursor-api-key");
-    this.aiProviderSelect = document.getElementById("ai-provider");
-    this.cursorKeyLabel = document.getElementById("cursor-key-label");
-    this.aiProviderLabel = document.getElementById("ai-provider-label");
-    this.cursorConnectBtn = document.getElementById("cursor-connect");
-    this.cursorAiStatus = document.getElementById("cursor-ai-status");
-    this.cursorUseAiCheckbox = document.getElementById("cursor-use-ai");
-    this.cursorAiStream = document.getElementById("cursor-ai-stream");
-    this.useCursorAi = true;
-    this.aiCachePrefix = "voice_poc_ai_";
 
     this.renderSteps();
     this.renderIngredients();
     this.applyStaticLabels();
-    this.setupCursorAi();
     this.updateVersionUi();
     this.bindUi();
     this.setupRecognition();
@@ -76,124 +65,6 @@ class RecipeVoiceController {
     const { strings } = this.config;
     if (this.prepTitle) this.prepTitle.textContent = strings.prepTitle || "";
     if (this.stepsTitle) this.stepsTitle.textContent = strings.stepsTitle || "";
-
-    const cursorTitle = document.getElementById("cursor-ai-title");
-    const cursorHint = document.getElementById("cursor-ai-hint");
-    const cursorUseLabel = document.getElementById("cursor-use-ai-label");
-    if (cursorTitle) cursorTitle.textContent = strings.cursorAiTitle || "";
-    if (cursorHint) cursorHint.textContent = strings.cursorAiHint || "";
-    if (cursorUseLabel) cursorUseLabel.textContent = strings.cursorUseAi || "";
-    this.updateAiKeyPlaceholder();
-    if (this.cursorConnectBtn) {
-      this.cursorConnectBtn.textContent = strings.cursorSaveKey || "Connect";
-    }
-    if (this.aiProviderSelect) {
-      const openaiOpt = this.aiProviderSelect.querySelector('[value="openai"]');
-      const cursorOpt = this.aiProviderSelect.querySelector('[value="cursor"]');
-      if (openaiOpt) openaiOpt.textContent = strings.cursorProviderOpenai || "ChatGPT";
-      if (cursorOpt) cursorOpt.textContent = strings.cursorProviderCursor || "Cursor AI";
-    }
-    if (this.aiProviderLabel) {
-      this.aiProviderLabel.textContent = strings.cursorProviderLabel || "AI service";
-    }
-    if (this.cursorKeyLabel) {
-      this.cursorKeyLabel.textContent = strings.cursorKeyLabel || "API Key";
-    }
-  }
-
-  getAiProvider() {
-    if (window.AiClient) return window.AiClient.getProvider();
-    return this.aiProviderSelect?.value || "openai";
-  }
-
-  updateAiKeyPlaceholder() {
-    const { strings } = this.config;
-    const provider = this.getAiProvider();
-    if (!this.cursorApiKeyInput) return;
-    this.cursorApiKeyInput.placeholder =
-      provider === "cursor"
-        ? strings.cursorKeyPlaceholderCursor || ""
-        : strings.cursorKeyPlaceholderOpenai || "";
-    if (window.AiClient) {
-      this.cursorApiKeyInput.value = window.AiClient.getStoredApiKey(provider);
-    }
-  }
-
-  setupCursorAi() {
-    if (!window.AiClient || !this.cursorApiKeyInput) return;
-
-    const provider = window.AiClient.getProvider();
-    if (this.aiProviderSelect) this.aiProviderSelect.value = provider;
-    this.updateAiKeyPlaceholder();
-
-    this.cursorConnectBtn?.addEventListener("click", () => this.connectCursorAi());
-    this.aiProviderSelect?.addEventListener("change", () => {
-      window.AiClient.setProvider(this.aiProviderSelect.value);
-      this.updateAiKeyPlaceholder();
-      this.refreshCursorStatus();
-    });
-    this.cursorUseAiCheckbox?.addEventListener("change", () => {
-      this.useCursorAi = this.cursorUseAiCheckbox.checked;
-    });
-    this.useCursorAi = this.cursorUseAiCheckbox?.checked ?? true;
-
-    this.refreshCursorStatus();
-  }
-
-  async connectCursorAi() {
-    const provider = this.getAiProvider();
-    const key = this.cursorApiKeyInput?.value.trim() || "";
-    window.AiClient.setStoredApiKey(provider, key);
-    await this.refreshCursorStatus();
-  }
-
-  async refreshCursorStatus() {
-    const { strings } = this.config;
-    if (!this.cursorAiStatus || !window.AiClient) return;
-
-    const provider = this.getAiProvider();
-    const key = window.AiClient.getStoredApiKey(provider);
-    if (!key) {
-      this.cursorAiStatus.textContent = strings.cursorDisconnected;
-      return;
-    }
-
-    try {
-      const health = await window.AiClient.checkHealth(provider, key);
-      if (health.ready) {
-        this.cursorAiStatus.textContent =
-          provider === "cursor"
-            ? strings.cursorConnectedCursor
-            : strings.cursorConnectedOpenai;
-      } else {
-        this.cursorAiStatus.textContent = strings.cursorDisconnected;
-      }
-    } catch {
-      this.cursorAiStatus.textContent = strings.cursorDisconnected;
-    }
-  }
-
-  showAiStream(message) {
-    if (!this.cursorAiStream) return;
-    this.cursorAiStream.classList.remove("hidden");
-    this.cursorAiStream.textContent = message;
-  }
-
-  appendAiStream(text) {
-    if (!this.cursorAiStream || !text) return;
-    this.cursorAiStream.classList.remove("hidden");
-    this.cursorAiStream.textContent += text;
-  }
-
-  hideAiStream() {
-    if (!this.cursorAiStream) return;
-    this.cursorAiStream.classList.add("hidden");
-    this.cursorAiStream.textContent = "";
-  }
-
-  getAiCacheKey(variantId) {
-    const locale = document.documentElement.lang?.startsWith("en") ? "en" : "zh-HK";
-    return `${this.aiCachePrefix}${variantId}_${locale}`;
   }
 
   applyVariantState(variantId, announce) {
@@ -209,75 +80,6 @@ class RecipeVoiceController {
     const message = this.config.strings.switchedVersion(variant.label);
     this.setMessage(message);
     if (announce) this.speakFeedback(message);
-  }
-
-  applyStaticVariant(variantId, announce = true) {
-    if (!this.getVariant(variantId) || variantId === this.currentVariantId) return;
-    this.applyVariantState(variantId, announce);
-  }
-
-  applyAiVariantData(data, variantId, announce = true) {
-    const base = this.getVariant(variantId);
-    this.variants[variantId] = {
-      ...base,
-      note: data.note || base.note,
-      ingredients: {
-        sections: data.sections || [],
-        lkkProducts: attachProductImages(data.lkkProducts || []),
-      },
-      steps: (data.steps || []).map((step, index) => ({
-        number: step.number ?? index + 1,
-        text: step.text ?? String(step),
-      })),
-    };
-    this.applyVariantState(variantId, announce);
-  }
-
-  async switchVariantWithCursorAi(variantId, announce = true) {
-    const { strings } = this.config;
-    const provider = this.getAiProvider();
-    const cacheKey = `${this.getAiCacheKey(variantId)}_${provider}`;
-    const cached = sessionStorage.getItem(cacheKey);
-
-    if (cached) {
-      this.applyAiVariantData(JSON.parse(cached), variantId, announce);
-      return;
-    }
-
-    const generating =
-      provider === "cursor"
-        ? strings.cursorGeneratingCursor
-        : strings.cursorGeneratingOpenai;
-    const streamLabel =
-      provider === "cursor"
-        ? strings.cursorStreamLabelCursor
-        : strings.cursorStreamLabelOpenai;
-
-    this.setMessage(generating);
-    this.showAiStream(`${streamLabel}: connecting…`);
-
-    try {
-      const data = await window.AiClient.streamRecipeVariant(
-        variantId,
-        (event) => {
-          if (event.type === "status") {
-            const msg = event.message || event.status || "Working…";
-            this.showAiStream(`${streamLabel}: ${msg}`);
-          }
-          if (event.type === "delta") this.appendAiStream(event.text);
-          if (event.type === "thinking") this.appendAiStream(event.text);
-        },
-        provider
-      );
-
-      sessionStorage.setItem(cacheKey, JSON.stringify(data));
-      this.applyAiVariantData(data, variantId, announce);
-    } catch (error) {
-      this.setMessage(strings.cursorError(error.message));
-      this.applyStaticVariant(variantId, false);
-    } finally {
-      this.hideAiStream();
-    }
   }
 
   renderIngredients() {
@@ -365,17 +167,7 @@ class RecipeVoiceController {
 
   switchVariant(variantId, announce = true) {
     if (!this.getVariant(variantId) || variantId === this.currentVariantId) return;
-
-    if (
-      variantId !== "default" &&
-      this.useCursorAi &&
-      window.AiClient?.getStoredApiKey(this.getAiProvider())
-    ) {
-      this.switchVariantWithCursorAi(variantId, announce);
-      return;
-    }
-
-    this.applyStaticVariant(variantId, announce);
+    this.applyVariantState(variantId, announce);
   }
 
   bindUi() {

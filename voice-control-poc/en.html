@@ -60,27 +60,6 @@
       <p id="version-note" class="version-note"></p>
     </section>
 
-    <section class="cursor-ai-panel" aria-label="AI generation">
-      <h2 id="cursor-ai-title">AI generation (real-time)</h2>
-      <p id="cursor-ai-hint" class="cursor-ai-hint"></p>
-      <label class="cursor-key-label" for="ai-provider" id="ai-provider-label">AI service</label>
-      <select id="ai-provider" class="ai-provider-select">
-        <option value="openai">ChatGPT (OpenAI)</option>
-        <option value="cursor">Cursor AI</option>
-      </select>
-      <label class="cursor-key-label" for="cursor-api-key" id="cursor-key-label">API Key</label>
-      <div class="cursor-key-row">
-        <input type="password" id="cursor-api-key" class="cursor-key-input" autocomplete="off" spellcheck="false">
-        <button type="button" id="cursor-connect" class="btn btn-primary">Save & connect</button>
-      </div>
-      <p id="cursor-ai-status" class="cursor-ai-status" role="status"></p>
-      <label class="cursor-toggle">
-        <input type="checkbox" id="cursor-use-ai" checked>
-        <span id="cursor-use-ai-label">Use AI for Vegan / Healthy versions</span>
-      </label>
-      <pre id="cursor-ai-stream" class="cursor-ai-stream hidden" aria-live="polite"></pre>
-    </section>
-
     <section class="ingredients-section" aria-label="Ingredients">
       <h2 id="prep-title" class="recipe-main-title"></h2>
       <div id="ingredients-content" class="ingredients-layout"></div>
@@ -127,7 +106,6 @@
     </div>
   </footer>
 
-  <script src="ai-client.js"></script>
   <script src="config.en.js"></script>
   <script src="voice-control.js"></script>
 </body>
