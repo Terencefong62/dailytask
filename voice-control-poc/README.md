@@ -36,19 +36,26 @@ Both languages support three versions (click buttons or use voice):
 
 Use the **English** / **中文** link in the header to switch language.
 
-## Cursor AI (real-time)
+## AI generation (real-time)
 
-Vegan and Healthy can be generated live via the [Cursor Cloud Agents API](https://cursor.com/docs/cloud-agent/api/endpoints):
+Vegan and Healthy can be generated with **ChatGPT (OpenAI API)** — recommended, usually **5–15 seconds** — or **Cursor Cloud Agents** (~30–90 seconds).
 
-1. Create an API key at [Cursor Dashboard → API Keys](https://cursor.com/dashboard/api)
-2. Paste it in the **Cursor AI** panel → **Save & connect**
-3. Choose **素食版 / Vegan version** or **健康版 / Healthy version**
+### ChatGPT (OpenAI)
 
-The UI streams Cursor agent status and updates ingredients, products, and steps. Results are cached in `sessionStorage` for the session. Without a key, static fallback data is used.
+1. Create an API key at [OpenAI API keys](https://platform.openai.com/api-keys)
+2. In the POC, select **ChatGPT (OpenAI)** and paste your `sk-…` key
+3. Click **Save & connect**, then choose **素食版 / Vegan** or **健康版 / Healthy**
 
-Optional server env: `CURSOR_API_KEY` (users can skip pasting a key in the browser).
+Server env (optional): `OPENAI_API_KEY` and optional `OPENAI_MODEL` (default `gpt-4o-mini`).
 
-**Note:** Cloud Agents are not instant chat — expect ~30–90 seconds per generation.
+### Cursor AI (alternative)
+
+1. API key from [Cursor Dashboard → API Keys](https://cursor.com/dashboard/api)
+2. Select **Cursor AI** in the dropdown
+
+Server env (optional): `CURSOR_API_KEY`
+
+Without a key, static fallback data is used. Results cache in `sessionStorage` per provider.
 
 ## Run locally
 
@@ -75,4 +82,6 @@ Use Chrome or Edge for full POC (TTS + voice commands).
 - `en.html` — English recipe page (en-US)
 - `config.zh-HK.js` / `config.en.js` — locale-specific steps and commands
 - `styles.css` — LKK-inspired styling
-- `voice-control.js` — shared TTS + voice recognition logic
+- `ai-client.js` — ChatGPT + Cursor API client
+- `api/` — FastAPI backend (`main.py`, `openai_service.py`, `cursor_service.py`)
+- `requirements.txt` — Python dependencies

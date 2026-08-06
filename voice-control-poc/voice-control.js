@@ -48,6 +48,9 @@ class RecipeVoiceController {
     this.statusMessage = document.getElementById("status-message");
     this.lastCommand = document.getElementById("last-command");
     this.cursorApiKeyInput = document.getElementById("cursor-api-key");
+    this.aiProviderSelect = document.getElementById("ai-provider");
+    this.cursorKeyLabel = document.getElementById("cursor-key-label");
+    this.aiProviderLabel = document.getElementById("ai-provider-label");
     this.cursorConnectBtn = document.getElementById("cursor-connect");
     this.cursorAiStatus = document.getElementById("cursor-ai-status");
     this.cursorUseAiCheckbox = document.getElementById("cursor-use-ai");
@@ -80,21 +83,55 @@ class RecipeVoiceController {
     if (cursorTitle) cursorTitle.textContent = strings.cursorAiTitle || "";
     if (cursorHint) cursorHint.textContent = strings.cursorAiHint || "";
     if (cursorUseLabel) cursorUseLabel.textContent = strings.cursorUseAi || "";
-    if (this.cursorApiKeyInput) {
-      this.cursorApiKeyInput.placeholder = strings.cursorKeyPlaceholder || "";
-    }
+    this.updateAiKeyPlaceholder();
     if (this.cursorConnectBtn) {
       this.cursorConnectBtn.textContent = strings.cursorSaveKey || "Connect";
+    }
+    if (this.aiProviderSelect) {
+      const openaiOpt = this.aiProviderSelect.querySelector('[value="openai"]');
+      const cursorOpt = this.aiProviderSelect.querySelector('[value="cursor"]');
+      if (openaiOpt) openaiOpt.textContent = strings.cursorProviderOpenai || "ChatGPT";
+      if (cursorOpt) cursorOpt.textContent = strings.cursorProviderCursor || "Cursor AI";
+    }
+    if (this.aiProviderLabel) {
+      this.aiProviderLabel.textContent = strings.cursorProviderLabel || "AI service";
+    }
+    if (this.cursorKeyLabel) {
+      this.cursorKeyLabel.textContent = strings.cursorKeyLabel || "API Key";
+    }
+  }
+
+  getAiProvider() {
+    if (window.AiClient) return window.AiClient.getProvider();
+    return this.aiProviderSelect?.value || "openai";
+  }
+
+  updateAiKeyPlaceholder() {
+    const { strings } = this.config;
+    const provider = this.getAiProvider();
+    if (!this.cursorApiKeyInput) return;
+    this.cursorApiKeyInput.placeholder =
+      provider === "cursor"
+        ? strings.cursorKeyPlaceholderCursor || ""
+        : strings.cursorKeyPlaceholderOpenai || "";
+    if (window.AiClient) {
+      this.cursorApiKeyInput.value = window.AiClient.getStoredApiKey(provider);
     }
   }
 
   setupCursorAi() {
-    if (!window.CursorAiClient || !this.cursorApiKeyInput) return;
+    if (!window.AiClient || !this.cursorApiKeyInput) return;
 
-    const saved = window.CursorAiClient.getStoredApiKey();
-    if (saved) this.cursorApiKeyInput.value = saved;
+    const provider = window.AiClient.getProvider();
+    if (this.aiProviderSelect) this.aiProviderSelect.value = provider;
+    this.updateAiKeyPlaceholder();
 
     this.cursorConnectBtn?.addEventListener("click", () => this.connectCursorAi());
+    this.aiProviderSelect?.addEventListener("change", () => {
+      window.AiClient.setProvider(this.aiProviderSelect.value);
+      this.updateAiKeyPlaceholder();
+      this.refreshCursorStatus();
+    });
     this.cursorUseAiCheckbox?.addEventListener("change", () => {
       this.useCursorAi = this.cursorUseAiCheckbox.checked;
     });
@@ -104,26 +141,33 @@ class RecipeVoiceController {
   }
 
   async connectCursorAi() {
+    const provider = this.getAiProvider();
     const key = this.cursorApiKeyInput?.value.trim() || "";
-    window.CursorAiClient.setStoredApiKey(key);
+    window.AiClient.setStoredApiKey(provider, key);
     await this.refreshCursorStatus();
   }
 
   async refreshCursorStatus() {
     const { strings } = this.config;
-    if (!this.cursorAiStatus || !window.CursorAiClient) return;
+    if (!this.cursorAiStatus || !window.AiClient) return;
 
-    const key = window.CursorAiClient.getStoredApiKey();
+    const provider = this.getAiProvider();
+    const key = window.AiClient.getStoredApiKey(provider);
     if (!key) {
       this.cursorAiStatus.textContent = strings.cursorDisconnected;
       return;
     }
 
     try {
-      const health = await window.CursorAiClient.checkCursorHealth(key);
-      this.cursorAiStatus.textContent = health.ready
-        ? strings.cursorConnected
-        : strings.cursorDisconnected;
+      const health = await window.AiClient.checkHealth(provider, key);
+      if (health.ready) {
+        this.cursorAiStatus.textContent =
+          provider === "cursor"
+            ? strings.cursorConnectedCursor
+            : strings.cursorConnectedOpenai;
+      } else {
+        this.cursorAiStatus.textContent = strings.cursorDisconnected;
+      }
     } catch {
       this.cursorAiStatus.textContent = strings.cursorDisconnected;
     }
@@ -191,7 +235,8 @@ class RecipeVoiceController {
 
   async switchVariantWithCursorAi(variantId, announce = true) {
     const { strings } = this.config;
-    const cacheKey = this.getAiCacheKey(variantId);
+    const provider = this.getAiProvider();
+    const cacheKey = `${this.getAiCacheKey(variantId)}_${provider}`;
     const cached = sessionStorage.getItem(cacheKey);
 
     if (cached) {
@@ -199,18 +244,31 @@ class RecipeVoiceController {
       return;
     }
 
-    this.setMessage(strings.cursorGenerating);
-    this.showAiStream(`${strings.cursorStreamLabel}: connecting…`);
+    const generating =
+      provider === "cursor"
+        ? strings.cursorGeneratingCursor
+        : strings.cursorGeneratingOpenai;
+    const streamLabel =
+      provider === "cursor"
+        ? strings.cursorStreamLabelCursor
+        : strings.cursorStreamLabelOpenai;
+
+    this.setMessage(generating);
+    this.showAiStream(`${streamLabel}: connecting…`);
 
     try {
-      const data = await window.CursorAiClient.streamRecipeVariant(variantId, (event) => {
-        if (event.type === "status") {
-          const msg = event.message || event.status || "Working…";
-          this.showAiStream(`${strings.cursorStreamLabel}: ${msg}`);
-        }
-        if (event.type === "delta") this.appendAiStream(event.text);
-        if (event.type === "thinking") this.appendAiStream(event.text);
-      });
+      const data = await window.AiClient.streamRecipeVariant(
+        variantId,
+        (event) => {
+          if (event.type === "status") {
+            const msg = event.message || event.status || "Working…";
+            this.showAiStream(`${streamLabel}: ${msg}`);
+          }
+          if (event.type === "delta") this.appendAiStream(event.text);
+          if (event.type === "thinking") this.appendAiStream(event.text);
+        },
+        provider
+      );
 
       sessionStorage.setItem(cacheKey, JSON.stringify(data));
       this.applyAiVariantData(data, variantId, announce);
@@ -311,7 +369,7 @@ class RecipeVoiceController {
     if (
       variantId !== "default" &&
       this.useCursorAi &&
-      window.CursorAiClient?.getStoredApiKey()
+      window.AiClient?.getStoredApiKey(this.getAiProvider())
     ) {
       this.switchVariantWithCursorAi(variantId, announce);
       return;

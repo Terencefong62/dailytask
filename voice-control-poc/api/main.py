@@ -1,8 +1,8 @@
-"""FastAPI server: static POC + Cursor AI recipe generation."""
+"""FastAPI server: static POC + AI recipe generation (ChatGPT / Cursor)."""
 
 import json
 import os
-from typing import Any, Optional
+from typing import Any, Literal, Optional
 
 from fastapi import FastAPI, Header, HTTPException, Query
 from fastapi.middleware.cors import CORSMiddleware
@@ -11,6 +11,7 @@ from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field
 
 from cursor_service import generate_variant_with_cursor
+from openai_service import generate_openai_variant, stream_openai_variant
 from prompts import build_transform_prompt, extract_json_from_text
 
 app = FastAPI(title="Voice Control POC API")
@@ -23,26 +24,65 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+Provider = Literal["openai", "cursor"]
+
 
 class VariantRequest(BaseModel):
     variant: str = Field(..., pattern="^(vegan|healthy)$")
     locale: str = Field(default="zh-HK")
+    provider: Provider = "openai"
 
 
-def resolve_api_key(header_key: Optional[str]) -> Optional[str]:
-    return header_key or os.environ.get("CURSOR_API_KEY")
+def parse_bearer(authorization: Optional[str]) -> Optional[str]:
+    if authorization and authorization.startswith("Bearer "):
+        return authorization[7:].strip() or None
+    return None
+
+
+def resolve_api_key(provider: Provider, header_key: Optional[str]) -> Optional[str]:
+    if header_key:
+        return header_key
+    if provider == "openai":
+        return os.environ.get("OPENAI_API_KEY")
+    return os.environ.get("CURSOR_API_KEY")
+
+
+def stream_provider_events(provider: Provider, api_key: str, prompt: str):
+    if provider == "openai":
+        return stream_openai_variant(api_key, prompt)
+    return generate_variant_with_cursor(api_key, prompt, use_stream=True)
 
 
 @app.get("/api/health")
-def health(authorization: Optional[str] = Header(default=None)) -> dict[str, Any]:
-    server_key = bool(os.environ.get("CURSOR_API_KEY"))
-    client_key = bool(authorization and authorization.startswith("Bearer "))
+def health(
+    authorization: Optional[str] = Header(default=None),
+    provider: Provider = Query(default="openai"),
+) -> dict[str, Any]:
+    header_key = parse_bearer(authorization)
+    openai_server = bool(os.environ.get("OPENAI_API_KEY"))
+    cursor_server = bool(os.environ.get("CURSOR_API_KEY"))
+    client_key = bool(header_key)
+
+    ready = False
+    if provider == "openai":
+        ready = openai_server or client_key
+    else:
+        ready = cursor_server or client_key
+
     return {
         "ok": True,
-        "cursorAi": True,
-        "serverKeyConfigured": server_key,
+        "provider": provider,
+        "openai": {
+            "configured": openai_server or (client_key and provider == "openai"),
+            "serverKeyConfigured": openai_server,
+        },
+        "cursor": {
+            "configured": cursor_server or (client_key and provider == "cursor"),
+            "serverKeyConfigured": cursor_server,
+        },
         "clientKeyProvided": client_key,
-        "ready": server_key or client_key,
+        "ready": ready,
+        "defaultProvider": "openai",
     }
 
 
@@ -51,56 +91,68 @@ def generate_variant(
     body: VariantRequest,
     authorization: Optional[str] = Header(default=None),
 ) -> dict[str, Any]:
-    api_key = resolve_api_key(
-        authorization.replace("Bearer ", "", 1) if authorization and authorization.startswith("Bearer ") else None
-    )
+    api_key = resolve_api_key(body.provider, parse_bearer(authorization))
     if not api_key:
         raise HTTPException(
             status_code=401,
-            detail="Add your Cursor API key in the panel or set CURSOR_API_KEY on the server.",
+            detail=f"Add your {'OpenAI' if body.provider == 'openai' else 'Cursor'} API key or set server env.",
         )
 
     prompt = build_transform_prompt(body.variant, body.locale)
-    result_text = None
-    for event in generate_variant_with_cursor(api_key, prompt, use_stream=False):
-        if event.get("type") == "result":
-            result_text = event.get("text")
-    if not result_text:
-        raise HTTPException(status_code=500, detail="No response from Cursor AI")
+
+    if body.provider == "openai":
+        try:
+            result_text = generate_openai_variant(api_key, prompt)
+        except PermissionError as exc:
+            raise HTTPException(status_code=401, detail=str(exc))
+        except RuntimeError as exc:
+            raise HTTPException(status_code=500, detail=str(exc))
+    else:
+        result_text = None
+        for event in generate_variant_with_cursor(api_key, prompt, use_stream=False):
+            if event.get("type") == "result":
+                result_text = event.get("text")
+        if not result_text:
+            raise HTTPException(status_code=500, detail="No response from Cursor AI")
 
     try:
         data = extract_json_from_text(result_text)
     except (json.JSONDecodeError, ValueError) as exc:
         raise HTTPException(status_code=500, detail=f"Could not parse AI response: {exc}")
 
-    return {"variant": body.variant, "locale": body.locale, "data": data, "source": "cursor-ai"}
+    return {
+        "variant": body.variant,
+        "locale": body.locale,
+        "data": data,
+        "source": body.provider,
+    }
 
 
 @app.get("/api/recipe/variant/stream")
 def stream_variant(
     variant: str = Query(..., pattern="^(vegan|healthy)$"),
     locale: str = Query(default="zh-HK"),
+    provider: Provider = Query(default="openai"),
     authorization: Optional[str] = Header(default=None),
 ):
-    api_key = resolve_api_key(
-        authorization.replace("Bearer ", "", 1) if authorization and authorization.startswith("Bearer ") else None
-    )
+    api_key = resolve_api_key(provider, parse_bearer(authorization))
     if not api_key:
-        raise HTTPException(status_code=401, detail="Cursor API key required")
+        label = "OpenAI" if provider == "openai" else "Cursor"
+        raise HTTPException(status_code=401, detail=f"{label} API key required")
 
     prompt = build_transform_prompt(variant, locale)
 
     def event_stream():
         result_text = None
         try:
-            for event in generate_variant_with_cursor(api_key, prompt, use_stream=True):
+            for event in stream_provider_events(provider, api_key, prompt):
                 if event.get("type") == "result":
                     result_text = event.get("text")
                 yield f"data: {json.dumps(event, ensure_ascii=False)}\n\n"
 
             if result_text:
                 parsed = extract_json_from_text(result_text)
-                yield f"data: {json.dumps({'type': 'complete', 'data': parsed}, ensure_ascii=False)}\n\n"
+                yield f"data: {json.dumps({'type': 'complete', 'data': parsed, 'source': provider}, ensure_ascii=False)}\n\n"
             else:
                 yield f"data: {json.dumps({'type': 'error', 'message': 'Empty AI response'})}\n\n"
         except Exception as exc:
@@ -109,6 +161,5 @@ def stream_variant(
     return StreamingResponse(event_stream(), media_type="text/event-stream")
 
 
-# Static files (POC frontend)
 static_dir = os.path.join(os.path.dirname(__file__), "..")
 app.mount("/", StaticFiles(directory=static_dir, html=True), name="static")

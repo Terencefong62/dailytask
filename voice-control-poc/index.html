@@ -65,10 +65,15 @@
       <p id="version-note" class="version-note"></p>
     </section>
 
-    <section class="cursor-ai-panel" aria-label="Cursor AI">
-      <h2 id="cursor-ai-title">Cursor AI 即時生成</h2>
+    <section class="cursor-ai-panel" aria-label="AI generation">
+      <h2 id="cursor-ai-title">AI 即時生成</h2>
       <p id="cursor-ai-hint" class="cursor-ai-hint"></p>
-      <label class="cursor-key-label" for="cursor-api-key">Cursor API Key</label>
+      <label class="cursor-key-label" for="ai-provider" id="ai-provider-label">AI 服務</label>
+      <select id="ai-provider" class="ai-provider-select">
+        <option value="openai">ChatGPT（OpenAI）</option>
+        <option value="cursor">Cursor AI</option>
+      </select>
+      <label class="cursor-key-label" for="cursor-api-key" id="cursor-key-label">API Key</label>
       <div class="cursor-key-row">
         <input type="password" id="cursor-api-key" class="cursor-key-input" autocomplete="off" spellcheck="false">
         <button type="button" id="cursor-connect" class="btn btn-primary">儲存並連線</button>
@@ -76,7 +81,7 @@
       <p id="cursor-ai-status" class="cursor-ai-status" role="status"></p>
       <label class="cursor-toggle">
         <input type="checkbox" id="cursor-use-ai" checked>
-        <span id="cursor-use-ai-label">使用 Cursor AI 即時生成</span>
+        <span id="cursor-use-ai-label">使用 AI 即時生成素食版／健康版</span>
       </label>
       <pre id="cursor-ai-stream" class="cursor-ai-stream hidden" aria-live="polite"></pre>
     </section>
@@ -121,7 +126,7 @@
     </div>
   </footer>
 
-  <script src="cursor-ai.js"></script>
+  <script src="ai-client.js"></script>
   <script src="config.zh-HK.js"></script>
   <script src="voice-control.js"></script>
 </body>
