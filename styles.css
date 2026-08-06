@@ -118,6 +118,11 @@ body {
   object-position: center top;
 }
 
+.chef-card__image--full {
+  object-fit: contain;
+  object-position: center center;
+}
+
 .chef-card__overlay {
   position: absolute;
   inset: 0;
