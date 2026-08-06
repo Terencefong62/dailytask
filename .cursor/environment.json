@@ -1,17 +1,5 @@
 {
   "install": "",
   "start": "",
-  "terminals": [
-    {
-      "name": "voice-poc",
-      "command": "cd voice-control-poc && python3 -m http.server 8080",
-      "description": "Voice control POC — open port 8080 in Preview"
-    }
-  ],
-  "ports": [
-    {
-      "name": "voice-poc",
-      "port": 8080
-    }
-  ]
+  "terminals": []
 }
