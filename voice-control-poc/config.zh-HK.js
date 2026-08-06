@@ -1,24 +1,77 @@
 window.RECIPE_VOICE_CONFIG = {
   lang: "zh-HK",
   recognitionLang: "zh-HK",
-  steps: [
-    {
-      number: 1,
-      text: "雞翼用刀在中間𠝹幾刀，用醃料醃10分鐘，薯仔去皮切角備用。用中大火燒熱油鑊，下雞翼煎至兩面金黃色，盛起蓋著保溫，備用。",
+  variants: {
+    default: {
+      id: "default",
+      label: "原版",
+      note: "依李錦記原版食譜：雞翼配舊庄蠔油。",
+      steps: [
+        {
+          number: 1,
+          text: "雞翼用刀在中間𠝹幾刀，用醃料醃10分鐘，薯仔去皮切角備用。用中大火燒熱油鑊，下雞翼煎至兩面金黃色，盛起蓋著保溫，備用。",
+        },
+        {
+          number: 2,
+          text: "原鑊再下少許油，爆香蒜蓉，下薯仔炒勻。",
+        },
+        {
+          number: 3,
+          text: "倒進水，加蓋用小火煮至馬鈴薯開始軟身。雞翼回鑊，兜勻。",
+        },
+        {
+          number: 4,
+          text: "倒進調味料，加蓋多煮5分鐘或至喜歡的濃稠度，灑蔥花裝飾，即可。",
+        },
+      ],
     },
-    {
-      number: 2,
-      text: "原鑊再下少許油，爆香蒜蓉，下薯仔炒勻。",
+    vegan: {
+      id: "vegan",
+      label: "素食版",
+      note: "以百頁豆腐代替雞翼，醃料及調味改用素食蠔油（香菇素蠔油），不含肉類。",
+      steps: [
+        {
+          number: 1,
+          text: "百頁豆腐切件，在中間𠝹幾刀，用素食蠔油及蒜蓉醃10分鐘，薯仔去皮切角備用。用中大火燒熱油鑊，下豆腐煎至兩面金黃色，盛起保溫備用。",
+        },
+        {
+          number: 2,
+          text: "原鑊再下少許油，爆香蒜蓉，下薯仔炒勻。",
+        },
+        {
+          number: 3,
+          text: "倒進水，加蓋用小火煮至薯仔開始軟身。豆腐回鑊，兜勻。",
+        },
+        {
+          number: 4,
+          text: "倒進調味料（素食蠔油2湯匙、糖1茶匙、清水200毫升），加蓋多煮5分鐘，灑蔥花裝飾，即可。",
+        },
+      ],
     },
-    {
-      number: 3,
-      text: "倒進水，加蓋用小火煮至馬鈴薯開始軟身。雞翼回鑊，兜勻。",
+    healthy: {
+      id: "healthy",
+      label: "健康版",
+      note: "減少用油，醃料及調味中的蠔油與糖分量減半，降低鈉與糖分。",
+      steps: [
+        {
+          number: 1,
+          text: "雞翼用刀在中間𠝹幾刀，用少量舊庄蠔油（約半湯匙）及蒜蓉醃10分鐘，薯仔去皮切角備用。用中火少油燒熱油鑊，下雞翼煎至兩面金黃色，盛起保溫備用。",
+        },
+        {
+          number: 2,
+          text: "原鑊下少許油，爆香蒜蓉，下薯仔炒勻。",
+        },
+        {
+          number: 3,
+          text: "倒進水，加蓋用小火煮至薯仔開始軟身。雞翼回鑊，兜勻。",
+        },
+        {
+          number: 4,
+          text: "倒進調味料（舊庄蠔油1.5湯匙、糖半茶匙或免糖、清水200毫升），加蓋多煮5分鐘，灑蔥花裝飾，即可。",
+        },
+      ],
     },
-    {
-      number: 4,
-      text: "倒進調味料，加蓋多煮5分鐘或至喜歡的濃稠度，灑蔥花裝飾，即可。",
-    },
-  ],
+  },
   strings: {
     micOn: "開啟語音聆聽",
     micOff: "停止語音聆聽",
@@ -37,6 +90,8 @@ window.RECIPE_VOICE_CONFIG = {
     noSynthesis: "此瀏覽器不支援文字轉語音（SpeechSynthesis）。",
     welcome: "按「開啟語音聆聽」或「開始」開始體驗",
     recognitionError: (err) => `語音辨識錯誤：${err}`,
+    versionTitle: "食譜版本",
+    switchedVersion: (label) => `已切換至${label}`,
   },
   commands: {
     start: ["開始", "播放", "朗讀"],
@@ -44,11 +99,10 @@ window.RECIPE_VOICE_CONFIG = {
     prev: ["上一步", "上一個"],
     stop: ["停止", "暫停"],
     repeat: ["重複", "再說", "再说"],
-    goToStepPatterns: [
-      /返回第.+步/,
-      /回到第.+步/,
-      /第.+步/,
-    ],
+    versionDefault: ["原版", "原始版", "原本"],
+    versionVegan: ["素食版", "素食版本", "素食"],
+    versionHealthy: ["健康版", "健康版本", "健康"],
+    goToStepPatterns: [/返回第.+步/, /回到第.+步/, /第.+步/],
     goToStepExclude: /下一步|上一步/,
     parseStepNumber: (text) => {
       const digitMatch = text.match(/第\s*(\d+)\s*步/);

@@ -8,12 +8,16 @@ const SpeechRecognition =
 class RecipeVoiceController {
   constructor(config) {
     this.config = config;
-    this.steps = config.steps;
+    this.variants = config.variants || { default: { id: "default", label: "Default", steps: config.steps || [] } };
+    this.currentVariantId = "default";
+    this.steps = this.variants.default.steps;
     this.currentIndex = -1;
     this.isListening = false;
     this.recognition = null;
 
     this.stepsList = document.getElementById("steps-list");
+    this.versionNote = document.getElementById("version-note");
+    this.versionButtons = document.querySelectorAll(".version-btn");
     this.micToggle = document.getElementById("mic-toggle");
     this.btnStart = document.getElementById("btn-start");
     this.btnPrev = document.getElementById("btn-prev");
@@ -25,9 +29,14 @@ class RecipeVoiceController {
     this.lastCommand = document.getElementById("last-command");
 
     this.renderSteps();
+    this.updateVersionUi();
     this.bindUi();
     this.setupRecognition();
     this.updateUi();
+  }
+
+  getVariant(id) {
+    return this.variants[id] || this.variants.default;
   }
 
   renderSteps() {
@@ -42,6 +51,33 @@ class RecipeVoiceController {
       .join("");
   }
 
+  updateVersionUi() {
+    const variant = this.getVariant(this.currentVariantId);
+    if (this.versionNote) this.versionNote.textContent = variant.note || "";
+
+    this.versionButtons.forEach((btn) => {
+      const active = btn.dataset.version === this.currentVariantId;
+      btn.classList.toggle("active", active);
+      btn.setAttribute("aria-pressed", String(active));
+    });
+  }
+
+  switchVariant(variantId, announce = true) {
+    const variant = this.getVariant(variantId);
+    if (!variant || variantId === this.currentVariantId) return;
+
+    this.stopSpeaking();
+    this.currentVariantId = variantId;
+    this.steps = variant.steps;
+    this.currentIndex = -1;
+    this.renderSteps();
+    this.updateVersionUi();
+
+    const message = this.config.strings.switchedVersion(variant.label);
+    this.setMessage(message);
+    if (announce) this.speakFeedback(message);
+  }
+
   bindUi() {
     const { commands } = this.config;
     this.micToggle.addEventListener("click", () => this.toggleListening());
@@ -49,6 +85,10 @@ class RecipeVoiceController {
     this.btnPrev.addEventListener("click", () => this.handleCommand(commands.prev[0]));
     this.btnNext.addEventListener("click", () => this.handleCommand(commands.next[0]));
     this.btnStop.addEventListener("click", () => this.stopSpeaking());
+
+    this.versionButtons.forEach((btn) => {
+      btn.addEventListener("click", () => this.switchVariant(btn.dataset.version));
+    });
 
     window.addEventListener("beforeunload", () => {
       this.stopListening();
@@ -219,10 +259,35 @@ class RecipeVoiceController {
     window.speechSynthesis.speak(utterance);
   }
 
+  matchesAnyCommand(text, commands) {
+    const { normalizeCommand } = this.config;
+    return commands.some((cmd) => text.includes(normalizeCommand(cmd)));
+  }
+
+  handleVersionCommand(text) {
+    const { commands } = this.config;
+
+    if (this.matchesAnyCommand(text, commands.versionVegan || [])) {
+      this.switchVariant("vegan");
+      return true;
+    }
+    if (this.matchesAnyCommand(text, commands.versionHealthy || [])) {
+      this.switchVariant("healthy");
+      return true;
+    }
+    if (this.matchesAnyCommand(text, commands.versionDefault || [])) {
+      this.switchVariant("default");
+      return true;
+    }
+    return false;
+  }
+
   handleCommand(rawText) {
     const { commands, normalizeCommand } = this.config;
     const text = normalizeCommand(rawText);
     const rawLower = rawText.toLowerCase();
+
+    if (this.handleVersionCommand(text)) return;
 
     const matchesGoToStep = commands.goToStepPatterns.some((pattern) =>
       pattern.test(rawLower)

@@ -17,6 +17,16 @@ Proof of concept for **text-to-speech** and **voice control** on recipe cooking 
 
 Cooking steps match the live recipe (tip omitted from TTS list).
 
+## Recipe versions
+
+Both languages support three versions (click buttons or use voice):
+
+| Version | Chinese voice | English voice | Changes |
+|---------|---------------|---------------|---------|
+| Original / 原版 | 原版 | original | Classic recipe |
+| Vegan / 素食版 | 素食版 | vegan version | Meat replaced with plant-based ingredients; vegan oyster sauce |
+| Healthy / 健康版 | 健康版 | healthy version | Less oil, reduced oyster sauce and sugar |
+
 ## Languages
 
 | Page | Language | Voice commands |

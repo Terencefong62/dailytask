@@ -133,6 +133,55 @@ body {
   font-size: 1.2rem;
 }
 
+.version-panel {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.25rem 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.version-panel h2 {
+  margin: 0 0 0.75rem;
+  font-size: 1.2rem;
+}
+
+.version-switcher {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.version-btn {
+  border: 1px solid var(--border);
+  background: var(--bg-soft);
+  color: var(--text);
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+}
+
+.version-btn:hover {
+  border-color: var(--lkk-red);
+  color: var(--lkk-red);
+}
+
+.version-btn.active {
+  background: var(--lkk-red);
+  border-color: var(--lkk-red);
+  color: #fff;
+}
+
+.version-note {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
 .voice-hint {
   margin: 0 0 1rem;
   color: var(--muted);

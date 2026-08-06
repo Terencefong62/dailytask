@@ -50,11 +50,22 @@
       </div>
     </section>
 
+    <section class="version-panel" aria-label="食譜版本">
+      <h2>食譜版本</h2>
+      <div class="version-switcher" role="group" aria-label="選擇食譜版本">
+        <button type="button" class="version-btn active" data-version="default" aria-pressed="true">原版</button>
+        <button type="button" class="version-btn" data-version="vegan" aria-pressed="false">素食版</button>
+        <button type="button" class="version-btn" data-version="healthy" aria-pressed="false">健康版</button>
+      </div>
+      <p id="version-note" class="version-note"></p>
+    </section>
+
     <section class="voice-panel" aria-label="語音控制">
       <h2>語音控制</h2>
       <p class="voice-hint">
         說出指令控制朗讀烹調步驟：
-        <strong>開始</strong>、<strong>下一步</strong>、<strong>上一步</strong>、<strong>返回第 X 步</strong>（例如：返回第 2 步）
+        <strong>開始</strong>、<strong>下一步</strong>、<strong>上一步</strong>、<strong>返回第 X 步</strong>；
+        或切換版本：<strong>素食版</strong>、<strong>健康版</strong>、<strong>原版</strong>
       </p>
 
       <div class="voice-controls">

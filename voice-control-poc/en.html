@@ -50,12 +50,23 @@
       </div>
     </section>
 
+    <section class="version-panel" aria-label="Recipe version">
+      <h2>Recipe version</h2>
+      <div class="version-switcher" role="group" aria-label="Choose recipe version">
+        <button type="button" class="version-btn active" data-version="default" aria-pressed="true">Original</button>
+        <button type="button" class="version-btn" data-version="vegan" aria-pressed="false">Vegan version</button>
+        <button type="button" class="version-btn" data-version="healthy" aria-pressed="false">Healthy version</button>
+      </div>
+      <p id="version-note" class="version-note"></p>
+    </section>
+
     <section class="voice-panel" aria-label="Voice control">
       <h2>Voice control</h2>
       <p class="voice-hint">
         Say a command to control step playback:
         <strong>start</strong>, <strong>next step</strong>, <strong>back</strong>,
-        <strong>go to step X</strong> (e.g. go to step 2)
+        <strong>go to step X</strong>;
+        or switch version: <strong>vegan version</strong>, <strong>healthy version</strong>, <strong>original</strong>
       </p>
 
       <div class="voice-controls">
