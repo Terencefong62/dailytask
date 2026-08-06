@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Oyster Flavoured Braised Chicken Wings | Voice Control POC | Lee Kum Kee</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-row">
+      <div class="header-brand">
+        <span class="logo-text">Lee Kum Kee</span>
+        <span class="poc-badge">Web Speech API POC</span>
+      </div>
+      <a href="index.html" class="lang-switch" hreflang="zh-HK">中文</a>
+    </div>
+  </header>
+
+  <nav class="breadcrumb" aria-label="breadcrumb">
+    <div class="container">
+      <span>Home</span>
+      <span class="sep">/</span>
+      <span>Recipes</span>
+      <span class="sep">/</span>
+      <span>Oyster Flavoured Braised Chicken Wings with Potatoes</span>
+    </div>
+  </nav>
+
+  <main class="container">
+    <section class="recipe-hero">
+      <img
+        src="https://cdn-akamai.lkk.com/-/media/oyster-flavoured-braised-chicken-wings-with-potatoes_600x465.jpg?h=465&iar=0&w=600"
+        alt="Oyster Flavoured Braised Chicken Wings with Potatoes"
+        class="recipe-image"
+      >
+      <div class="recipe-meta">
+        <h1>Oyster Flavoured Braised Chicken Wings with Potatoes</h1>
+        <ul class="meta-icons">
+          <li>Prep time <strong>10 min</strong></li>
+          <li>Cook time <strong>15 min</strong></li>
+          <li>Serves <strong>4</strong></li>
+        </ul>
+        <p class="source-link">
+          Source recipe:
+          <a href="https://hk.lkk.com/en/recipes/oyster-flavoured-braised-chicken-wings-with-potatoes" target="_blank" rel="noopener">
+            hk.lkk.com recipe
+          </a>
+        </p>
+      </div>
+    </section>
+
+    <section class="voice-panel" aria-label="Voice control">
+      <h2>Voice control</h2>
+      <p class="voice-hint">
+        Say a command to control step playback:
+        <strong>start</strong>, <strong>next step</strong>, <strong>previous step</strong>,
+        <strong>go to step X</strong> (e.g. go to step 2)
+      </p>
+
+      <div class="voice-controls">
+        <button type="button" id="mic-toggle" class="btn btn-primary" aria-pressed="false">
+          <span class="mic-icon" aria-hidden="true">🎤</span>
+          Start voice listening
+        </button>
+        <button type="button" id="btn-start" class="btn">Start</button>
+        <button type="button" id="btn-prev" class="btn">Previous</button>
+        <button type="button" id="btn-next" class="btn">Next</button>
+        <button type="button" id="btn-stop" class="btn btn-muted">Stop reading</button>
+      </div>
+
+      <div class="status-bar" role="status" aria-live="polite">
+        <span id="status-listening" class="status-chip hidden">Listening…</span>
+        <span id="status-speaking" class="status-chip hidden">Speaking…</span>
+        <span id="status-message" class="status-message">Click "Start voice listening" or "Start" to begin</span>
+      </div>
+
+      <p id="last-command" class="last-command" aria-live="polite"></p>
+    </section>
+
+    <section class="steps-section">
+      <h2 class="recipe-main-title">How to make it</h2>
+      <ol id="steps-list" class="steps-list"></ol>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>POC to validate Web Speech API (text-to-speech + voice commands) for recipe cooking steps.</p>
+    </div>
+  </footer>
+
+  <script src="config.en.js"></script>
+  <script src="voice-control.js"></script>
+</body>
+</html>

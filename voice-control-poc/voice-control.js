@@ -1,46 +1,14 @@
 /**
- * Web Speech API POC — recipe step TTS + voice commands (zh-HK)
- * Recipe: 蠔油薯仔炆雞翼
+ * Web Speech API POC — recipe step TTS + voice commands (locale via RECIPE_VOICE_CONFIG)
  */
-
-const COOKING_STEPS = [
-  {
-    number: 1,
-    text: "雞翼用刀在中間𠝹幾刀，用醃料醃10分鐘，薯仔去皮切角備用。用中大火燒熱油鑊，下雞翼煎至兩面金黃色，盛起蓋著保溫，備用。",
-  },
-  {
-    number: 2,
-    text: "原鑊再下少許油，爆香蒜蓉，下薯仔炒勻。",
-  },
-  {
-    number: 3,
-    text: "倒進水，加蓋用小火煮至馬鈴薯開始軟身。雞翼回鑊，兜勻。",
-  },
-  {
-    number: 4,
-    text: "倒進調味料，加蓋多煮5分鐘或至喜歡的濃稠度，灑蔥花裝飾，即可。",
-  },
-];
-
-const CHINESE_DIGITS = {
-  一: 1,
-  二: 2,
-  三: 3,
-  四: 4,
-  五: 5,
-  六: 6,
-  七: 7,
-  八: 8,
-  九: 9,
-  十: 10,
-};
 
 const SpeechRecognition =
   window.SpeechRecognition || window.webkitSpeechRecognition;
 
 class RecipeVoiceController {
-  constructor(steps) {
-    this.steps = steps;
+  constructor(config) {
+    this.config = config;
+    this.steps = config.steps;
     this.currentIndex = -1;
     this.isListening = false;
     this.recognition = null;
@@ -75,10 +43,11 @@ class RecipeVoiceController {
   }
 
   bindUi() {
+    const { commands } = this.config;
     this.micToggle.addEventListener("click", () => this.toggleListening());
-    this.btnStart.addEventListener("click", () => this.handleCommand("開始"));
-    this.btnPrev.addEventListener("click", () => this.handleCommand("上一步"));
-    this.btnNext.addEventListener("click", () => this.handleCommand("下一步"));
+    this.btnStart.addEventListener("click", () => this.handleCommand(commands.start[0]));
+    this.btnPrev.addEventListener("click", () => this.handleCommand(commands.prev[0]));
+    this.btnNext.addEventListener("click", () => this.handleCommand(commands.next[0]));
     this.btnStop.addEventListener("click", () => this.stopSpeaking());
 
     window.addEventListener("beforeunload", () => {
@@ -88,14 +57,16 @@ class RecipeVoiceController {
   }
 
   setupRecognition() {
+    const { strings, recognitionLang } = this.config;
+
     if (!SpeechRecognition) {
-      this.setMessage("此瀏覽器不支援語音辨識（SpeechRecognition）。請使用 Chrome 或 Edge。");
+      this.setMessage(strings.noRecognition);
       this.micToggle.disabled = true;
       return;
     }
 
     this.recognition = new SpeechRecognition();
-    this.recognition.lang = "zh-HK";
+    this.recognition.lang = recognitionLang;
     this.recognition.continuous = true;
     this.recognition.interimResults = false;
 
@@ -104,14 +75,14 @@ class RecipeVoiceController {
       if (!last.isFinal) return;
 
       const transcript = last[0].transcript.trim();
-      this.lastCommand.textContent = `辨識到：「${transcript}」`;
+      this.lastCommand.textContent = strings.heard(transcript);
       this.handleCommand(transcript);
     };
 
     this.recognition.onerror = (event) => {
       if (event.error === "no-speech") return;
       if (event.error === "aborted") return;
-      this.setMessage(`語音辨識錯誤：${event.error}`);
+      this.setMessage(strings.recognitionError(event.error));
     };
 
     this.recognition.onend = () => {
@@ -134,6 +105,7 @@ class RecipeVoiceController {
   }
 
   startListening() {
+    const { strings } = this.config;
     if (!this.recognition) return;
 
     try {
@@ -141,22 +113,23 @@ class RecipeVoiceController {
       this.isListening = true;
       this.micToggle.setAttribute("aria-pressed", "true");
       this.micToggle.querySelector(".mic-icon").textContent = "🔴";
-      this.micToggle.lastChild.textContent = "停止語音聆聽";
-      this.setMessage("語音聆聽已開啟，請說出指令。");
+      this.micToggle.lastChild.textContent = strings.micOff;
+      this.setMessage(strings.listeningOn);
       this.updateUi();
-    } catch (error) {
-      this.setMessage("無法啟動語音聆聽，請確認麥克風權限。");
+    } catch {
+      this.setMessage(strings.micError);
     }
   }
 
   stopListening() {
+    const { strings } = this.config;
     if (!this.recognition || !this.isListening) return;
 
     this.isListening = false;
     this.recognition.stop();
     this.micToggle.setAttribute("aria-pressed", "false");
     this.micToggle.querySelector(".mic-icon").textContent = "🎤";
-    this.micToggle.lastChild.textContent = "開啟語音聆聽";
+    this.micToggle.lastChild.textContent = strings.micOn;
     this.updateUi();
   }
 
@@ -166,29 +139,27 @@ class RecipeVoiceController {
   }
 
   speakStep(index, announceStep = true) {
+    const { lang, strings, pickVoice } = this.config;
     if (index < 0 || index >= this.steps.length) return;
 
     this.stopSpeaking();
     this.currentIndex = index;
     this.highlightStep(this.steps[index].number);
 
-    const prefix = announceStep ? `第 ${this.steps[index].number} 步：` : "";
+    const prefix = announceStep ? strings.stepPrefix(this.steps[index].number) : "";
     const utterance = new SpeechSynthesisUtterance(prefix + this.steps[index].text);
-    utterance.lang = "zh-HK";
+    utterance.lang = lang;
 
     utterance.onstart = () => this.updateUi();
     utterance.onend = () => this.updateUi();
     utterance.onerror = () => this.updateUi();
 
     const voices = window.speechSynthesis.getVoices();
-    const zhVoice = voices.find(
-      (v) => v.lang.startsWith("zh") && (v.lang.includes("HK") || v.lang.includes("TW"))
-    ) || voices.find((v) => v.lang.startsWith("zh"));
-
-    if (zhVoice) utterance.voice = zhVoice;
+    const voice = pickVoice(voices);
+    if (voice) utterance.voice = voice;
 
     window.speechSynthesis.speak(utterance);
-    this.setMessage(`正在朗讀第 ${this.steps[index].number} 步`);
+    this.setMessage(strings.readingStep(this.steps[index].number));
     this.updateUi();
   }
 
@@ -206,22 +177,24 @@ class RecipeVoiceController {
   }
 
   goToNextStep() {
+    const { strings } = this.config;
     if (this.currentIndex < 0) {
       this.goToFirstStep();
       return;
     }
     if (this.currentIndex >= this.steps.length - 1) {
-      this.setMessage("已是最後一步");
-      this.speakFeedback("已是最後一步");
+      this.setMessage(strings.lastStep);
+      this.speakFeedback(strings.lastStep);
       return;
     }
     this.speakStep(this.currentIndex + 1);
   }
 
   goToPreviousStep() {
+    const { strings } = this.config;
     if (this.currentIndex <= 0) {
-      this.setMessage("已是第一步");
-      this.speakFeedback("已是第一步");
+      this.setMessage(strings.firstStep);
+      this.speakFeedback(strings.firstStep);
       if (this.currentIndex < 0) this.goToFirstStep();
       return;
     }
@@ -229,10 +202,12 @@ class RecipeVoiceController {
   }
 
   goToStepNumber(stepNumber) {
+    const { strings } = this.config;
     const index = this.steps.findIndex((s) => s.number === stepNumber);
     if (index === -1) {
-      this.setMessage(`沒有第 ${stepNumber} 步，請說 1 至 ${this.steps.length} 之間的步驟`);
-      this.speakFeedback(`沒有第 ${stepNumber} 步`);
+      const message = strings.noStep(stepNumber, this.steps.length);
+      this.setMessage(message);
+      this.speakFeedback(message);
       return;
     }
     this.speakStep(index);
@@ -240,63 +215,48 @@ class RecipeVoiceController {
 
   speakFeedback(text) {
     const utterance = new SpeechSynthesisUtterance(text);
-    utterance.lang = "zh-HK";
+    utterance.lang = this.config.lang;
     window.speechSynthesis.speak(utterance);
   }
 
-  parseStepNumber(text) {
-    const digitMatch = text.match(/第\s*(\d+)\s*步/);
-    if (digitMatch) return parseInt(digitMatch[1], 10);
-
-    const chineseMatch = text.match(/第\s*([一二三四五六七八九十]+)\s*步/);
-    if (chineseMatch) {
-      const token = chineseMatch[1];
-      if (token.length === 1 && CHINESE_DIGITS[token]) return CHINESE_DIGITS[token];
-      if (token === "十") return 10;
-      if (token.startsWith("十") && token.length === 2) return 10 + CHINESE_DIGITS[token[1]];
-      if (token.endsWith("十") && token.length === 2) return CHINESE_DIGITS[token[0]] * 10;
-    }
-
-    return null;
-  }
-
-  normalizeCommand(text) {
-    return text.replace(/\s+/g, "").replace(/[，。！？、]/g, "");
-  }
-
   handleCommand(rawText) {
-    const text = this.normalizeCommand(rawText);
+    const { commands, normalizeCommand } = this.config;
+    const text = normalizeCommand(rawText);
+    const rawLower = rawText.toLowerCase();
 
-    if (/返回第.+步|回到第.+步|第.+步/.test(text) && !/下一步|上一步/.test(text)) {
-      const stepNum = this.parseStepNumber(text);
+    const matchesGoToStep = commands.goToStepPatterns.some((pattern) =>
+      pattern.test(rawLower)
+    );
+    if (matchesGoToStep && !commands.goToStepExclude.test(rawLower)) {
+      const stepNum = commands.parseStepNumber(rawText);
       if (stepNum !== null) {
         this.goToStepNumber(stepNum);
         return;
       }
     }
 
-    if (text.includes("開始") || text.includes("播放") || text.includes("朗讀")) {
+    if (commands.start.some((cmd) => text.includes(normalizeCommand(cmd)))) {
       this.goToFirstStep();
       return;
     }
 
-    if (text.includes("下一步") || text.includes("下一個")) {
+    if (commands.next.some((cmd) => text.includes(normalizeCommand(cmd)))) {
       this.goToNextStep();
       return;
     }
 
-    if (text.includes("上一步") || text.includes("上一個")) {
+    if (commands.prev.some((cmd) => text.includes(normalizeCommand(cmd)))) {
       this.goToPreviousStep();
       return;
     }
 
-    if (text.includes("停止") || text.includes("暫停")) {
+    if (commands.stop.some((cmd) => text.includes(normalizeCommand(cmd)))) {
       this.stopSpeaking();
-      this.setMessage("已停止朗讀");
+      this.setMessage(this.config.strings.stopped);
       return;
     }
 
-    if (text.includes("重複") || text.includes("再說") || text.includes("再说")) {
+    if (commands.repeat.some((cmd) => text.includes(normalizeCommand(cmd)))) {
       if (this.currentIndex >= 0) {
         this.speakStep(this.currentIndex);
       } else {
@@ -310,23 +270,32 @@ class RecipeVoiceController {
   }
 
   updateUi() {
+    const { strings } = this.config;
     const speaking = window.speechSynthesis.speaking;
     this.statusSpeaking.classList.toggle("hidden", !speaking);
     this.statusListening.classList.toggle("hidden", !this.isListening);
+    this.statusListening.textContent = strings.listening;
+    this.statusSpeaking.textContent = strings.speaking;
   }
 }
 
 function init() {
+  const config = window.RECIPE_VOICE_CONFIG;
+  if (!config) return;
+
   if (!window.speechSynthesis) {
-    document.getElementById("status-message").textContent =
-      "此瀏覽器不支援文字轉語音（SpeechSynthesis）。";
+    const el = document.getElementById("status-message");
+    if (el) el.textContent = config.strings.noSynthesis;
     return;
   }
+
+  const welcomeEl = document.getElementById("status-message");
+  if (welcomeEl) welcomeEl.textContent = config.strings.welcome;
 
   window.speechSynthesis.getVoices();
   window.speechSynthesis.onvoiceschanged = () => window.speechSynthesis.getVoices();
 
-  new RecipeVoiceController(COOKING_STEPS);
+  new RecipeVoiceController(config);
 }
 
 if (document.readyState === "loading") {

@@ -15,7 +15,16 @@ Proof of concept for **text-to-speech** and **voice control** on recipe cooking 
    - `停止` / `暫停` — stop reading
    - `重複` — repeat current step
 
-Cooking steps match the live recipe (4 steps; video embed and tip omitted from TTS list).
+Cooking steps match the live recipe (tip omitted from TTS list).
+
+## Languages
+
+| Page | Language | Voice commands |
+|------|----------|----------------|
+| `index.html` | 中文 (zh-HK) | 開始、下一步、上一步、返回第 X 步 |
+| `en.html` | English (en-US) | start, next step, previous step, go to step X |
+
+Use the **English** / **中文** link in the header to switch language.
 
 ## Run locally
 
@@ -39,6 +48,8 @@ Use Chrome or Edge for full POC (TTS + voice commands).
 
 ## Files
 
-- `index.html` — recipe layout and controls
+- `index.html` — Chinese recipe page (zh-HK)
+- `en.html` — English recipe page (en-US)
+- `config.zh-HK.js` / `config.en.js` — locale-specific steps and commands
 - `styles.css` — LKK-inspired styling
-- `voice-control.js` — TTS + voice recognition logic
+- `voice-control.js` — shared TTS + voice recognition logic
