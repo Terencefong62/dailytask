@@ -16,6 +16,9 @@ class RecipeVoiceController {
     this.recognition = null;
 
     this.stepsList = document.getElementById("steps-list");
+    this.ingredientsContent = document.getElementById("ingredients-content");
+    this.prepTitle = document.getElementById("prep-title");
+    this.stepsTitle = document.getElementById("steps-title");
     this.versionNote = document.getElementById("version-note");
     this.versionButtons = document.querySelectorAll(".version-btn");
     this.micToggle = document.getElementById("mic-toggle");
@@ -29,6 +32,8 @@ class RecipeVoiceController {
     this.lastCommand = document.getElementById("last-command");
 
     this.renderSteps();
+    this.renderIngredients();
+    this.applyStaticLabels();
     this.updateVersionUi();
     this.bindUi();
     this.setupRecognition();
@@ -37,6 +42,72 @@ class RecipeVoiceController {
 
   getVariant(id) {
     return this.variants[id] || this.variants.default;
+  }
+
+  applyStaticLabels() {
+    const { strings } = this.config;
+    if (this.prepTitle) this.prepTitle.textContent = strings.prepTitle || "";
+    if (this.stepsTitle) this.stepsTitle.textContent = strings.stepsTitle || "";
+  }
+
+  renderIngredients() {
+    const variant = this.getVariant(this.currentVariantId);
+    const data = variant.ingredients;
+    const { strings } = this.config;
+
+    if (!data || !this.ingredientsContent) return;
+
+    const sectionsHtml = data.sections
+      .map((section) => {
+        const itemsHtml = section.items
+          .map((item) => {
+            const badge = item.changed
+              ? `<span class="changed-badge">${strings.changedBadge}</span>`
+              : "";
+            const changedClass = item.changed ? " changed" : "";
+            return `<li class="ingredient-item${changedClass}">${badge}${item.text}</li>`;
+          })
+          .join("");
+
+        return `
+          <div class="ingredient-box">
+            <h3>${section.title}</h3>
+            <ul class="ingredient-list">${itemsHtml}</ul>
+          </div>
+        `;
+      })
+      .join("");
+
+    const productsHtml = (data.lkkProducts || [])
+      .map((product) => {
+        const changedClass = product.changed ? " changed" : "";
+        const badge = product.changed
+          ? `<span class="changed-badge">${strings.changedBadge}</span>`
+          : "";
+        const thumb = product.image
+          ? `<img src="${product.image}" alt="${product.name}" class="product-thumb" loading="lazy">`
+          : `<div class="product-thumb placeholder" aria-hidden="true">LKK</div>`;
+
+        return `
+          <div class="lkk-product-card${changedClass}">
+            ${badge}
+            ${thumb}
+            <div class="product-desc">
+              <p class="product-category">${product.category}</p>
+              <p class="product-name">${product.name}</p>
+            </div>
+          </div>
+        `;
+      })
+      .join("");
+
+    this.ingredientsContent.innerHTML = `
+      <div class="ingredient-boxes">${sectionsHtml}</div>
+      <div class="lkk-products-wrap">
+        <h3 class="lkk-products-heading">${strings.lkkProductsTitle}</h3>
+        <div class="lkk-products">${productsHtml}</div>
+      </div>
+    `;
   }
 
   renderSteps() {
@@ -71,6 +142,7 @@ class RecipeVoiceController {
     this.steps = variant.steps;
     this.currentIndex = -1;
     this.renderSteps();
+    this.renderIngredients();
     this.updateVersionUi();
 
     const message = this.config.strings.switchedVersion(variant.label);

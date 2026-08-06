@@ -24,6 +24,44 @@ window.RECIPE_VOICE_CONFIG = {
           text: "倒進調味料，加蓋多煮5分鐘或至喜歡的濃稠度，灑蔥花裝飾，即可。",
         },
       ],
+      ingredients: {
+        sections: [
+          {
+            title: "材料",
+            items: [
+              { text: "雞中翼 12隻" },
+              { text: "薯仔 3個（約300克）" },
+              { text: "李錦記蒜蓉 1茶匙" },
+              { text: "乾蔥頭 3顆（切半）" },
+              { text: "蔥花（適量，裝飾用）" },
+            ],
+          },
+          {
+            title: "醃料",
+            items: [{ text: "李錦記舊庄特級蠔油 1.5湯匙" }],
+          },
+          {
+            title: "調味料",
+            items: [
+              { text: "李錦記舊庄特級蠔油 2.5湯匙" },
+              { text: "糖 1茶匙" },
+              { text: "清水 200毫升" },
+            ],
+          },
+        ],
+        lkkProducts: [
+          {
+            category: "基礎烹調醬料",
+            name: "蒜蓉",
+            image: "https://cdn-akamai.lkk.com/-/media/hk-site---homecook/minced-garlic.jpg?w=80&h=80",
+          },
+          {
+            category: "蠔油",
+            name: "舊庄特級蠔油",
+            image: "https://cdn-akamai.lkk.com/-/media/hk-site---homecook/premium-oyster-sauce-510g-tran.png?w=80&h=80",
+          },
+        ],
+      },
     },
     vegan: {
       id: "vegan",
@@ -47,6 +85,44 @@ window.RECIPE_VOICE_CONFIG = {
           text: "倒進調味料（素食蠔油2湯匙、糖1茶匙、清水200毫升），加蓋多煮5分鐘，灑蔥花裝飾，即可。",
         },
       ],
+      ingredients: {
+        sections: [
+          {
+            title: "材料",
+            items: [
+              { text: "百頁豆腐 2包（約300克，代替雞翼）", changed: true },
+              { text: "薯仔 3個（約300克）" },
+              { text: "李錦記蒜蓉 1茶匙" },
+              { text: "乾蔥頭 3顆（切半）" },
+              { text: "蔥花（適量，裝飾用）" },
+            ],
+          },
+          {
+            title: "醃料",
+            items: [{ text: "素食蠔油（香菇素蠔油）1.5湯匙", changed: true }],
+          },
+          {
+            title: "調味料",
+            items: [
+              { text: "素食蠔油 2湯匙", changed: true },
+              { text: "糖 1茶匙" },
+              { text: "清水 200毫升" },
+            ],
+          },
+        ],
+        lkkProducts: [
+          {
+            category: "基礎烹調醬料",
+            name: "蒜蓉",
+            image: "https://cdn-akamai.lkk.com/-/media/hk-site---homecook/minced-garlic.jpg?w=80&h=80",
+          },
+          {
+            category: "醬料",
+            name: "素食蠔油（代替舊庄蠔油）",
+            changed: true,
+          },
+        ],
+      },
     },
     healthy: {
       id: "healthy",
@@ -70,6 +146,45 @@ window.RECIPE_VOICE_CONFIG = {
           text: "倒進調味料（舊庄蠔油1.5湯匙、糖半茶匙或免糖、清水200毫升），加蓋多煮5分鐘，灑蔥花裝飾，即可。",
         },
       ],
+      ingredients: {
+        sections: [
+          {
+            title: "材料",
+            items: [
+              { text: "雞中翼 12隻" },
+              { text: "薯仔 3個（約300克）" },
+              { text: "李錦記蒜蓉 1茶匙" },
+              { text: "乾蔥頭 3顆（切半）" },
+              { text: "蔥花（適量，裝飾用）" },
+            ],
+          },
+          {
+            title: "醃料",
+            items: [{ text: "李錦記舊庄特級蠔油 半湯匙（減量）", changed: true }],
+          },
+          {
+            title: "調味料",
+            items: [
+              { text: "李錦記舊庄特級蠔油 1.5湯匙（減量）", changed: true },
+              { text: "糖 半茶匙或免糖（減量）", changed: true },
+              { text: "清水 200毫升" },
+            ],
+          },
+        ],
+        lkkProducts: [
+          {
+            category: "基礎烹調醬料",
+            name: "蒜蓉",
+            image: "https://cdn-akamai.lkk.com/-/media/hk-site---homecook/minced-garlic.jpg?w=80&h=80",
+          },
+          {
+            category: "蠔油",
+            name: "舊庄特級蠔油（減量使用）",
+            changed: true,
+            image: "https://cdn-akamai.lkk.com/-/media/hk-site---homecook/premium-oyster-sauce-510g-tran.png?w=80&h=80",
+          },
+        ],
+      },
     },
   },
   strings: {
@@ -92,6 +207,10 @@ window.RECIPE_VOICE_CONFIG = {
     recognitionError: (err) => `語音辨識錯誤：${err}`,
     versionTitle: "食譜版本",
     switchedVersion: (label) => `已切換至${label}`,
+    prepTitle: "預備食材",
+    lkkProductsTitle: "使用了以下李錦記產品",
+    stepsTitle: "烹調步驟",
+    changedBadge: "已調整",
   },
   commands: {
     start: ["開始", "播放", "朗讀"],

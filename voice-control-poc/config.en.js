@@ -28,6 +28,44 @@ window.RECIPE_VOICE_CONFIG = {
           text: "Add the seasoning, cover and cook for 5 minutes or adjust the thickness of sauce according to personal preference. Garnish with green onions.",
         },
       ],
+      ingredients: {
+        sections: [
+          {
+            title: "Ingredients",
+            items: [
+              { text: "Chicken wings 12 pcs" },
+              { text: "Potato 3 pcs (around 300 g)" },
+              { text: "Lee Kum Kee Minced Garlic 1 tsp" },
+              { text: "Shallots 3 pcs (halved)" },
+              { text: "Green onion (for garnish)" },
+            ],
+          },
+          {
+            title: "Marinade",
+            items: [{ text: "Lee Kum Kee Premium Oyster Sauce 1.5 tbsp" }],
+          },
+          {
+            title: "Seasoning",
+            items: [
+              { text: "Lee Kum Kee Premium Oyster Sauce 2.5 tbsp" },
+              { text: "Sugar 1 tsp" },
+              { text: "Water 200 ml" },
+            ],
+          },
+        ],
+        lkkProducts: [
+          {
+            category: "Basic Cooking Sauce",
+            name: "Minced Garlic",
+            image: "https://cdn-akamai.lkk.com/-/media/hk-site---homecook/minced-garlic.jpg?w=80&h=80",
+          },
+          {
+            category: "Oyster Sauce",
+            name: "Premium Oyster Sauce",
+            image: "https://cdn-akamai.lkk.com/-/media/hk-site---homecook/premium-oyster-sauce-510g-tran.png?w=80&h=80",
+          },
+        ],
+      },
     },
     vegan: {
       id: "vegan",
@@ -55,6 +93,44 @@ window.RECIPE_VOICE_CONFIG = {
           text: "Add seasoning (2 tbsp vegan oyster sauce, 1 tsp sugar, 200 ml water), cover and cook for 5 minutes. Garnish with green onions.",
         },
       ],
+      ingredients: {
+        sections: [
+          {
+            title: "Ingredients",
+            items: [
+              { text: "King oyster mushrooms 300 g (replaces chicken)", changed: true },
+              { text: "Potato 3 pcs (around 300 g)" },
+              { text: "Lee Kum Kee Minced Garlic 1 tsp" },
+              { text: "Shallots 3 pcs (halved)" },
+              { text: "Green onion (for garnish)" },
+            ],
+          },
+          {
+            title: "Marinade",
+            items: [{ text: "Vegan oyster sauce 1.5 tbsp", changed: true }],
+          },
+          {
+            title: "Seasoning",
+            items: [
+              { text: "Vegan oyster sauce 2 tbsp", changed: true },
+              { text: "Sugar 1 tsp" },
+              { text: "Water 200 ml" },
+            ],
+          },
+        ],
+        lkkProducts: [
+          {
+            category: "Basic Cooking Sauce",
+            name: "Minced Garlic",
+            image: "https://cdn-akamai.lkk.com/-/media/hk-site---homecook/minced-garlic.jpg?w=80&h=80",
+          },
+          {
+            category: "Sauce",
+            name: "Vegan oyster sauce (replaces Premium Oyster Sauce)",
+            changed: true,
+          },
+        ],
+      },
     },
     healthy: {
       id: "healthy",
@@ -82,6 +158,45 @@ window.RECIPE_VOICE_CONFIG = {
           text: "Add reduced seasoning (1.5 tbsp oyster sauce, half teaspoon sugar or no sugar, 200 ml water), cover and cook for 5 minutes. Garnish with green onions.",
         },
       ],
+      ingredients: {
+        sections: [
+          {
+            title: "Ingredients",
+            items: [
+              { text: "Chicken wings 12 pcs" },
+              { text: "Potato 3 pcs (around 300 g)" },
+              { text: "Lee Kum Kee Minced Garlic 1 tsp" },
+              { text: "Shallots 3 pcs (halved)" },
+              { text: "Green onion (for garnish)" },
+            ],
+          },
+          {
+            title: "Marinade",
+            items: [{ text: "Lee Kum Kee Premium Oyster Sauce ½ tbsp (reduced)", changed: true }],
+          },
+          {
+            title: "Seasoning",
+            items: [
+              { text: "Lee Kum Kee Premium Oyster Sauce 1.5 tbsp (reduced)", changed: true },
+              { text: "Sugar ½ tsp or no sugar (reduced)", changed: true },
+              { text: "Water 200 ml" },
+            ],
+          },
+        ],
+        lkkProducts: [
+          {
+            category: "Basic Cooking Sauce",
+            name: "Minced Garlic",
+            image: "https://cdn-akamai.lkk.com/-/media/hk-site---homecook/minced-garlic.jpg?w=80&h=80",
+          },
+          {
+            category: "Oyster Sauce",
+            name: "Premium Oyster Sauce (reduced amount)",
+            changed: true,
+            image: "https://cdn-akamai.lkk.com/-/media/hk-site---homecook/premium-oyster-sauce-510g-tran.png?w=80&h=80",
+          },
+        ],
+      },
     },
   },
   strings: {
@@ -104,6 +219,10 @@ window.RECIPE_VOICE_CONFIG = {
     recognitionError: (err) => `Speech recognition error: ${err}`,
     versionTitle: "Recipe version",
     switchedVersion: (label) => `Switched to ${label}`,
+    prepTitle: "Ingredients",
+    lkkProductsTitle: "Made with Lee Kum Kee products",
+    stepsTitle: "How to make it",
+    changedBadge: "Adjusted",
   },
   commands: {
     start: ["start", "begin", "play"],
