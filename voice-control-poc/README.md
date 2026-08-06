@@ -22,7 +22,7 @@ Cooking steps match the live recipe (tip omitted from TTS list).
 | Page | Language | Voice commands |
 |------|----------|----------------|
 | `index.html` | 中文 (zh-HK) | 開始、下一步、上一步、返回第 X 步 |
-| `en.html` | English (en-US) | start, next step, previous step, go to step X |
+| `en.html` | English (en-US) | start, next step, back, go to step X |
 
 Use the **English** / **中文** link in the header to switch language.
 

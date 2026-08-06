@@ -45,7 +45,7 @@ window.RECIPE_VOICE_CONFIG = {
   commands: {
     start: ["start", "begin", "play"],
     next: ["next step", "next"],
-    prev: ["previous step", "previous", "back"],
+    prev: ["back", "go back"],
     stop: ["stop", "pause"],
     repeat: ["repeat", "again", "say again"],
     goToStepPatterns: [
@@ -53,7 +53,7 @@ window.RECIPE_VOICE_CONFIG = {
       /return to step\s*\d+/i,
       /step\s*\d+/i,
     ],
-    goToStepExclude: /next|previous/i,
+    goToStepExclude: /next|back/i,
     parseStepNumber: (text) => {
       const match = text.match(/(?:go to step|return to step|step)\s*(\d+)/i);
       return match ? parseInt(match[1], 10) : null;
