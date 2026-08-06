@@ -36,13 +36,26 @@ Both languages support three versions (click buttons or use voice):
 
 Use the **English** / **中文** link in the header to switch language.
 
+## Cursor AI (real-time)
+
+Vegan and Healthy can be generated live via the [Cursor Cloud Agents API](https://cursor.com/docs/cloud-agent/api/endpoints):
+
+1. Create an API key at [Cursor Dashboard → API Keys](https://cursor.com/dashboard/api)
+2. Paste it in the **Cursor AI** panel → **Save & connect**
+3. Choose **素食版 / Vegan version** or **健康版 / Healthy version**
+
+The UI streams Cursor agent status and updates ingredients, products, and steps. Results are cached in `sessionStorage` for the session. Without a key, static fallback data is used.
+
+Optional server env: `CURSOR_API_KEY` (users can skip pasting a key in the browser).
+
+**Note:** Cloud Agents are not instant chat — expect ~30–90 seconds per generation.
+
 ## Run locally
 
-Web Speech API requires a secure context (HTTPS or `localhost`). Use a local server:
-
 ```bash
-cd voice-control-poc
-python3 -m http.server 8080
+cd voice-control-poc/api
+pip install -r ../requirements.txt
+python3 -m uvicorn main:app --host 0.0.0.0 --port 8080
 ```
 
 Open [http://localhost:8080](http://localhost:8080) in **Chrome** or **Edge**, allow microphone access, then click **開啟語音聆聽**.

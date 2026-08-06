@@ -4,7 +4,7 @@
   "terminals": [
     {
       "name": "voice-poc",
-      "command": "cd voice-control-poc && python3 -m http.server 8080",
+      "command": "cd voice-control-poc/api && pip install -q -r ../requirements.txt && python3 -m uvicorn main:app --host 0.0.0.0 --port 8080",
       "description": "Voice control POC — open port 8080 in Preview"
     }
   ],

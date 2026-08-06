@@ -5,6 +5,23 @@
 const SpeechRecognition =
   window.SpeechRecognition || window.webkitSpeechRecognition;
 
+const LKK_PRODUCT_IMAGES = {
+  garlic:
+    "https://cdn-akamai.lkk.com/-/media/hk-site---homecook/minced-garlic.jpg?w=80&h=80",
+  oyster:
+    "https://cdn-akamai.lkk.com/-/media/hk-site---homecook/premium-oyster-sauce-510g-tran.png?w=80&h=80",
+};
+
+function attachProductImages(products) {
+  return (products || []).map((product) => {
+    if (product.image) return product;
+    const label = `${product.category} ${product.name}`;
+    if (/蒜|garlic/i.test(label)) return { ...product, image: LKK_PRODUCT_IMAGES.garlic };
+    if (/蠔|oyster/i.test(label)) return { ...product, image: LKK_PRODUCT_IMAGES.oyster };
+    return product;
+  });
+}
+
 class RecipeVoiceController {
   constructor(config) {
     this.config = config;
@@ -30,10 +47,18 @@ class RecipeVoiceController {
     this.statusSpeaking = document.getElementById("status-speaking");
     this.statusMessage = document.getElementById("status-message");
     this.lastCommand = document.getElementById("last-command");
+    this.cursorApiKeyInput = document.getElementById("cursor-api-key");
+    this.cursorConnectBtn = document.getElementById("cursor-connect");
+    this.cursorAiStatus = document.getElementById("cursor-ai-status");
+    this.cursorUseAiCheckbox = document.getElementById("cursor-use-ai");
+    this.cursorAiStream = document.getElementById("cursor-ai-stream");
+    this.useCursorAi = true;
+    this.aiCachePrefix = "voice_poc_ai_";
 
     this.renderSteps();
     this.renderIngredients();
     this.applyStaticLabels();
+    this.setupCursorAi();
     this.updateVersionUi();
     this.bindUi();
     this.setupRecognition();
@@ -48,6 +73,153 @@ class RecipeVoiceController {
     const { strings } = this.config;
     if (this.prepTitle) this.prepTitle.textContent = strings.prepTitle || "";
     if (this.stepsTitle) this.stepsTitle.textContent = strings.stepsTitle || "";
+
+    const cursorTitle = document.getElementById("cursor-ai-title");
+    const cursorHint = document.getElementById("cursor-ai-hint");
+    const cursorUseLabel = document.getElementById("cursor-use-ai-label");
+    if (cursorTitle) cursorTitle.textContent = strings.cursorAiTitle || "";
+    if (cursorHint) cursorHint.textContent = strings.cursorAiHint || "";
+    if (cursorUseLabel) cursorUseLabel.textContent = strings.cursorUseAi || "";
+    if (this.cursorApiKeyInput) {
+      this.cursorApiKeyInput.placeholder = strings.cursorKeyPlaceholder || "";
+    }
+    if (this.cursorConnectBtn) {
+      this.cursorConnectBtn.textContent = strings.cursorSaveKey || "Connect";
+    }
+  }
+
+  setupCursorAi() {
+    if (!window.CursorAiClient || !this.cursorApiKeyInput) return;
+
+    const saved = window.CursorAiClient.getStoredApiKey();
+    if (saved) this.cursorApiKeyInput.value = saved;
+
+    this.cursorConnectBtn?.addEventListener("click", () => this.connectCursorAi());
+    this.cursorUseAiCheckbox?.addEventListener("change", () => {
+      this.useCursorAi = this.cursorUseAiCheckbox.checked;
+    });
+    this.useCursorAi = this.cursorUseAiCheckbox?.checked ?? true;
+
+    this.refreshCursorStatus();
+  }
+
+  async connectCursorAi() {
+    const key = this.cursorApiKeyInput?.value.trim() || "";
+    window.CursorAiClient.setStoredApiKey(key);
+    await this.refreshCursorStatus();
+  }
+
+  async refreshCursorStatus() {
+    const { strings } = this.config;
+    if (!this.cursorAiStatus || !window.CursorAiClient) return;
+
+    const key = window.CursorAiClient.getStoredApiKey();
+    if (!key) {
+      this.cursorAiStatus.textContent = strings.cursorDisconnected;
+      return;
+    }
+
+    try {
+      const health = await window.CursorAiClient.checkCursorHealth(key);
+      this.cursorAiStatus.textContent = health.ready
+        ? strings.cursorConnected
+        : strings.cursorDisconnected;
+    } catch {
+      this.cursorAiStatus.textContent = strings.cursorDisconnected;
+    }
+  }
+
+  showAiStream(message) {
+    if (!this.cursorAiStream) return;
+    this.cursorAiStream.classList.remove("hidden");
+    this.cursorAiStream.textContent = message;
+  }
+
+  appendAiStream(text) {
+    if (!this.cursorAiStream || !text) return;
+    this.cursorAiStream.classList.remove("hidden");
+    this.cursorAiStream.textContent += text;
+  }
+
+  hideAiStream() {
+    if (!this.cursorAiStream) return;
+    this.cursorAiStream.classList.add("hidden");
+    this.cursorAiStream.textContent = "";
+  }
+
+  getAiCacheKey(variantId) {
+    const locale = document.documentElement.lang?.startsWith("en") ? "en" : "zh-HK";
+    return `${this.aiCachePrefix}${variantId}_${locale}`;
+  }
+
+  applyVariantState(variantId, announce) {
+    const variant = this.getVariant(variantId);
+    this.stopSpeaking();
+    this.currentVariantId = variantId;
+    this.steps = variant.steps;
+    this.currentIndex = -1;
+    this.renderSteps();
+    this.renderIngredients();
+    this.updateVersionUi();
+
+    const message = this.config.strings.switchedVersion(variant.label);
+    this.setMessage(message);
+    if (announce) this.speakFeedback(message);
+  }
+
+  applyStaticVariant(variantId, announce = true) {
+    if (!this.getVariant(variantId) || variantId === this.currentVariantId) return;
+    this.applyVariantState(variantId, announce);
+  }
+
+  applyAiVariantData(data, variantId, announce = true) {
+    const base = this.getVariant(variantId);
+    this.variants[variantId] = {
+      ...base,
+      note: data.note || base.note,
+      ingredients: {
+        sections: data.sections || [],
+        lkkProducts: attachProductImages(data.lkkProducts || []),
+      },
+      steps: (data.steps || []).map((step, index) => ({
+        number: step.number ?? index + 1,
+        text: step.text ?? String(step),
+      })),
+    };
+    this.applyVariantState(variantId, announce);
+  }
+
+  async switchVariantWithCursorAi(variantId, announce = true) {
+    const { strings } = this.config;
+    const cacheKey = this.getAiCacheKey(variantId);
+    const cached = sessionStorage.getItem(cacheKey);
+
+    if (cached) {
+      this.applyAiVariantData(JSON.parse(cached), variantId, announce);
+      return;
+    }
+
+    this.setMessage(strings.cursorGenerating);
+    this.showAiStream(`${strings.cursorStreamLabel}: connecting…`);
+
+    try {
+      const data = await window.CursorAiClient.streamRecipeVariant(variantId, (event) => {
+        if (event.type === "status") {
+          const msg = event.message || event.status || "Working…";
+          this.showAiStream(`${strings.cursorStreamLabel}: ${msg}`);
+        }
+        if (event.type === "delta") this.appendAiStream(event.text);
+        if (event.type === "thinking") this.appendAiStream(event.text);
+      });
+
+      sessionStorage.setItem(cacheKey, JSON.stringify(data));
+      this.applyAiVariantData(data, variantId, announce);
+    } catch (error) {
+      this.setMessage(strings.cursorError(error.message));
+      this.applyStaticVariant(variantId, false);
+    } finally {
+      this.hideAiStream();
+    }
   }
 
   renderIngredients() {
@@ -134,20 +306,18 @@ class RecipeVoiceController {
   }
 
   switchVariant(variantId, announce = true) {
-    const variant = this.getVariant(variantId);
-    if (!variant || variantId === this.currentVariantId) return;
+    if (!this.getVariant(variantId) || variantId === this.currentVariantId) return;
 
-    this.stopSpeaking();
-    this.currentVariantId = variantId;
-    this.steps = variant.steps;
-    this.currentIndex = -1;
-    this.renderSteps();
-    this.renderIngredients();
-    this.updateVersionUi();
+    if (
+      variantId !== "default" &&
+      this.useCursorAi &&
+      window.CursorAiClient?.getStoredApiKey()
+    ) {
+      this.switchVariantWithCursorAi(variantId, announce);
+      return;
+    }
 
-    const message = this.config.strings.switchedVersion(variant.label);
-    this.setMessage(message);
-    if (announce) this.speakFeedback(message);
+    this.applyStaticVariant(variantId, announce);
   }
 
   bindUi() {

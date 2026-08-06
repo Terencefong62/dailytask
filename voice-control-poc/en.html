@@ -65,6 +65,22 @@
       <p id="version-note" class="version-note"></p>
     </section>
 
+    <section class="cursor-ai-panel" aria-label="Cursor AI">
+      <h2 id="cursor-ai-title">Cursor AI (real-time)</h2>
+      <p id="cursor-ai-hint" class="cursor-ai-hint"></p>
+      <label class="cursor-key-label" for="cursor-api-key">Cursor API Key</label>
+      <div class="cursor-key-row">
+        <input type="password" id="cursor-api-key" class="cursor-key-input" autocomplete="off" spellcheck="false">
+        <button type="button" id="cursor-connect" class="btn btn-primary">Save & connect</button>
+      </div>
+      <p id="cursor-ai-status" class="cursor-ai-status" role="status"></p>
+      <label class="cursor-toggle">
+        <input type="checkbox" id="cursor-use-ai" checked>
+        <span id="cursor-use-ai-label">Use Cursor AI for Vegan / Healthy</span>
+      </label>
+      <pre id="cursor-ai-stream" class="cursor-ai-stream hidden" aria-live="polite"></pre>
+    </section>
+
     <section class="voice-panel" aria-label="Voice control">
       <h2>Voice control</h2>
       <p class="voice-hint">
@@ -106,6 +122,7 @@
     </div>
   </footer>
 
+  <script src="cursor-ai.js"></script>
   <script src="config.en.js"></script>
   <script src="voice-control.js"></script>
 </body>
