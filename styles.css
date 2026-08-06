@@ -118,10 +118,6 @@ body {
   object-position: center top;
 }
 
-.chef-card--lee-man-sing .chef-card__image {
-  object-position: 52% top;
-}
-
 .chef-card__overlay {
   position: absolute;
   inset: 0;

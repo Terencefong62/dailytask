@@ -1,0 +1,17 @@
+{
+  "install": "",
+  "start": "python3 -m http.server 8080",
+  "terminals": [
+    {
+      "name": "chef-slider",
+      "command": "python3 -m http.server 8080",
+      "description": "APAC Chef slider preview on port 8080"
+    }
+  ],
+  "ports": [
+    {
+      "name": "chef-slider",
+      "port": 8080
+    }
+  ]
+}
