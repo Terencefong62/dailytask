@@ -100,7 +100,7 @@ class RecipeVoiceController {
     this.btnStart.addEventListener("click", () => this.handleCommand("開始"));
     this.btnPrev.addEventListener("click", () => this.handleCommand("上一步"));
     this.btnNext.addEventListener("click", () => this.handleCommand("下一步"));
-    this.btnStop.addEventListener("click", () => this.stopSpeaking());
+    this.btnStop.addEventListener("click", () => this.stopReading());
 
     window.addEventListener("beforeunload", () => {
       this.stopListening();
@@ -181,6 +181,11 @@ class RecipeVoiceController {
   stopSpeaking() {
     window.speechSynthesis.cancel();
     this.updateUi();
+  }
+
+  stopReading() {
+    this.stopSpeaking();
+    this.setMessage("已停止朗讀");
   }
 
   speakStep(index, announceStep = true) {
@@ -317,8 +322,7 @@ class RecipeVoiceController {
     }
 
     if (text.includes("停止") || text.includes("暫停")) {
-      this.stopSpeaking();
-      this.setMessage("已停止朗讀");
+      this.stopReading();
       return;
     }
 
