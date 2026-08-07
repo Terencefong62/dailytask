@@ -31,10 +31,15 @@ Both languages support three versions (click buttons or use voice):
 
 | Page | Language | Voice commands |
 |------|----------|----------------|
+| `start.html` | Language picker | Open this first after unzip |
 | `index.html` | 中文 (zh-HK) | 開始、下一步、上一步、返回第 X 步 |
-| `en.html` | English (en-US) | start, next step, back, go to step X |
+| `en.html` | **English (en-US)** | start, next step, back, go to step X |
 
-Use the **English** / **中文** link in the header to switch language.
+**English version:** open [`en.html`](en.html) or pick **English** on [`start.html`](start.html).
+
+Use the **English** / **中文** link in the header to switch language on either page.
+
+Each cooking step includes a **thumbnail** and a **step visual guide** image (see `images/steps/`).
 
 ## Run locally
 
@@ -53,7 +58,7 @@ pip install -r ../requirements.txt
 python3 -m uvicorn main:app --host 0.0.0.0 --port 8080
 ```
 
-Open [http://localhost:8080](http://localhost:8080) in **Chrome** or **Edge**, allow microphone access, then click **開啟語音聆聽**.
+Open [http://localhost:8080/start.html](http://localhost:8080/start.html) (or `index.html` / `en.html`) in **Chrome** or **Edge**, allow microphone access, then click **開啟語音聆聽** / **Start voice listening**.
 
 ## Browser support
 
@@ -66,8 +71,11 @@ Use Chrome or Edge for full POC (TTS + voice commands).
 
 ## Files
 
+- `start.html` — language picker (中文 / English)
 - `index.html` — Chinese recipe page (zh-HK)
 - `en.html` — English recipe page (en-US)
+- `images/steps/` — generated step guide images
+- `step-images.js` — step image paths and alt text
 - `config.zh-HK.js` / `config.en.js` — locale-specific steps and commands
 - `styles.css` — LKK-inspired styling
 - `voice-control.js` — shared TTS + voice recognition logic

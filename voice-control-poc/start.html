@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Voice Taste Image POC | Lee Kum Kee Recipe</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .start-page {
+      max-width: 640px;
+      margin: 3rem auto;
+      padding: 0 1rem;
+      text-align: center;
+    }
+
+    .start-page h1 {
+      color: var(--lkk-red);
+      margin-bottom: 0.5rem;
+      font-size: 1.75rem;
+    }
+
+    .start-page p {
+      color: var(--muted);
+      margin-bottom: 2rem;
+    }
+
+    .lang-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    .lang-card {
+      display: block;
+      padding: 1.5rem 1rem;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      text-decoration: none;
+      color: var(--text);
+      background: #fff;
+      box-shadow: var(--shadow);
+      transition: border-color 0.15s, transform 0.15s;
+    }
+
+    .lang-card:hover {
+      border-color: var(--lkk-red);
+      transform: translateY(-2px);
+    }
+
+    .lang-card strong {
+      display: block;
+      font-size: 1.25rem;
+      color: var(--lkk-red);
+      margin-bottom: 0.35rem;
+    }
+
+  .start-page p {
+      margin-bottom: 2rem;
+    }
+
+    @media (max-width: 520px) {
+      .lang-cards {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-row">
+      <div class="header-brand">
+        <span class="logo-text">Lee Kum Kee</span>
+        <span class="poc-badge">Web Speech API POC</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="start-page">
+    <h1>Voice Taste Image POC</h1>
+    <p>Oyster braised chicken wings with potatoes — voice-guided cooking steps with images.</p>
+
+    <div class="lang-cards">
+      <a class="lang-card" href="index.html" hreflang="zh-HK">
+        <strong>中文</strong>
+        蠔油薯仔炆雞翼<br>語音控制 + 步驟圖示
+      </a>
+      <a class="lang-card" href="en.html" hreflang="en">
+        <strong>English</strong>
+        Oyster braised chicken wings<br>Voice control + step images
+      </a>
+    </div>
+  </main>
+</body>
+</html>
