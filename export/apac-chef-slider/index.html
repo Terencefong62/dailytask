@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>APAC Chef Program — Meet our Top Chefs</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Placeholder for brand video section above -->
+  <section class="brand-video-placeholder" aria-hidden="true">
+    <p>Brand video section</p>
+  </section>
+
+  <!-- (1) Heading + (2) Description + (3) Chef card slider -->
+  <section class="chef-section" aria-labelledby="chef-section-heading">
+    <div class="chef-section__inner">
+
+      <header class="chef-section__header">
+        <h2 id="chef-section-heading" class="chef-section__heading">Meet our Top Chefs</h2>
+        <p class="chef-section__description">
+          Get to know the culinary experts leading our APAC campaign, bringing innovation
+          and tradition from across the region.
+        </p>
+      </header>
+
+      <div class="chef-slider" data-chef-slider>
+        <button
+          class="chef-slider__arrow chef-slider__arrow--prev"
+          type="button"
+          aria-label="Previous chefs"
+          data-slider-prev
+        >
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+            <path d="M12.5 15L7.5 10L12.5 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+
+        <div class="chef-slider__viewport" tabindex="0" data-slider-viewport>
+          <ul class="chef-slider__track" data-slider-track>
+
+            <li class="chef-card">
+              <article class="chef-card__inner">
+                <img
+                  class="chef-card__image"
+                  src="images/chef-lee-man-sing.jpg"
+                  alt="Chef Lee Man Sing"
+                  width="864"
+                  height="1152"
+                  loading="eager"
+                >
+                <div class="chef-card__overlay">
+                  <h3 class="chef-card__name">Chef Lee Man Sing</h3>
+                  <p class="chef-card__country">Hong Kong, China</p>
+                  <p class="chef-card__bio">Executive Chef from Mott 32 Group, a restaurant group recognised for contemporary Chinese cuisine</p>
+                </div>
+              </article>
+            </li>
+
+            <li class="chef-card">
+              <article class="chef-card__inner">
+                <img
+                  class="chef-card__image"
+                  src="https://picsum.photos/seed/chef-mei/480/640"
+                  alt="Mei Lin"
+                  width="480"
+                  height="640"
+                  loading="lazy"
+                >
+                <div class="chef-card__overlay">
+                  <h3 class="chef-card__name">Mei Lin</h3>
+                  <p class="chef-card__country">Singapore</p>
+                  <p class="chef-card__bio">Award-winning chef specialising in modern Asian flavours.</p>
+                </div>
+              </article>
+            </li>
+
+            <li class="chef-card">
+              <article class="chef-card__inner">
+                <img
+                  class="chef-card__image"
+                  src="https://picsum.photos/seed/chef-hiroshi/480/640"
+                  alt="Hiroshi Tanaka"
+                  width="480"
+                  height="640"
+                  loading="lazy"
+                >
+                <div class="chef-card__overlay">
+                  <h3 class="chef-card__name">Hiroshi Tanaka</h3>
+                  <p class="chef-card__country">Japan</p>
+                  <p class="chef-card__bio">Renowned for precision, seasonality, and umami-rich dishes.</p>
+                </div>
+              </article>
+            </li>
+
+            <li class="chef-card">
+              <article class="chef-card__inner">
+                <img
+                  class="chef-card__image"
+                  src="https://picsum.photos/seed/chef-priya/480/640"
+                  alt="Priya Sharma"
+                  width="480"
+                  height="640"
+                  loading="lazy"
+                >
+                <div class="chef-card__overlay">
+                  <h3 class="chef-card__name">Priya Sharma</h3>
+                  <p class="chef-card__country">India</p>
+                  <p class="chef-card__bio">Celebrated for bold spices and contemporary Indian cuisine.</p>
+                </div>
+              </article>
+            </li>
+
+            <li class="chef-card">
+              <article class="chef-card__inner">
+                <img
+                  class="chef-card__image"
+                  src="https://picsum.photos/seed/chef-james/480/640"
+                  alt="James Wong"
+                  width="480"
+                  height="640"
+                  loading="lazy"
+                >
+                <div class="chef-card__overlay">
+                  <h3 class="chef-card__name">James Wong</h3>
+                  <p class="chef-card__country">Hong Kong</p>
+                  <p class="chef-card__bio">Expert in Cantonese classics with a creative modern twist.</p>
+                </div>
+              </article>
+            </li>
+
+            <li class="chef-card">
+              <article class="chef-card__inner">
+                <img
+                  class="chef-card__image"
+                  src="https://picsum.photos/seed/chef-soomin/480/640"
+                  alt="Soo-Min Park"
+                  width="480"
+                  height="640"
+                  loading="lazy"
+                >
+                <div class="chef-card__overlay">
+                  <h3 class="chef-card__name">Soo-Min Park</h3>
+                  <p class="chef-card__country">South Korea</p>
+                  <p class="chef-card__bio">Pioneer of Korean fine dining and fermentation techniques.</p>
+                </div>
+              </article>
+            </li>
+
+            <li class="chef-card">
+              <article class="chef-card__inner">
+                <img
+                  class="chef-card__image"
+                  src="https://picsum.photos/seed/chef-marco/480/640"
+                  alt="Marco Reyes"
+                  width="480"
+                  height="640"
+                  loading="lazy"
+                >
+                <div class="chef-card__overlay">
+                  <h3 class="chef-card__name">Marco Reyes</h3>
+                  <p class="chef-card__country">Philippines</p>
+                  <p class="chef-card__bio">Champion of heritage Filipino recipes reimagined for today.</p>
+                </div>
+              </article>
+            </li>
+
+          </ul>
+        </div>
+
+        <button
+          class="chef-slider__arrow chef-slider__arrow--next"
+          type="button"
+          aria-label="Next chefs"
+          data-slider-next
+        >
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+            <path d="M7.5 15L12.5 10L7.5 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+      </div>
+
+      <div class="chef-slider__dots" role="tablist" aria-label="Chef slides" data-slider-dots></div>
+
+    </div>
+  </section>
+
+  <script src="slider.js"></script>
+</body>
+</html>
