@@ -190,27 +190,9 @@ body {
   margin-bottom: 1rem;
 }
 
-.serves-meta {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 0.5rem 0.75rem;
-}
-
-.serves-meta-label {
-  font-weight: 600;
-}
-
-.serving-control--hero {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.35rem;
-  vertical-align: middle;
-}
-
-.serving-hint--hero {
-  margin: 0.5rem 0 0;
-  font-size: 0.85rem;
+.serving-panel h2 {
+  margin: 0 0 0.75rem;
+  font-size: 1.2rem;
 }
 
 .serving-quick-picks {
@@ -235,11 +217,6 @@ body {
   background: var(--lkk-red);
   border-color: var(--lkk-red);
   color: #fff;
-}
-
-.serving-panel h2 {
-  margin: 0 0 0.75rem;
-  font-size: 1.2rem;
 }
 
 .serving-control {

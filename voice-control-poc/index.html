@@ -39,25 +39,7 @@
         <ul class="meta-icons">
           <li>Prep time <strong>10 min</strong></li>
           <li>Cook time <strong>15 min</strong></li>
-          <li class="serves-meta">
-            <span id="serving-title" class="serves-meta-label">Serves</span>
-            <div class="serving-control serving-control--hero">
-              <button type="button" id="serving-decrease" class="btn serving-btn" aria-label="Decrease servings">−</button>
-              <input
-                type="text"
-                id="serving-input"
-                class="serving-input"
-                inputmode="numeric"
-                pattern="[0-9]*"
-                value="4"
-                aria-labelledby="serving-title"
-              >
-              <button type="button" id="serving-increase" class="btn serving-btn" aria-label="Increase servings">+</button>
-              <span id="serving-unit" class="serving-unit">people</span>
-            </div>
-          </li>
         </ul>
-        <p id="serving-hint" class="serving-hint serving-hint--hero"></p>
         <p class="source-link">
           Source recipe:
           <a href="https://hk.lkk.com/en/recipes/oyster-flavoured-braised-chicken-wings-with-potatoes" target="_blank" rel="noopener">
@@ -75,12 +57,31 @@
         <button type="button" class="version-btn" data-version="healthy" aria-pressed="false">Healthy version</button>
       </div>
       <p id="version-note" class="version-note"></p>
+    </section>
+
+    <section class="serving-panel" aria-label="Serving size">
+      <h2 id="serving-title">Serves</h2>
+      <div class="serving-control">
+        <button type="button" id="serving-decrease" class="btn serving-btn" aria-label="Decrease servings">−</button>
+        <input
+          type="text"
+          id="serving-input"
+          class="serving-input"
+          inputmode="numeric"
+          pattern="[0-9]*"
+          value="4"
+          aria-labelledby="serving-title"
+        >
+        <span id="serving-unit" class="serving-unit">people</span>
+        <button type="button" id="serving-increase" class="btn serving-btn" aria-label="Increase servings">+</button>
+      </div>
       <div class="serving-quick-picks" role="group" aria-label="Quick serving sizes">
         <button type="button" class="serving-quick" data-serves="2">2</button>
         <button type="button" class="serving-quick active" data-serves="4">4</button>
         <button type="button" class="serving-quick" data-serves="6">6</button>
         <button type="button" class="serving-quick" data-serves="8">8</button>
       </div>
+      <p id="serving-hint" class="serving-hint"></p>
     </section>
 
     <section class="ingredients-section" aria-label="Ingredients">

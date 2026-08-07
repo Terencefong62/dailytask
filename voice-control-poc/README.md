@@ -39,7 +39,7 @@ Open **`index.html`** for English (default). Chinese: **`zh.html`**. Use the hea
 
 ## Flexible servings
 
-Adjust **Serves** (1–12 people) before cooking. Ingredient and seasoning amounts scale proportionally with practical rounding (spoons, ml, g, piece counts) so flavour stays balanced.
+Adjust **Serves** (1–12 people) in the panel **right after Recipe version**. Ingredient and seasoning amounts scale proportionally with practical rounding (spoons, ml, g, piece counts) so flavour stays balanced.
 
 Each cooking step includes a **thumbnail** and **step visual guide** image (see `images/steps/`).
 

@@ -39,25 +39,7 @@
         <ul class="meta-icons">
           <li>準備時間 <strong>10 分鐘</strong></li>
           <li>烹煮時間 <strong>15 分鐘</strong></li>
-          <li class="serves-meta">
-            <span id="serving-title" class="serves-meta-label">份量</span>
-            <div class="serving-control serving-control--hero">
-              <button type="button" id="serving-decrease" class="btn serving-btn" aria-label="減少份量">−</button>
-              <input
-                type="text"
-                id="serving-input"
-                class="serving-input"
-                inputmode="numeric"
-                pattern="[0-9]*"
-                value="4"
-                aria-labelledby="serving-title"
-              >
-              <button type="button" id="serving-increase" class="btn serving-btn" aria-label="增加份量">+</button>
-              <span id="serving-unit" class="serving-unit">人</span>
-            </div>
-          </li>
         </ul>
-        <p id="serving-hint" class="serving-hint serving-hint--hero"></p>
         <p class="source-link">
           原型頁面：
           <a href="https://hk.lkk.com/zh-hk/recipes/oyster-flavoured-braised-chicken-wings-with-potatoes" target="_blank" rel="noopener">
@@ -75,12 +57,31 @@
         <button type="button" class="version-btn" data-version="healthy" aria-pressed="false">健康版</button>
       </div>
       <p id="version-note" class="version-note"></p>
+    </section>
+
+    <section class="serving-panel" aria-label="份量">
+      <h2 id="serving-title">份量</h2>
+      <div class="serving-control">
+        <button type="button" id="serving-decrease" class="btn serving-btn" aria-label="減少份量">−</button>
+        <input
+          type="text"
+          id="serving-input"
+          class="serving-input"
+          inputmode="numeric"
+          pattern="[0-9]*"
+          value="4"
+          aria-labelledby="serving-title"
+        >
+        <span id="serving-unit" class="serving-unit">人</span>
+        <button type="button" id="serving-increase" class="btn serving-btn" aria-label="增加份量">+</button>
+      </div>
       <div class="serving-quick-picks" role="group" aria-label="快速選擇份量">
         <button type="button" class="serving-quick" data-serves="2">2</button>
         <button type="button" class="serving-quick active" data-serves="4">4</button>
         <button type="button" class="serving-quick" data-serves="6">6</button>
         <button type="button" class="serving-quick" data-serves="8">8</button>
       </div>
+      <p id="serving-hint" class="serving-hint"></p>
     </section>
 
     <section class="ingredients-section" aria-label="預備食材">
