@@ -31,15 +31,17 @@ Both languages support three versions (click buttons or use voice):
 
 | Page | Language | Voice commands |
 |------|----------|----------------|
-| `start.html` | Language picker | Open this first after unzip |
-| `index.html` | 中文 (zh-HK) | 開始、下一步、上一步、返回第 X 步 |
-| `en.html` | **English (en-US)** | start, next step, back, go to step X |
+| `index.html` | **English (en-US)** — default | start, next step, back, go to step X |
+| `zh.html` | 中文 (zh-HK) | 開始、下一步、上一步、返回第 X 步 |
+| `start.html` | Language picker | Optional entry page |
 
-**English version:** open [`en.html`](en.html) or pick **English** on [`start.html`](start.html).
+Open **`index.html`** for English (default). Chinese: **`zh.html`**. Use the header language link to switch.
 
-Use the **English** / **中文** link in the header to switch language on either page.
+## Flexible servings
 
-Each cooking step includes a **thumbnail** and a **step visual guide** image (see `images/steps/`).
+Adjust **Serves** (1–12 people) before cooking. Ingredient and seasoning amounts scale proportionally with practical rounding (spoons, ml, g, piece counts) so flavour stays balanced.
+
+Each cooking step includes a **thumbnail** and **step visual guide** image (see `images/steps/`).
 
 ## Run locally
 
@@ -71,9 +73,10 @@ Use Chrome or Edge for full POC (TTS + voice commands).
 
 ## Files
 
-- `start.html` — language picker (中文 / English)
-- `index.html` — Chinese recipe page (zh-HK)
-- `en.html` — English recipe page (en-US)
+- `index.html` — English recipe page (default, en-US)
+- `zh.html` — Chinese recipe page (zh-HK)
+- `en.html` — redirects to `index.html`
+- `serving-scale.js` — serving size scaling logic
 - `images/steps/` — generated step guide images
 - `step-images.js` — step image paths and alt text
 - `config.zh-HK.js` / `config.en.js` — locale-specific steps and commands

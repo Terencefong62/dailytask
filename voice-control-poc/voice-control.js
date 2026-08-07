@@ -28,6 +28,9 @@ class RecipeVoiceController {
     this.variants = config.variants || { default: { id: "default", label: "Default", steps: config.steps || [] } };
     this.currentVariantId = "default";
     this.steps = this.variants.default.steps;
+    this.baseServes = config.baseServes || 4;
+    this.maxServes = config.maxServes || 12;
+    this.currentServes = this.baseServes;
     this.currentIndex = -1;
     this.isListening = false;
     this.recognition = null;
@@ -40,6 +43,13 @@ class RecipeVoiceController {
     this.stepGuideTitle = document.getElementById("step-guide-title");
     this.stepGuideLabel = document.getElementById("step-guide-label");
     this.stepGuideImage = document.getElementById("step-guide-image");
+    this.servesDisplay = document.getElementById("serves-display");
+    this.servingTitle = document.getElementById("serving-title");
+    this.servingInput = document.getElementById("serving-input");
+    this.servingUnit = document.getElementById("serving-unit");
+    this.servingHint = document.getElementById("serving-hint");
+    this.servingDecrease = document.getElementById("serving-decrease");
+    this.servingIncrease = document.getElementById("serving-increase");
     this.versionNote = document.getElementById("version-note");
     this.versionButtons = document.querySelectorAll(".version-btn");
     this.micToggle = document.getElementById("mic-toggle");
@@ -70,7 +80,51 @@ class RecipeVoiceController {
     if (this.prepTitle) this.prepTitle.textContent = strings.prepTitle || "";
     if (this.stepsTitle) this.stepsTitle.textContent = strings.stepsTitle || "";
     if (this.stepGuideTitle) this.stepGuideTitle.textContent = strings.stepGuideTitle || "";
+    this.applyServingLabels();
     this.updateStepGuide();
+  }
+
+  applyServingLabels() {
+    const { strings } = this.config;
+    if (this.servingTitle) this.servingTitle.textContent = strings.servingTitle || "";
+    if (this.servingUnit) this.servingUnit.textContent = strings.servingUnit || "";
+    if (this.servingHint) this.servingHint.textContent = strings.servingHint || "";
+    if (this.servingInput) {
+      this.servingInput.min = "1";
+      this.servingInput.max = String(this.maxServes);
+      this.servingInput.value = String(this.currentServes);
+    }
+    this.updateServesDisplay();
+  }
+
+  getServingRatio() {
+    return this.currentServes / this.baseServes;
+  }
+
+  updateServesDisplay() {
+    if (this.servesDisplay) this.servesDisplay.textContent = String(this.currentServes);
+    if (this.servingInput && this.servingInput.value !== String(this.currentServes)) {
+      this.servingInput.value = String(this.currentServes);
+    }
+  }
+
+  setServingSize(serves, announce = false) {
+    const parsed = Math.round(Number(serves));
+    const clamped = Math.min(this.maxServes, Math.max(1, parsed || this.baseServes));
+    if (clamped === this.currentServes) return;
+
+    this.currentServes = clamped;
+    this.updateServesDisplay();
+    this.renderIngredients();
+
+    if (announce && this.config.strings.servingUpdated) {
+      const message = this.config.strings.servingUpdated(clamped);
+      this.setMessage(message);
+    }
+  }
+
+  adjustServing(delta) {
+    this.setServingSize(this.currentServes + delta, true);
   }
 
   applyVariantState(variantId, announce) {
@@ -95,7 +149,13 @@ class RecipeVoiceController {
 
     if (!data || !this.ingredientsContent) return;
 
-    const sectionsHtml = data.sections
+    const locale = this.config.localeKey || "en";
+    const ratio = this.getServingRatio();
+    const sections = window.ServingScale
+      ? ServingScale.scaleSections(data.sections, ratio, locale)
+      : data.sections;
+
+    const sectionsHtml = sections
       .map((section) => {
         const itemsHtml = section.items
           .map((item) => {
@@ -231,6 +291,18 @@ class RecipeVoiceController {
     this.versionButtons.forEach((btn) => {
       btn.addEventListener("click", () => this.switchVariant(btn.dataset.version));
     });
+
+    if (this.servingDecrease) {
+      this.servingDecrease.addEventListener("click", () => this.adjustServing(-1));
+    }
+    if (this.servingIncrease) {
+      this.servingIncrease.addEventListener("click", () => this.adjustServing(1));
+    }
+    if (this.servingInput) {
+      this.servingInput.addEventListener("change", () => {
+        this.setServingSize(this.servingInput.value, true);
+      });
+    }
 
     this.stepsList.addEventListener("click", (event) => {
       const box = event.target.closest(".step-box");

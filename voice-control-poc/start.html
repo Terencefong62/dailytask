@@ -48,15 +48,16 @@
       transform: translateY(-2px);
     }
 
+    .lang-card.primary {
+      border-color: var(--lkk-red);
+      background: var(--active-bg);
+    }
+
     .lang-card strong {
       display: block;
       font-size: 1.25rem;
       color: var(--lkk-red);
       margin-bottom: 0.35rem;
-    }
-
-  .start-page p {
-      margin-bottom: 2rem;
     }
 
     @media (max-width: 520px) {
@@ -78,16 +79,16 @@
 
   <main class="start-page">
     <h1>Voice Taste Image POC</h1>
-    <p>Oyster braised chicken wings with potatoes — voice-guided cooking steps with images.</p>
+    <p>Oyster braised chicken wings with potatoes — voice-guided steps, step images, and flexible servings.</p>
 
     <div class="lang-cards">
-      <a class="lang-card" href="index.html" hreflang="zh-HK">
+      <a class="lang-card primary" href="index.html" hreflang="en">
+        <strong>English (default)</strong>
+        Oyster braised chicken wings<br>Voice control + step images
+      </a>
+      <a class="lang-card" href="zh.html" hreflang="zh-HK">
         <strong>中文</strong>
         蠔油薯仔炆雞翼<br>語音控制 + 步驟圖示
-      </a>
-      <a class="lang-card" href="en.html" hreflang="en">
-        <strong>English</strong>
-        Oyster braised chicken wings<br>Voice control + step images
       </a>
     </div>
   </main>

@@ -3,6 +3,9 @@ const _img = (key) => stepImageMeta(key, "en");
 window.RECIPE_VOICE_CONFIG = {
   lang: "en-US",
   recognitionLang: "en-US",
+  localeKey: "en",
+  baseServes: 4,
+  maxServes: 12,
   variants: {
     default: {
       id: "default",
@@ -40,23 +43,23 @@ window.RECIPE_VOICE_CONFIG = {
           {
             title: "Ingredients",
             items: [
-              { text: "Chicken wings 12 pcs" },
-              { text: "Potato 3 pcs (around 300 g)" },
-              { text: "Lee Kum Kee Minced Garlic 1 tsp" },
-              { text: "Shallots 3 pcs (halved)" },
-              { text: "Green onion (for garnish)" },
+              { name: "Chicken wings", amount: 12, unit: "pcs" },
+              { name: "Potato", amount: 3, unit: "pcs", sub: { amount: 300, unit: "g", prefix: "around" } },
+              { name: "Lee Kum Kee Minced Garlic", amount: 1, unit: "tsp" },
+              { name: "Shallots", amount: 3, unit: "pcs", note: "halved" },
+              { fixed: "Green onion (for garnish)" },
             ],
           },
           {
             title: "Marinade",
-            items: [{ text: "Lee Kum Kee Premium Oyster Sauce 1.5 tbsp" }],
+            items: [{ name: "Lee Kum Kee Premium Oyster Sauce", amount: 1.5, unit: "tbsp" }],
           },
           {
             title: "Seasoning",
             items: [
-              { text: "Lee Kum Kee Premium Oyster Sauce 2.5 tbsp" },
-              { text: "Sugar 1 tsp" },
-              { text: "Water 200 ml" },
+              { name: "Lee Kum Kee Premium Oyster Sauce", amount: 2.5, unit: "tbsp" },
+              { name: "Sugar", amount: 1, unit: "tsp" },
+              { name: "Water", amount: 200, unit: "ml" },
             ],
           },
         ],
@@ -110,23 +113,23 @@ window.RECIPE_VOICE_CONFIG = {
           {
             title: "Ingredients",
             items: [
-              { text: "King oyster mushrooms 300 g (replaces chicken)", changed: true },
-              { text: "Potato 3 pcs (around 300 g)" },
-              { text: "Lee Kum Kee Minced Garlic 1 tsp" },
-              { text: "Shallots 3 pcs (halved)" },
-              { text: "Green onion (for garnish)" },
+              { name: "King oyster mushrooms", amount: 300, unit: "g", note: "replaces chicken", changed: true },
+              { name: "Potato", amount: 3, unit: "pcs", sub: { amount: 300, unit: "g", prefix: "around" } },
+              { name: "Lee Kum Kee Minced Garlic", amount: 1, unit: "tsp" },
+              { name: "Shallots", amount: 3, unit: "pcs", note: "halved" },
+              { fixed: "Green onion (for garnish)" },
             ],
           },
           {
             title: "Marinade",
-            items: [{ text: "Vegan oyster sauce 1.5 tbsp", changed: true }],
+            items: [{ name: "Vegan oyster sauce", amount: 1.5, unit: "tbsp", changed: true }],
           },
           {
             title: "Seasoning",
             items: [
-              { text: "Vegan oyster sauce 2 tbsp", changed: true },
-              { text: "Sugar 1 tsp" },
-              { text: "Water 200 ml" },
+              { name: "Vegan oyster sauce", amount: 2, unit: "tbsp", changed: true },
+              { name: "Sugar", amount: 1, unit: "tsp" },
+              { name: "Water", amount: 200, unit: "ml" },
             ],
           },
         ],
@@ -180,23 +183,37 @@ window.RECIPE_VOICE_CONFIG = {
           {
             title: "Ingredients",
             items: [
-              { text: "Chicken wings 12 pcs" },
-              { text: "Potato 3 pcs (around 300 g)" },
-              { text: "Lee Kum Kee Minced Garlic 1 tsp" },
-              { text: "Shallots 3 pcs (halved)" },
-              { text: "Green onion (for garnish)" },
+              { name: "Chicken wings", amount: 12, unit: "pcs" },
+              { name: "Potato", amount: 3, unit: "pcs", sub: { amount: 300, unit: "g", prefix: "around" } },
+              { name: "Lee Kum Kee Minced Garlic", amount: 1, unit: "tsp" },
+              { name: "Shallots", amount: 3, unit: "pcs", note: "halved" },
+              { fixed: "Green onion (for garnish)" },
             ],
           },
           {
             title: "Marinade",
-            items: [{ text: "Lee Kum Kee Premium Oyster Sauce ½ tbsp (reduced)", changed: true }],
+            items: [
+              {
+                name: "Lee Kum Kee Premium Oyster Sauce",
+                amount: 0.5,
+                unit: "tbsp",
+                note: "reduced",
+                changed: true,
+              },
+            ],
           },
           {
             title: "Seasoning",
             items: [
-              { text: "Lee Kum Kee Premium Oyster Sauce 1.5 tbsp (reduced)", changed: true },
-              { text: "Sugar ½ tsp or no sugar (reduced)", changed: true },
-              { text: "Water 200 ml" },
+              {
+                name: "Lee Kum Kee Premium Oyster Sauce",
+                amount: 1.5,
+                unit: "tbsp",
+                note: "reduced",
+                changed: true,
+              },
+              { name: "Sugar", amount: 0.5, unit: "tsp", note: "or no sugar (reduced)", changed: true },
+              { name: "Water", amount: 200, unit: "ml" },
             ],
           },
         ],
@@ -243,6 +260,10 @@ window.RECIPE_VOICE_CONFIG = {
     stepGuideLabel: (n) => `Step ${n}`,
     stepGuidePrompt: "Say \"Start\" or pick a step to see the visual guide",
     changedBadge: "Adjusted",
+    servingTitle: "Serves",
+    servingUnit: "people",
+    servingHint: "Adjust servings — ingredients and seasoning scale automatically for balanced flavour.",
+    servingUpdated: (n) => `Updated for ${n} servings`,
     cursorAiTitle: "AI generation (real-time)",
     cursorAiHint: "Generate Vegan / Healthy with ChatGPT (OpenAI API) or Cursor AI.",
     cursorKeyLabel: "API Key",

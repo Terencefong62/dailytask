@@ -3,6 +3,9 @@ const _img = (key) => stepImageMeta(key, "zh");
 window.RECIPE_VOICE_CONFIG = {
   lang: "zh-HK",
   recognitionLang: "zh-HK",
+  localeKey: "zh",
+  baseServes: 4,
+  maxServes: 12,
   variants: {
     default: {
       id: "default",
@@ -35,23 +38,23 @@ window.RECIPE_VOICE_CONFIG = {
           {
             title: "材料",
             items: [
-              { text: "雞中翼 12隻" },
-              { text: "薯仔 3個（約300克）" },
-              { text: "李錦記蒜蓉 1茶匙" },
-              { text: "乾蔥頭 3顆（切半）" },
-              { text: "蔥花（適量，裝飾用）" },
+              { name: "雞中翼", amount: 12, unit: "隻" },
+              { name: "薯仔", amount: 3, unit: "個", sub: { amount: 300, unit: "克" } },
+              { name: "李錦記蒜蓉", amount: 1, unit: "茶匙" },
+              { name: "乾蔥頭", amount: 3, unit: "顆", note: "切半" },
+              { fixed: "蔥花（適量，裝飾用）" },
             ],
           },
           {
             title: "醃料",
-            items: [{ text: "李錦記舊庄特級蠔油 1.5湯匙" }],
+            items: [{ name: "李錦記舊庄特級蠔油", amount: 1.5, unit: "湯匙" }],
           },
           {
             title: "調味料",
             items: [
-              { text: "李錦記舊庄特級蠔油 2.5湯匙" },
-              { text: "糖 1茶匙" },
-              { text: "清水 200毫升" },
+              { name: "李錦記舊庄特級蠔油", amount: 2.5, unit: "湯匙" },
+              { name: "糖", amount: 1, unit: "茶匙" },
+              { name: "清水", amount: 200, unit: "毫升" },
             ],
           },
         ],
@@ -100,23 +103,30 @@ window.RECIPE_VOICE_CONFIG = {
           {
             title: "材料",
             items: [
-              { text: "百頁豆腐 2包（約300克，代替雞翼）", changed: true },
-              { text: "薯仔 3個（約300克）" },
-              { text: "李錦記蒜蓉 1茶匙" },
-              { text: "乾蔥頭 3顆（切半）" },
-              { text: "蔥花（適量，裝飾用）" },
+              {
+                name: "百頁豆腐",
+                amount: 2,
+                unit: "包",
+                sub: { amount: 300, unit: "克" },
+                note: "代替雞翼",
+                changed: true,
+              },
+              { name: "薯仔", amount: 3, unit: "個", sub: { amount: 300, unit: "克" } },
+              { name: "李錦記蒜蓉", amount: 1, unit: "茶匙" },
+              { name: "乾蔥頭", amount: 3, unit: "顆", note: "切半" },
+              { fixed: "蔥花（適量，裝飾用）" },
             ],
           },
           {
             title: "醃料",
-            items: [{ text: "素食蠔油（香菇素蠔油）1.5湯匙", changed: true }],
+            items: [{ name: "素食蠔油（香菇素蠔油）", amount: 1.5, unit: "湯匙", changed: true }],
           },
           {
             title: "調味料",
             items: [
-              { text: "素食蠔油 2湯匙", changed: true },
-              { text: "糖 1茶匙" },
-              { text: "清水 200毫升" },
+              { name: "素食蠔油", amount: 2, unit: "湯匙", changed: true },
+              { name: "糖", amount: 1, unit: "茶匙" },
+              { name: "清水", amount: 200, unit: "毫升" },
             ],
           },
         ],
@@ -165,23 +175,25 @@ window.RECIPE_VOICE_CONFIG = {
           {
             title: "材料",
             items: [
-              { text: "雞中翼 12隻" },
-              { text: "薯仔 3個（約300克）" },
-              { text: "李錦記蒜蓉 1茶匙" },
-              { text: "乾蔥頭 3顆（切半）" },
-              { text: "蔥花（適量，裝飾用）" },
+              { name: "雞中翼", amount: 12, unit: "隻" },
+              { name: "薯仔", amount: 3, unit: "個", sub: { amount: 300, unit: "克" } },
+              { name: "李錦記蒜蓉", amount: 1, unit: "茶匙" },
+              { name: "乾蔥頭", amount: 3, unit: "顆", note: "切半" },
+              { fixed: "蔥花（適量，裝飾用）" },
             ],
           },
           {
             title: "醃料",
-            items: [{ text: "李錦記舊庄特級蠔油 半湯匙（減量）", changed: true }],
+            items: [
+              { name: "李錦記舊庄特級蠔油", amount: 0.5, unit: "湯匙", note: "減量", changed: true },
+            ],
           },
           {
             title: "調味料",
             items: [
-              { text: "李錦記舊庄特級蠔油 1.5湯匙（減量）", changed: true },
-              { text: "糖 半茶匙或免糖（減量）", changed: true },
-              { text: "清水 200毫升" },
+              { name: "李錦記舊庄特級蠔油", amount: 1.5, unit: "湯匙", note: "減量", changed: true },
+              { name: "糖", amount: 0.5, unit: "茶匙", note: "或免糖（減量）", changed: true },
+              { name: "清水", amount: 200, unit: "毫升" },
             ],
           },
         ],
@@ -228,6 +240,10 @@ window.RECIPE_VOICE_CONFIG = {
     stepGuideLabel: (n) => `第 ${n} 步`,
     stepGuidePrompt: "說「開始」或點選步驟，查看該步圖示指引",
     changedBadge: "已調整",
+    servingTitle: "份量",
+    servingUnit: "人",
+    servingHint: "調整份量後，材料及調味料會按比例自動換算，保持最佳味道。",
+    servingUpdated: (n) => `已調整為 ${n} 人份量`,
     cursorAiTitle: "AI 即時生成",
     cursorAiHint: "使用 ChatGPT（OpenAI API）或 Cursor AI 即時生成素食版／健康版。",
     cursorKeyLabel: "API Key",
