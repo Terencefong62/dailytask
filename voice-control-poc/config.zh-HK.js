@@ -244,6 +244,12 @@ window.RECIPE_VOICE_CONFIG = {
     servingUnit: "人",
     servingHint: "調整份量後，材料及調味料會按比例自動換算，保持最佳味道。",
     servingUpdated: (n) => `已調整為 ${n} 人份量`,
+    portionChangeTitle: (n) => `材料及調味料已調整為 ${n} 人份量`,
+    portionChangeDetail: (n, base) =>
+      n === base
+        ? `已恢復原食譜分量（原版：${base} 人）。`
+        : `材料、醃料及調味料已按 ${base} 人原版食譜比例換算，保持最佳味道。`,
+    portionScaledBadge: "已換算",
     cursorAiTitle: "AI 即時生成",
     cursorAiHint: "使用 ChatGPT（OpenAI API）或 Cursor AI 即時生成素食版／健康版。",
     cursorKeyLabel: "API Key",

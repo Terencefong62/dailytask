@@ -264,6 +264,13 @@ window.RECIPE_VOICE_CONFIG = {
     servingUnit: "people",
     servingHint: "Adjust servings — ingredients and seasoning scale automatically for balanced flavour.",
     servingUpdated: (n) => `Updated for ${n} servings`,
+    portionChangeTitle: (n) =>
+      `Ingredients & seasoning adjusted for ${n} ${n === 1 ? "person" : "people"}`,
+    portionChangeDetail: (n, base) =>
+      n === base
+        ? `Showing original recipe amounts (base recipe: ${base} people).`
+        : `Material, marinade and seasoning scaled from the ${base}-person recipe for balanced flavour.`,
+    portionScaledBadge: "Scaled",
     cursorAiTitle: "AI generation (real-time)",
     cursorAiHint: "Generate Vegan / Healthy with ChatGPT (OpenAI API) or Cursor AI.",
     cursorKeyLabel: "API Key",

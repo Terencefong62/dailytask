@@ -50,6 +50,9 @@ class RecipeVoiceController {
     this.servingHint = document.getElementById("serving-hint");
     this.servingDecrease = document.getElementById("serving-decrease");
     this.servingIncrease = document.getElementById("serving-increase");
+    this.portionChangeHint = document.getElementById("portion-change-hint");
+    this.portionChangeTitle = document.getElementById("portion-change-title");
+    this.portionChangeDetail = document.getElementById("portion-change-detail");
     this.versionNote = document.getElementById("version-note");
     this.versionButtons = document.querySelectorAll(".version-btn");
     this.micToggle = document.getElementById("mic-toggle");
@@ -121,11 +124,37 @@ class RecipeVoiceController {
     this.currentServes = clamped;
     this.updateServesDisplay();
     this.renderIngredients();
+    this.showPortionChangeHint();
+  }
 
-    if (announce && this.config.strings.servingUpdated) {
-      const message = this.config.strings.servingUpdated(clamped);
-      this.setMessage(message);
+  showPortionChangeHint() {
+    const { strings, baseServes } = this.config;
+    if (!this.portionChangeHint) return;
+
+    if (this.portionChangeTitle && strings.portionChangeTitle) {
+      this.portionChangeTitle.textContent = strings.portionChangeTitle(this.currentServes);
     }
+    if (this.portionChangeDetail && strings.portionChangeDetail) {
+      this.portionChangeDetail.textContent = strings.portionChangeDetail(
+        this.currentServes,
+        this.baseServes
+      );
+    }
+
+    this.portionChangeHint.classList.remove("hidden");
+
+    if (this.ingredientsContent) {
+      this.ingredientsContent.classList.remove("is-portion-updated");
+      void this.ingredientsContent.offsetWidth;
+      this.ingredientsContent.classList.add("is-portion-updated");
+      window.setTimeout(() => {
+        this.ingredientsContent.classList.remove("is-portion-updated");
+      }, 900);
+    }
+  }
+
+  hidePortionChangeHint() {
+    if (this.portionChangeHint) this.portionChangeHint.classList.add("hidden");
   }
 
   adjustServing(delta) {
@@ -138,6 +167,7 @@ class RecipeVoiceController {
     this.currentVariantId = variantId;
     this.steps = variant.steps;
     this.currentIndex = -1;
+    this.hidePortionChangeHint();
     this.renderSteps();
     this.renderIngredients();
     this.updateVersionUi();
@@ -156,12 +186,22 @@ class RecipeVoiceController {
 
     const locale = this.config.localeKey || "en";
     const ratio = this.getServingRatio();
+    const isScaled = ratio !== 1;
+    const scaledBadge = strings.portionScaledBadge
+      ? `<span class="portion-scaled-badge">${strings.portionScaledBadge}</span>`
+      : "";
+
     const sections = window.ServingScale
       ? ServingScale.scaleSections(data.sections, ratio, locale)
       : data.sections;
 
     const sectionsHtml = sections
       .map((section) => {
+        const isScaledSection = /marinade|seasoning|醃料|調味料|材料|ingredients/i.test(
+          section.title
+        );
+        const sectionScaledBadge = isScaled && isScaledSection ? scaledBadge : "";
+
         const itemsHtml = section.items
           .map((item) => {
             const displayText =
@@ -179,8 +219,8 @@ class RecipeVoiceController {
           .join("");
 
         return `
-          <div class="ingredient-box">
-            <h3>${section.title}</h3>
+          <div class="ingredient-box${isScaled ? " portion-scaled-box" : ""}">
+            <h3>${section.title}${sectionScaledBadge}</h3>
             <ul class="ingredient-list">${itemsHtml}</ul>
           </div>
         `;

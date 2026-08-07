@@ -243,6 +243,90 @@ body {
   margin-bottom: 1.5rem;
 }
 
+.portion-change-hint {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+  padding: 0.9rem 1rem;
+  background: var(--active-bg);
+  border: 1px solid var(--lkk-red);
+  border-radius: 10px;
+  animation: portionHintIn 0.35s ease-out;
+}
+
+.portion-change-hint.hidden {
+  display: none;
+}
+
+.portion-change-icon {
+  flex-shrink: 0;
+  width: 2rem;
+  height: 2rem;
+  line-height: 2rem;
+  text-align: center;
+  border-radius: 50%;
+  background: var(--lkk-red);
+  color: #fff;
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.portion-change-title {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--lkk-red);
+  line-height: 1.4;
+}
+
+.portion-change-detail {
+  margin: 0.25rem 0 0;
+  font-size: 0.88rem;
+  color: var(--muted);
+  line-height: 1.45;
+}
+
+.portion-scaled-badge {
+  display: inline-block;
+  margin-left: 0.4rem;
+  padding: 0.1rem 0.45rem;
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--lkk-red);
+  background: var(--active-bg);
+  border: 1px solid rgba(200, 16, 46, 0.35);
+  border-radius: 4px;
+  vertical-align: middle;
+}
+
+.ingredients-layout.is-portion-updated .ingredient-box {
+  animation: portionBoxPulse 0.75s ease-out;
+}
+
+@keyframes portionHintIn {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes portionBoxPulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(200, 16, 46, 0.28);
+  }
+  60% {
+    box-shadow: 0 0 0 6px rgba(200, 16, 46, 0);
+  }
+  100% {
+    box-shadow: none;
+  }
+}
+
 .ingredients-layout {
   display: flex;
   flex-direction: column;

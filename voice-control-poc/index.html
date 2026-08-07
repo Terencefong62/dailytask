@@ -80,6 +80,13 @@
 
     <section class="ingredients-section" aria-label="Ingredients">
       <h2 id="prep-title" class="recipe-main-title"></h2>
+      <div id="portion-change-hint" class="portion-change-hint hidden" role="status" aria-live="polite">
+        <span class="portion-change-icon" aria-hidden="true">↻</span>
+        <div class="portion-change-body">
+          <p id="portion-change-title" class="portion-change-title"></p>
+          <p id="portion-change-detail" class="portion-change-detail"></p>
+        </div>
+      </div>
       <div id="ingredients-content" class="ingredients-layout"></div>
     </section>
 
