@@ -81,6 +81,7 @@ class RecipeVoiceController {
     if (this.stepsTitle) this.stepsTitle.textContent = strings.stepsTitle || "";
     if (this.stepGuideTitle) this.stepGuideTitle.textContent = strings.stepGuideTitle || "";
     this.applyServingLabels();
+    this.updateServingQuickPicks();
     this.updateStepGuide();
   }
 
@@ -103,18 +104,24 @@ class RecipeVoiceController {
 
   updateServesDisplay() {
     if (this.servesDisplay) this.servesDisplay.textContent = String(this.currentServes);
-    if (this.servingInput && this.servingInput.value !== String(this.currentServes)) {
+    if (this.servingInput) {
       this.servingInput.value = String(this.currentServes);
     }
   }
 
   setServingSize(serves, announce = false) {
     const parsed = Math.round(Number(serves));
-    const clamped = Math.min(this.maxServes, Math.max(1, parsed || this.baseServes));
-    if (clamped === this.currentServes) return;
+    const fallback = Number.isFinite(parsed) ? parsed : this.currentServes;
+    const clamped = Math.min(this.maxServes, Math.max(1, fallback));
+
+    if (clamped === this.currentServes) {
+      this.updateServesDisplay();
+      return;
+    }
 
     this.currentServes = clamped;
     this.updateServesDisplay();
+    this.updateServingQuickPicks();
     this.renderIngredients();
 
     if (announce && this.config.strings.servingUpdated) {
@@ -125,6 +132,14 @@ class RecipeVoiceController {
 
   adjustServing(delta) {
     this.setServingSize(this.currentServes + delta, true);
+  }
+
+  updateServingQuickPicks() {
+    document.querySelectorAll(".serving-quick").forEach((btn) => {
+      const active = Number(btn.dataset.serves) === this.currentServes;
+      btn.classList.toggle("active", active);
+      btn.setAttribute("aria-pressed", String(active));
+    });
   }
 
   applyVariantState(variantId, announce) {
@@ -159,11 +174,17 @@ class RecipeVoiceController {
       .map((section) => {
         const itemsHtml = section.items
           .map((item) => {
+            const displayText =
+              item.text ||
+              (window.ServingScale && item.amount
+                ? ServingScale.formatMeasurable(item, ratio, locale)
+                : "");
+
             const badge = item.changed
               ? `<span class="changed-badge">${strings.changedBadge}</span>`
               : "";
             const changedClass = item.changed ? " changed" : "";
-            return `<li class="ingredient-item${changedClass}">${badge}${item.text}</li>`;
+            return `<li class="ingredient-item${changedClass}">${badge}${displayText}</li>`;
           })
           .join("");
 
@@ -282,35 +303,70 @@ class RecipeVoiceController {
 
   bindUi() {
     const { commands } = this.config;
-    this.micToggle.addEventListener("click", () => this.toggleListening());
-    this.btnStart.addEventListener("click", () => this.handleCommand(commands.start[0]));
-    this.btnPrev.addEventListener("click", () => this.handleCommand(commands.prev[0]));
-    this.btnNext.addEventListener("click", () => this.handleCommand(commands.next[0]));
-    this.btnStop.addEventListener("click", () => this.stopSpeaking());
+
+    if (this.micToggle) {
+      this.micToggle.addEventListener("click", () => this.toggleListening());
+    }
+    if (this.btnStart) {
+      this.btnStart.addEventListener("click", () => this.handleCommand(commands.start[0]));
+    }
+    if (this.btnPrev) {
+      this.btnPrev.addEventListener("click", () => this.handleCommand(commands.prev[0]));
+    }
+    if (this.btnNext) {
+      this.btnNext.addEventListener("click", () => this.handleCommand(commands.next[0]));
+    }
+    if (this.btnStop) {
+      this.btnStop.addEventListener("click", () => this.stopSpeaking());
+    }
 
     this.versionButtons.forEach((btn) => {
       btn.addEventListener("click", () => this.switchVariant(btn.dataset.version));
     });
 
     if (this.servingDecrease) {
-      this.servingDecrease.addEventListener("click", () => this.adjustServing(-1));
+      this.servingDecrease.addEventListener("click", (e) => {
+        e.preventDefault();
+        this.adjustServing(-1);
+      });
     }
     if (this.servingIncrease) {
-      this.servingIncrease.addEventListener("click", () => this.adjustServing(1));
+      this.servingIncrease.addEventListener("click", (e) => {
+        e.preventDefault();
+        this.adjustServing(1);
+      });
     }
     if (this.servingInput) {
-      this.servingInput.addEventListener("change", () => {
-        this.setServingSize(this.servingInput.value, true);
+      const commitInput = (announce) => this.setServingSize(this.servingInput.value, announce);
+      this.servingInput.addEventListener("input", () => {
+        const raw = this.servingInput.value.trim();
+        if (/^\d+$/.test(raw)) commitInput(false);
+      });
+      this.servingInput.addEventListener("change", () => commitInput(true));
+      this.servingInput.addEventListener("keydown", (e) => {
+        if (e.key === "Enter") {
+          e.preventDefault();
+          commitInput(true);
+          this.servingInput.blur();
+        }
       });
     }
 
-    this.stepsList.addEventListener("click", (event) => {
-      const box = event.target.closest(".step-box");
-      if (!box) return;
-      const stepNumber = parseInt(box.dataset.step, 10);
-      const index = this.steps.findIndex((s) => s.number === stepNumber);
-      if (index !== -1) this.speakStep(index);
+    document.querySelectorAll(".serving-quick").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        this.setServingSize(btn.dataset.serves, true);
+      });
     });
+
+    if (this.stepsList) {
+      this.stepsList.addEventListener("click", (event) => {
+        const box = event.target.closest(".step-box");
+        if (!box) return;
+        const stepNumber = parseInt(box.dataset.step, 10);
+        const index = this.steps.findIndex((s) => s.number === stepNumber);
+        if (index !== -1) this.speakStep(index);
+      });
+    }
 
     window.addEventListener("beforeunload", () => {
       this.stopListening();
@@ -321,9 +377,9 @@ class RecipeVoiceController {
   setupRecognition() {
     const { strings, recognitionLang } = this.config;
 
-    if (!SpeechRecognition) {
-      this.setMessage(strings.noRecognition);
-      this.micToggle.disabled = true;
+    if (!SpeechRecognition || !this.micToggle) {
+      if (this.micToggle) this.micToggle.disabled = true;
+      if (!SpeechRecognition) this.setMessage(strings.noRecognition);
       return;
     }
 
@@ -404,6 +460,7 @@ class RecipeVoiceController {
   speakStep(index, announceStep = true) {
     const { lang, strings, pickVoice } = this.config;
     if (index < 0 || index >= this.steps.length) return;
+    if (!window.speechSynthesis) return;
 
     this.stopSpeaking();
     this.currentIndex = index;
@@ -479,6 +536,7 @@ class RecipeVoiceController {
   }
 
   speakFeedback(text) {
+    if (!window.speechSynthesis) return;
     const utterance = new SpeechSynthesisUtterance(text);
     utterance.lang = this.config.lang;
     window.speechSynthesis.speak(utterance);
@@ -573,17 +631,19 @@ function init() {
   const config = window.RECIPE_VOICE_CONFIG;
   if (!config) return;
 
-  if (!window.speechSynthesis) {
-    const el = document.getElementById("status-message");
-    if (el) el.textContent = config.strings.noSynthesis;
-    return;
+  if (!window.ServingScale) {
+    console.error("serving-scale.js failed to load — ingredient scaling will not work.");
   }
 
   const welcomeEl = document.getElementById("status-message");
   if (welcomeEl) welcomeEl.textContent = config.strings.welcome;
 
-  window.speechSynthesis.getVoices();
-  window.speechSynthesis.onvoiceschanged = () => window.speechSynthesis.getVoices();
+  if (window.speechSynthesis) {
+    window.speechSynthesis.getVoices();
+    window.speechSynthesis.onvoiceschanged = () => window.speechSynthesis.getVoices();
+  } else if (welcomeEl) {
+    welcomeEl.textContent = config.strings.noSynthesis;
+  }
 
   new RecipeVoiceController(config);
 }
