@@ -37,6 +37,16 @@ Both languages support three versions (click buttons or use voice):
 
 Open **`index.html`** for English (default). Chinese: **`zh.html`**. Use the header language link to switch.
 
+## Cook Mode
+
+Turn on **Cook Mode** before you start cooking at the stove:
+
+- **Screen stay-awake** — uses the Screen Wake Lock API (Chrome / Edge on desktop and mobile; Safari iOS 16.4+)
+- **Voice control** — listening starts automatically; say start, next step, back, etc.
+- **Cooking steps** — highlighted while Cook Mode is active
+
+When Cook Mode is off, voice controls are hidden until you enable it again.
+
 ## Flexible servings
 
 Adjust **Serves** (1–12 people) in the panel **right after Recipe version**. Ingredient and seasoning amounts scale proportionally with practical rounding (spoons, ml, g, piece counts) so flavour stays balanced.

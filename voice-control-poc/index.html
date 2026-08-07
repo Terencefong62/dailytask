@@ -90,7 +90,23 @@
       <div id="ingredients-content" class="ingredients-layout"></div>
     </section>
 
-    <section class="voice-panel" aria-label="Voice control">
+    <section class="cook-mode-panel" aria-label="Cook Mode">
+      <div class="cook-mode-header">
+        <div class="cook-mode-heading">
+          <h2 id="cook-mode-title">Cook Mode</h2>
+          <p id="cook-mode-hint" class="cook-mode-hint"></p>
+        </div>
+        <label class="cook-mode-toggle" for="cook-mode-switch">
+          <input type="checkbox" id="cook-mode-switch" role="switch" aria-labelledby="cook-mode-title">
+          <span class="cook-mode-switch-ui" aria-hidden="true"></span>
+          <span id="cook-mode-label" class="cook-mode-label">Off</span>
+        </label>
+      </div>
+      <p id="cook-mode-status" class="cook-mode-status" role="status" aria-live="polite"></p>
+      <p id="cook-mode-off-hint" class="cook-mode-off-hint"></p>
+    </section>
+
+    <section class="voice-panel cook-mode-only" id="voice-panel" aria-label="Voice control" hidden>
       <h2>Voice control</h2>
       <p class="voice-hint">
         Say a command to control step playback:
@@ -119,7 +135,7 @@
       <p id="last-command" class="last-command" aria-live="polite"></p>
     </section>
 
-    <section class="steps-section">
+    <section class="steps-section cook-mode-steps" id="steps-section">
       <h2 id="steps-title" class="recipe-main-title"></h2>
       <div id="step-guide" class="step-guide is-idle" aria-live="polite">
         <h3 id="step-guide-title" class="step-guide-heading"></h3>
@@ -138,6 +154,7 @@
 
   <script src="step-images.js"></script>
   <script src="serving-scale.js"></script>
+  <script src="cook-mode.js"></script>
   <script src="config.en.js"></script>
   <script src="voice-control.js"></script>
 </body>

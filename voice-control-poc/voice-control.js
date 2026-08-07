@@ -31,6 +31,7 @@ class RecipeVoiceController {
     this.baseServes = config.baseServes || 4;
     this.maxServes = config.maxServes || 12;
     this.currentServes = this.baseServes;
+    this.cookModeOn = false;
     this.currentIndex = -1;
     this.isListening = false;
     this.recognition = null;
@@ -53,6 +54,14 @@ class RecipeVoiceController {
     this.portionChangeHint = document.getElementById("portion-change-hint");
     this.portionChangeTitle = document.getElementById("portion-change-title");
     this.portionChangeDetail = document.getElementById("portion-change-detail");
+    this.cookModeSwitch = document.getElementById("cook-mode-switch");
+    this.cookModeTitle = document.getElementById("cook-mode-title");
+    this.cookModeHint = document.getElementById("cook-mode-hint");
+    this.cookModeLabel = document.getElementById("cook-mode-label");
+    this.cookModeStatus = document.getElementById("cook-mode-status");
+    this.cookModeOffHint = document.getElementById("cook-mode-off-hint");
+    this.voicePanel = document.getElementById("voice-panel");
+    this.stepsSection = document.getElementById("steps-section");
     this.versionNote = document.getElementById("version-note");
     this.versionButtons = document.querySelectorAll(".version-btn");
     this.micToggle = document.getElementById("mic-toggle");
@@ -68,6 +77,7 @@ class RecipeVoiceController {
     this.renderSteps();
     this.renderIngredients();
     this.applyStaticLabels();
+    this.applyCookModeLabels();
     this.updateVersionUi();
     this.bindUi();
     this.setupRecognition();
@@ -85,6 +95,100 @@ class RecipeVoiceController {
     if (this.stepGuideTitle) this.stepGuideTitle.textContent = strings.stepGuideTitle || "";
     this.applyServingLabels();
     this.updateStepGuide();
+  }
+
+  applyCookModeLabels() {
+    const { strings } = this.config;
+    if (this.cookModeTitle) this.cookModeTitle.textContent = strings.cookModeTitle || "";
+    if (this.cookModeHint) this.cookModeHint.textContent = strings.cookModeHint || "";
+    if (this.cookModeOffHint) this.cookModeOffHint.textContent = strings.cookModeOffHint || "";
+    this.updateCookModeUi();
+  }
+
+  async setCookMode(enabled) {
+    if (enabled === this.cookModeOn) return;
+
+    const { strings } = this.config;
+
+    if (enabled) {
+      this.cookModeOn = true;
+      document.body.classList.add("cook-mode-on");
+
+      if (this.voicePanel) {
+        this.voicePanel.hidden = false;
+        this.voicePanel.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+
+      let wakeOk = false;
+      if (window.CookModeWakeLock) {
+        wakeOk = await CookModeWakeLock.acquire();
+      }
+
+      if (this.recognition && !this.isListening) {
+        this.startListening();
+      }
+
+      const wakeMessage = wakeOk
+        ? strings.cookModeWakeLockOk
+        : window.CookModeWakeLock?.isSupported()
+          ? strings.cookModeWakeLockDenied
+          : strings.cookModeWakeLockFallback;
+
+      this.setCookModeStatus(`${strings.cookModeActive} ${wakeMessage}`);
+      this.setMessage(strings.cookModeActive);
+    } else {
+      this.cookModeOn = false;
+      document.body.classList.remove("cook-mode-on");
+
+      if (this.voicePanel) this.voicePanel.hidden = true;
+      this.stopListening();
+      this.stopSpeaking();
+
+      if (window.CookModeWakeLock) {
+        await CookModeWakeLock.release();
+      }
+
+      this.setCookModeStatus(strings.cookModeEnded);
+      this.setMessage(strings.cookModeEnded);
+    }
+
+    this.updateCookModeUi();
+  }
+
+  setCookModeStatus(message) {
+    if (this.cookModeStatus) this.cookModeStatus.textContent = message || "";
+  }
+
+  updateCookModeUi() {
+    const { strings } = this.config;
+    const on = this.cookModeOn;
+
+    if (this.cookModeSwitch) {
+      this.cookModeSwitch.checked = on;
+      this.cookModeSwitch.setAttribute("aria-checked", String(on));
+    }
+    if (this.cookModeLabel) {
+      this.cookModeLabel.textContent = on ? strings.cookModeOn : strings.cookModeOff;
+    }
+    if (this.cookModeOffHint) {
+      this.cookModeOffHint.classList.toggle("hidden", on);
+    }
+    if (this.voicePanel && !on) {
+      this.voicePanel.hidden = true;
+    }
+  }
+
+  async reacquireWakeLockIfNeeded() {
+    if (!this.cookModeOn || !window.CookModeWakeLock) return;
+    if (document.visibilityState !== "visible") return;
+    if (CookModeWakeLock.isActive()) return;
+
+    const wakeOk = await CookModeWakeLock.acquire();
+    if (wakeOk && this.config.strings.cookModeWakeLockOk) {
+      this.setCookModeStatus(
+        `${this.config.strings.cookModeActive} ${this.config.strings.cookModeWakeLockOk}`
+      );
+    }
   }
 
   applyServingLabels() {
@@ -382,6 +486,16 @@ class RecipeVoiceController {
       });
     }
 
+    if (this.cookModeSwitch) {
+      this.cookModeSwitch.addEventListener("change", () => {
+        this.setCookMode(this.cookModeSwitch.checked);
+      });
+    }
+
+    document.addEventListener("visibilitychange", () => {
+      this.reacquireWakeLockIfNeeded();
+    });
+
     if (this.stepsList) {
       this.stepsList.addEventListener("click", (event) => {
         const box = event.target.closest(".step-box");
@@ -395,6 +509,7 @@ class RecipeVoiceController {
     window.addEventListener("beforeunload", () => {
       this.stopListening();
       this.stopSpeaking();
+      if (window.CookModeWakeLock) CookModeWakeLock.release();
     });
   }
 
