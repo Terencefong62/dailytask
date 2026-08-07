@@ -195,30 +195,6 @@ body {
   font-size: 1.2rem;
 }
 
-.serving-quick-picks {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  margin-top: 0.75rem;
-}
-
-.serving-quick {
-  border: 1px solid var(--border);
-  background: var(--bg-soft);
-  color: var(--text);
-  padding: 0.35rem 0.85rem;
-  border-radius: 999px;
-  cursor: pointer;
-  font-size: 0.9rem;
-}
-
-.serving-quick:hover,
-.serving-quick.active {
-  background: var(--lkk-red);
-  border-color: var(--lkk-red);
-  color: #fff;
-}
-
 .serving-control {
   display: flex;
   align-items: center;

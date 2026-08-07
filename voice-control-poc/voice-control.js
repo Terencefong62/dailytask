@@ -81,7 +81,6 @@ class RecipeVoiceController {
     if (this.stepsTitle) this.stepsTitle.textContent = strings.stepsTitle || "";
     if (this.stepGuideTitle) this.stepGuideTitle.textContent = strings.stepGuideTitle || "";
     this.applyServingLabels();
-    this.updateServingQuickPicks();
     this.updateStepGuide();
   }
 
@@ -121,7 +120,6 @@ class RecipeVoiceController {
 
     this.currentServes = clamped;
     this.updateServesDisplay();
-    this.updateServingQuickPicks();
     this.renderIngredients();
 
     if (announce && this.config.strings.servingUpdated) {
@@ -132,14 +130,6 @@ class RecipeVoiceController {
 
   adjustServing(delta) {
     this.setServingSize(this.currentServes + delta, true);
-  }
-
-  updateServingQuickPicks() {
-    document.querySelectorAll(".serving-quick").forEach((btn) => {
-      const active = Number(btn.dataset.serves) === this.currentServes;
-      btn.classList.toggle("active", active);
-      btn.setAttribute("aria-pressed", String(active));
-    });
   }
 
   applyVariantState(variantId, announce) {
@@ -351,12 +341,6 @@ class RecipeVoiceController {
         }
       });
     }
-
-    document.querySelectorAll(".serving-quick").forEach((btn) => {
-      btn.addEventListener("click", () => {
-        this.setServingSize(btn.dataset.serves, true);
-      });
-    });
 
     if (this.stepsList) {
       this.stepsList.addEventListener("click", (event) => {
