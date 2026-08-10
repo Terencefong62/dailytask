@@ -10,7 +10,7 @@
   --color-dot: #d0d0d0;
   --color-dot-active: #c8102e;
 
-  --card-radius: 12px;
+  --card-radius: 0;
   --card-aspect: 3 / 4;
   --card-gap: 20px;
 
