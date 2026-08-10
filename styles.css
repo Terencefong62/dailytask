@@ -150,8 +150,8 @@ body {
   font-size: clamp(11px, 1.3vw, 13px);
   font-weight: 600;
   line-height: 1.3;
-  color: #ffffff;
-  background-color: #5C087E;
+  color: #1a1a1a;
+  background-color: #FFB133;
   padding: 4px 10px;
   margin-bottom: 8px;
 }
